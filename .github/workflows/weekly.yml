@@ -1,0 +1,68 @@
+name: Weekly Fon Tarama
+
+on:
+  schedule:
+    # Her Pazartesi 06:00 UTC (≈ 08:00 Türkiye/Almanya). Bilgisayar kapalıyken de çalışır.
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}   # Actions sekmesinden manuel "Run workflow" için
+
+permissions:
+  contents: write   # güncellenen index.html'i commit etmek için
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo'yu çek
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Bağımlılıklar
+        run: pip install -r requirements.txt
+
+      - name: Panoyu üret (Claude API + web arama)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python build.py
+
+      - name: Güncellenen panoyu commit et
+        run: |
+          git config user.name "fon-bot"
+          git config user.email "actions@github.com"
+          git add index.html
+          git commit -m "Haftalık güncelleme: $(date +%F)" || echo "Değişiklik yok"
+          git push || echo "Push atlanıyor"
+
+      - name: GitHub Pages için yükle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: GitHub Pages'e yayınla
+        uses: actions/deploy-pages@v4
+
+      - name: Haftalık özet e-postası gönder
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Siber Güvenlik & Fon Fırsatları — Haftalık Güncelleme"
+          # MAIL_TO ve MAIL_CC secret'ları virgülle ayrılmış birden çok adres tutabilir.
+          # Yeni alıcı eklemek için kod değiştirmeden secret'ı düzenle.
+          to: ${{ secrets.MAIL_TO }}
+          cc: ${{ secrets.MAIL_CC }}
+          from: Fon Takip Bot <${{ secrets.MAIL_USERNAME }}>
+          html_body: |
+            <h2>🛡️ Siber Güvenlik & Fon Fırsatları — Haftalık Güncelleme</h2>
+            <p>Panon güncellendi. Canlı pano linkinden tüm fırsatları görebilirsin:</p>
+            <p><a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">Canlı Panoyu Aç →</a></p>
+            <p style="color:#888;font-size:12px">Bu e-posta GitHub Actions tarafından otomatik gönderildi.</p>
