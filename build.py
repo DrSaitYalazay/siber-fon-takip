@@ -93,14 +93,16 @@ KURALLAR:
 
 def get_opportunities() -> dict:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    resp = client.messages.create(
+    # Büyük max_tokens + web arama uzun sürebildiği için streaming şart.
+    with client.messages.stream(
         model=MODEL,
         max_tokens=32000,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 12}],
         messages=[{"role": "user", "content": PROMPT}],
-    )
+    ) as stream:
+        final = stream.get_final_message()
     # Web arama tool'u birden çok metin bloğu döndürebilir; hepsini birleştir.
-    text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+    text = "".join(b.text for b in final.content if getattr(b, "type", "") == "text")
     return extract_json(text)
 
 
