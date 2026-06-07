@@ -78,12 +78,16 @@ publicOnly=true işaretle (silme, işaretle).
 }}
 
 KURALLAR:
-- 20-30 fırsat hedefle; köklü programları (Horizon, DIGITAL, EIC, BMBF, NRW,
-  Skills Academy, World Bank, OECD) her zaman dahil et, yenileri ekle.
+- 16-20 fırsat hedefle; köklü programları (Horizon, DIGITAL, EIC, BMBF, NRW,
+  Skills Academy, World Bank, OECD) her zaman dahil et, varsa yenileri ekle.
 - "sum" içindeki her anahtar "data" içindeki bir "title" ile birebir aynı olmalı.
+- "sartlar" en fazla 4 KISA madde; tüm metinler kısa ve öz olsun.
 - Tarih ve başvuru hakkını resmi kaynaktan doğrula; eminsizsen desc'e
   "teyit edilmeli" yaz.
-- Tüm metin Türkçe. SADECE JSON döndür.
+- Tüm metin Türkçe.
+- ÇOK ÖNEMLİ: Yanıtın TAMAMI tek bir geçerli JSON nesnesi olmalı. JSON'dan önce
+  veya sonra HİÇBİR açıklama/metin yazma. JSON'ı eksiksiz kapat (tüm parantezler
+  dengeli). String içinde satır başı kullanma.
 """
 
 
@@ -91,27 +95,68 @@ def get_opportunities() -> dict:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     resp = client.messages.create(
         model=MODEL,
-        max_tokens=16000,
+        max_tokens=32000,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 12}],
         messages=[{"role": "user", "content": PROMPT}],
     )
-    # Web arama tool'u birden çok metin bloğu döndürebilir; son JSON'ı topla.
+    # Web arama tool'u birden çok metin bloğu döndürebilir; hepsini birleştir.
     text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
     return extract_json(text)
 
 
+def _clean(s: str) -> str:
+    # Sondaki gereksiz virgülleri kaldır:  ,}  ,]  ->  }  ]
+    return re.sub(r",(\s*[}\]])", r"\1", s)
+
+
+def _repair_truncated(s: str) -> str:
+    """Yarıda kesilmiş JSON'ı en yakın geçerli yapıya kapatmaya çalışır."""
+    stack, in_str, esc = [], False, False
+    for ch in s:
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+        else:
+            if ch == '"':
+                in_str = True
+            elif ch in "{[":
+                stack.append("}" if ch == "{" else "]")
+            elif ch in "}]" and stack:
+                stack.pop()
+    out = s
+    if in_str:              # açık string'i kapat
+        out += '"'
+    out = re.sub(r",\s*$", "", out.rstrip())   # sondaki yarım virgül
+    out += "".join(reversed(stack))            # açık parantezleri kapat
+    return out
+
+
 def extract_json(text: str) -> dict:
-    """Model çıktısından JSON nesnesini güvenle ayıkla."""
+    """Model çıktısından JSON nesnesini güvenle ayıkla (kesilmeye dayanıklı)."""
     text = text.strip()
-    # ```json ... ``` bloklarını temizle
     fence = re.search(r"```(?:json)?\s*(\{.*\})\s*```", text, re.DOTALL)
     if fence:
         text = fence.group(1)
-    # İlk { ile son } arasını al
-    start, end = text.find("{"), text.rfind("}")
-    if start == -1 or end == -1:
-        raise ValueError("Modelden JSON alınamadı:\n" + text[:500])
-    return json.loads(text[start:end + 1])
+    start = text.find("{")
+    if start == -1:
+        raise ValueError("Modelden JSON alınamadı:\n" + text[:800])
+    text = text[start:]
+    end = text.rfind("}")
+    candidate = text[: end + 1] if end != -1 else text
+
+    for attempt in (candidate, _clean(candidate), _clean(_repair_truncated(text))):
+        try:
+            return json.loads(attempt)
+        except json.JSONDecodeError:
+            continue
+    # Hepsi başarısızsa hata ayıklama için kuyruğu göster
+    raise ValueError(
+        "JSON ayrıştırılamadı. Çıktının sonu:\n" + candidate[-800:]
+    )
 
 
 def js_array(data: list) -> str:
