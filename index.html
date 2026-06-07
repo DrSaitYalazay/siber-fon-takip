@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siber Güvenlik & Veri Koruma — Fon / Proje Takip Panosu</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2a3340;
+    --text:#e6edf3; --muted:#9aa7b4; --accent:#3b82f6; --accent2:#22d3ee;
+    --green:#22c55e; --amber:#f59e0b; --red:#ef4444; --purple:#a855f7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.5;padding:24px;max-width:1280px;margin:0 auto}
+  header{margin-bottom:20px}
+  h1{font-size:24px;font-weight:700;letter-spacing:-.3px}
+  .sub{color:var(--muted);font-size:13px;margin-top:4px}
+  .kpis{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 16px;min-width:120px;cursor:pointer;transition:.15s}
+  .kpi:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .kpi.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:var(--panel2)}
+  .kpi .n{font-size:22px;font-weight:700}
+  .kpi .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  input[type=search]{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--border);
+    color:var(--text);padding:10px 14px;border-radius:10px;font-size:14px}
+  select{background:var(--panel);border:1px solid var(--border);color:var(--text);
+    padding:9px 12px;border-radius:10px;font-size:13px;cursor:pointer}
+  .toggle{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);
+    padding:9px 14px;border-radius:10px;font-size:13px;cursor:pointer;user-select:none}
+  .toggle input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .chip{background:var(--panel2);border:1px solid var(--border);color:var(--muted);
+    padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;transition:.15s}
+  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;
+    display:flex;flex-direction:column;gap:10px;transition:.15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card.pub{opacity:.78}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .card h3{font-size:15px;font-weight:650;line-height:1.35}
+  .badges{display:flex;gap:6px;flex-wrap:wrap}
+  .badge{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+  .b-open{background:rgba(34,197,94,.15);color:var(--green)}
+  .b-soon{background:rgba(245,158,11,.15);color:var(--amber)}
+  .b-closed{background:rgba(239,68,68,.13);color:var(--red)}
+  .b-rolling{background:rgba(168,85,247,.15);color:var(--purple)}
+  .b-cat{background:rgba(59,130,246,.13);color:#7eb3ff}
+  .b-reg{background:rgba(34,211,238,.12);color:var(--accent2)}
+  .b-pub{background:rgba(239,68,68,.13);color:#ff8f8f}
+  .elig{display:flex;gap:5px;flex-wrap:wrap;font-size:11px}
+  .etag{background:rgba(34,197,94,.10);color:#7ee2a8;border:1px solid rgba(34,197,94,.25);padding:2px 7px;border-radius:5px}
+  .etag.kamu{background:rgba(148,163,184,.10);color:#aab4c0;border-color:rgba(148,163,184,.25)}
+  .desc{font-size:13px;color:var(--muted)}
+  .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;margin-top:2px}
+  .meta b{color:var(--text);font-weight:600}
+  .card a.link{font-size:12.5px;color:var(--accent);text-decoration:none;font-weight:600;margin-top:2px}
+  .card a.link:hover{text-decoration:underline}
+  .elig-label{font-size:11px;color:var(--muted);margin-bottom:2px}
+  .empty{text-align:center;color:var(--muted);padding:40px;grid-column:1/-1}
+  footer{margin-top:28px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);padding-top:14px}
+  .deadline-near{color:var(--amber)!important}
+  .deadline-past{color:var(--red)!important;text-decoration:line-through}
+  .card-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:2px}
+  .btn-sum{font-size:12.5px;font-weight:600;color:var(--text);background:var(--panel2);
+    border:1px solid var(--border);padding:6px 12px;border-radius:8px;cursor:pointer;transition:.15s}
+  .btn-sum:hover{border-color:var(--accent);color:var(--accent)}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);
+    display:none;align-items:flex-start;justify-content:center;padding:40px 16px;z-index:50;overflow-y:auto}
+  .overlay.show{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--border);border-radius:16px;max-width:640px;width:100%;
+    padding:24px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .modal h2{font-size:19px;font-weight:700;line-height:1.3;padding-right:36px}
+  .modal .m-org{color:var(--muted);font-size:13px;margin:4px 0 14px}
+  .modal .m-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .m-close{position:absolute;top:16px;right:18px;font-size:22px;color:var(--muted);cursor:pointer;
+    background:none;border:none;line-height:1}
+  .m-close:hover{color:var(--text)}
+  .srow{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--border)}
+  .srow .lab{flex:0 0 130px;font-size:12px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.4px;padding-top:2px}
+  .srow .val{flex:1;font-size:13.5px;color:var(--text)}
+  .srow .val ul{margin:0;padding-left:18px}
+  .srow .val li{margin-bottom:4px}
+  .m-cta{display:inline-block;margin-top:18px;background:var(--accent);color:#fff;text-decoration:none;
+    font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:9px}
+  .m-cta:hover{background:#2f6fd6}
+  .m-note{font-size:11.5px;color:var(--muted);margin-top:14px;font-style:italic}
+</style>
+</head>
+<body>
+<header>
+  <h1>🛡️ Siber Güvenlik, Veri Koruma, GRC & Pentest — Fon / Proje Takip Panosu</h1>
+  <div class="sub">AB · Almanya · NRW · Dünya | Kapsam: siber güvenlik, AI/AI Act, GRC & GRC automation, NIS2, GDPR, security risk, awareness training · Son güncelleme: <span id="updated"></span></div>
+</header>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="controls">
+  <input type="search" id="search" placeholder="🔍 Ara: program, kurum, NIS2, GRC, AI Act, GDPR, awareness...">
+  <select id="region"><option value="">Tüm bölgeler</option></select>
+  <select id="sort">
+    <option value="deadline">Son tarihe göre sırala</option>
+    <option value="status">Duruma göre sırala</option>
+    <option value="title">İsme göre sırala</option>
+  </select>
+  <label class="toggle"><input type="checkbox" id="hidePublic" checked> Kamu-only olanları gizle</label>
+</div>
+
+<div class="chips" id="catChips"></div>
+<div class="chips" id="statusChips"></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer>
+  <b>Başvuru hakkı:</b> Yeşil etiketler bireysel / firma-KOBİ / dernek-vakıf / üniversite-araştırma başvurabildiğini gösterir. "Kamu-only" işaretli kayıtlar yalnızca kamu kurumları/ulusal otoriteler içindir ve varsayılan gizlidir.
+  Durum etiketleri bugünün tarihine göre otomatik hesaplanır. Rakam/son tarihler resmi portallardan derlenmiştir; başvurmadan önce teyit edin.
+  Kaynaklar: EU Funding &amp; Tenders Portal, ECCC, EIC, BMBF, Gründungsstipendium.NRW, secure4sme.eu, DIGITAL SME Alliance, EU Cybersecurity Skills Academy, World Bank, OECD.
+</footer>
+
+<script>
+const TODAY = new Date('2026-06-07');
+
+// elig: kimler başvurabilir. publicOnly:true => yalnızca kamu (varsayılan gizli)
+const DATA = [
+  {
+    "title": "Horizon Europe CL3-2026-02 Siber Güvenlik (ECCC)",
+    "org": "Avrupa Komisyonu / REA",
+    "cat": "AB fon çağrısı",
+    "region": "AB",
+    "budget": "≈ €5–15 milyon/proje / %100 eş finansman mümkün",
+    "deadline": "2026-09-15",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "Yazılım/donanım güvenliği, AI model güvenliği (SecureAI) ve ileri kriptografi alanlarında AR-GE projeleri; en az 3 farklı AB üye/ortak ülkeden kuruluştan oluşan konsorsiyum gerekli.",
+    "url": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe/cluster-3-civil-security-society_en"
+  },
+  {
+    "title": "Horizon Europe CL3-2026-01 Sivil Güvenlik (FCT/INFRA/DRS)",
+    "org": "Avrupa Komisyonu / REA",
+    "cat": "AB fon çağrısı",
+    "region": "AB",
+    "budget": "≈ €3–8 milyon/proje / %100 eş finansman mümkün",
+    "deadline": "2026-11-05",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "Siber suç ve terörizme karşı mücadele, kritik altyapı koruması ve afet esnekliği konularında inovasyon projeleri; 6 Mayıs 2026'da açılış.",
+    "url": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe/cluster-3-civil-security-society_en"
+  },
+  {
+    "title": "DIGITAL Europe ECCC Cyber-10 (Cross-Border Cyber Hubs)",
+    "org": "ECCC / Avrupa Komisyonu",
+    "cat": "AB fon çağrısı",
+    "region": "AB",
+    "budget": "≈ €50 milyon toplam / %50 eş finansman",
+    "deadline": "2026-10-01",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "SOC'ların güçlendirilmesi, sınır ötesi siber hub'ların kurulumu ve siber güvenlik ekosisteminin geliştirilmesi; 21 Nisan 2026'da açıldı.",
+    "url": "https://cybersecurity-centre.europa.eu/funding-opportunities_en"
+  },
+  {
+    "title": "DIGITAL Europe Siber-09 KOBİ Çözümleri Dağıtımı",
+    "org": "ECCC / Avrupa Komisyonu",
+    "cat": "AB fon çağrısı",
+    "region": "AB",
+    "budget": "≈ €50 milyon / %50 eş finansman",
+    "deadline": "2026-03-31",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "KOBİ'ler için yenilikçi siber güvenlik çözümleri (MFA dahil), AI destekli tehdit tespiti ve denizaltı kablo altyapısı siber güvenliği; 28 Ekim 2025'te açıldı (teyit edilmeli: son başvuru geçmiş olabilir).",
+    "url": "https://cybersecurity-centre.europa.eu/news/eccc-publishes-new-call-proposals-under-digital-europe-programme-2025-10-22_en"
+  },
+  {
+    "title": "EIC Accelerator 2026 (Açık Çağrı)",
+    "org": "Avrupa İnovasyon Konseyi (EIC)",
+    "cat": "AB fon çağrısı",
+    "region": "AB",
+    "budget": "≤ €2,5M hibe + €1–10M özkaynak / toplam €634M bütçe",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Birey (startup kurucu)"
+    ],
+    "publicOnly": false,
+    "desc": "Siber güvenlik dahil her teknoloji alanında derin-teknoloji KOBİ ve startup'ları destekler; 2026'da 6 tam başvuru tarihi (Oca, Mar, May, Tem, Eyl, Kas); kısa başvuru her zaman yapılabilir.",
+    "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en"
+  },
+  {
+    "title": "EU Cybersecurity Skills Academy – Eğitim Fonu",
+    "org": "Avrupa Komisyonu / ECCC / ENISA",
+    "cat": "Eğitim & araştırma",
+    "region": "AB",
+    "budget": "≤ €4M (Aktivite 1) / ≤ €2M (Aktivite 2) proje başına",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "KOBİ, startup ve kamu sektörü için siber güvenlik eğitim programları geliştirme (Aktivite 1) ve Academy destek operasyonları (Aktivite 2); konsorsiyum oluşumu gerekli.",
+    "url": "https://digital-skills-jobs.europa.eu/en/cybersecurity-skills-academy"
+  },
+  {
+    "title": "DIGITAL Europe 10. Çağrı – Dijital Beceriler (ELEVATE)",
+    "org": "Avrupa Komisyonu / HaDEA",
+    "cat": "Eğitim & araştırma",
+    "region": "AB",
+    "budget": "≈ €12,5 milyon toplam / %50 eş finansman",
+    "deadline": "2026-10-01",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "Siber güvenlik, AI, kuantum ve yarı iletkenler alanında Avrupa çapında ileri dijital beceri akademileri (ELEVATE) ve yarışmalar; 1 Nisan 2026'da açıldı.",
+    "url": "https://digital-strategy.ec.europa.eu/en/activities/digital-programme"
+  },
+  {
+    "title": "EDIH (Avrupa Dijital İnovasyon Merkezi) – KOBİ Hizmetleri",
+    "org": "Avrupa Komisyonu / DIGITAL Programme",
+    "cat": "Eğitim & araştırma",
+    "region": "AB / Almanya",
+    "budget": "Ücretsiz hizmet (AB fonlu); EDIH başına %50 eş finansman",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": false,
+    "desc": "Siber güvenlik ve AI odaklı EDIH'ler (Almanya'da dahil) KOBİ ve kamu kurumlarına test, eğitim, yatırım danışmanlığı sunar; hizmetler büyük ölçüde ücretsizdir.",
+    "url": "https://european-digital-innovation-hubs.ec.europa.eu/home"
+  },
+  {
+    "title": "BMBF IT-Sicherheit in der Wirtschaft – Transferstelle / Fokusprojekte",
+    "org": "BMBF (Bundesministerium für Forschung)",
+    "cat": "Almanya & NRW desteği",
+    "region": "Almanya",
+    "budget": "Proje bütçesinin %50–100'ü (KOBİ ve üniversite farkı var)",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "KOBİ odaklı IT ve siber güvenlik transferi; Fokusprojekte skizleri yılda iki kez (01.02 ve 01.08 – 01.08.2026 askıya alınmış; teyit edilmeli) kabul edilir; temaları mittelstand-digital.de'de duyurulur.",
+    "url": "https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"
+  },
+  {
+    "title": "BMBF Plattform Privatheit – IT-Sicherheit & Demokratie",
+    "org": "BMBF / DLR Projektträger",
+    "cat": "Almanya & NRW desteği",
+    "region": "Almanya",
+    "budget": "Proje bütçesinin %50–100'ü",
+    "deadline": "2027-03-15",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "IT güvenliğinin gizlilik ve demokrasiyi nasıl koruyabileceğine dair araştırma projeleri; yıllık değerlendirme stichtag'ı 15 Mart; son stichtag 2027.",
+    "url": "https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"
+  },
+  {
+    "title": "EXIST Gründungsstipendium (Üniversite Kaynaklı Startup)",
+    "org": "BMWK (Bundesministerium für Wirtschaft)",
+    "cat": "Startup desteği",
+    "region": "Almanya",
+    "budget": "≤ €150.000 / 12 ay (yaşam gideri + maddi destek + koçluk)",
+    "deadline": "rolling",
+    "elig": [
+      "Birey (startup kurucu)",
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": false,
+    "desc": "Üniversite mezunları ve araştırmacılar için teknoloji tabanlı girişim hazırlık desteği; siber güvenlik dahil tüm IKT alanları uygun; başvuru üniversite üzerinden yapılır.",
+    "url": "https://exist.de/en/"
+  },
+  {
+    "title": "Gründungsstipendium.NRW",
+    "org": "MWIKE NRW / Projektträger Jülich",
+    "cat": "Startup desteği",
+    "region": "NRW",
+    "budget": "€1.200/ay/kişi x 12 ay (ekip: maks. 3 kişi)",
+    "deadline": "2026-09-30",
+    "elig": [
+      "Birey (startup kurucu)"
+    ],
+    "publicOnly": false,
+    "desc": "NRW'de inovatif girişim kurmayı planlayan bireyler için aylık stipendyum + koçluk; siber güvenlik startup'ları uygun; jüri toplantıları Nisan 2026'dan itibaren geçici askıya alındı, yıl içinde devam edilecek.",
+    "url": "https://www.gruendungsstipendium.nrw"
+  },
+  {
+    "title": "ZIM – Merkezi Orta Ölçekli İnovasyon Programı",
+    "org": "BMWK / AiF Projekt GmbH",
+    "cat": "Almanya & NRW desteği",
+    "region": "Almanya",
+    "budget": "≤ €2,3M (işbirliği) / %25–70 eş finansman",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": false,
+    "desc": "Siber güvenlik dahil tüm teknoloji alanlarında KOBİ AR-GE projeleri; tek KOBİ ya da araştırma kurumuyla işbirliği mümkün; başvuru dijital portal üzerinden sürekli kabul edilir.",
+    "url": "https://www.zim.de"
+  },
+  {
+    "title": "NIS2 & DORA GRC Uyum Projesi Danışmanlık Desteği (BAFA)",
+    "org": "BAFA / BMWK",
+    "cat": "GRC, AI Act & Uyum",
+    "region": "Almanya",
+    "budget": "≤ €4.000/proje / %50–80 eş finansman",
+    "deadline": "2026-12-31",
+    "elig": [
+      "Firma/KOBİ"
+    ],
+    "publicOnly": false,
+    "desc": "NIS2, DORA ve GDPR uyumu için profesyonel danışmanlık maliyetini destekleyen BAFA programı; BAFA kayıtlı danışman gerekli; yılda en fazla 2 danışmanlık desteklenir.",
+    "url": "https://www.bafa.de/DE/Wirtschaft/Beratung_Finanzierung/Unternehmensberatung/unternehmensberatung_node.html"
+  },
+  {
+    "title": "EU AI Act Uyum & GRC Otomasyon Araştırması – Horizon Europe",
+    "org": "Avrupa Komisyonu / ERC / HEU",
+    "cat": "GRC, AI Act & Uyum",
+    "region": "AB",
+    "budget": "Proje başına değişken / %70–100",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "AI Act, GDPR ve NIS2 uyum otomasyonu, risk yönetimi araçları konularında Horizon Europe çerçevesinde çeşitli çağrılar; DIGITAL ve CL3 kapsamındaki çağrılarla örtüşür; teyit edilmeli.",
+    "url": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en"
+  },
+  {
+    "title": "Mittelstand-Digital Zentren (Dijital Dönüşüm Ağı)",
+    "org": "BMBF / BMWi",
+    "cat": "Almanya & NRW desteği",
+    "region": "Almanya",
+    "budget": "Ücretsiz KOBİ hizmetleri (devlet fonlu ağ)",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ"
+    ],
+    "publicOnly": false,
+    "desc": "KOBİ'lere siber güvenlik, dijitalleşme ve AI konularında ücretsiz danışmanlık ve eğitim sunan bölgesel merkezler; NRW'de de aktif merkezler mevcut; Fokusprojekte skizleri yılda iki kez alınır.",
+    "url": "https://www.mittelstand-digital.de"
+  },
+  {
+    "title": "NRW.Bank – Gründungs- und Wachstumsfinanzierung",
+    "org": "NRW.Bank",
+    "cat": "Almanya & NRW desteği",
+    "region": "NRW",
+    "budget": "€25.000 – €7,5M / düşük faizli kredi",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Birey (startup kurucu)"
+    ],
+    "publicOnly": false,
+    "desc": "NRW'de faaliyet gösteren girişimciler ve KOBİ'ler için kuruluş ve büyüme finansmanı; siber güvenlik girişimleri teknoloji odaklı olarak uygun sayılır; başvuru Hausbank üzerinden yapılır.",
+    "url": "https://www.nrwbank.de/de/foerderprodukte/gruendung-und-wachstum/"
+  },
+  {
+    "title": "DIGITAL Europe – Siber Güvenlik Beceri Yarışmaları (COMPETITIONS)",
+    "org": "Avrupa Komisyonu / HaDEA",
+    "cat": "Eğitim & araştırma",
+    "region": "AB",
+    "budget": "Çağrı başına değişken / %50 eş finansman",
+    "deadline": "2026-10-01",
+    "elig": [
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf",
+      "Firma/KOBİ"
+    ],
+    "publicOnly": false,
+    "desc": "Genç Avrupalıları siber güvenlik, AI ve kuantum alanlarında ileri dijital becerilerle buluşturmayı hedefleyen AB çapında yarışma organizasyonu finansmanı (DIGITAL-2026-SKILLS-09-COMPETITIONS).",
+    "url": "https://digital-skills-jobs.europa.eu/en/about/digital-europe-programme"
+  },
+  {
+    "title": "Dünya Bankası – Dijital Kalkınma Hibeleri",
+    "org": "World Bank / IFC",
+    "cat": "Uluslararası fon (WB/OECD)",
+    "region": "Dünya",
+    "budget": "Proje bazlı (genellikle $500K–$5M+)",
+    "deadline": "rolling",
+    "elig": [
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "Gelişmekte olan ülkelerde dijital altyapı ve siber güvenlik kapasitesi için fonlar; özel sektör IFC kanalıyla başvurabilir; çoğu çağrı kamu ağırlıklı olmakla birlikte araştırma ve STK konsorsiyumları da uygun olabilir (teyit edilmeli).",
+    "url": "https://www.worldbank.org/en/topic/digitaldevelopment"
+  },
+  {
+    "title": "OECD – Dijital Ekonomi ve Siber Güvenlik Politika Projeleri",
+    "org": "OECD",
+    "cat": "Uluslararası fon (WB/OECD)",
+    "region": "Dünya",
+    "budget": "Proje bazlı (genellikle kamu odaklı)",
+    "deadline": "rolling",
+    "elig": [
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": true,
+    "desc": "OECD dijital güvenlik ve AI yönetişim politika çalışmaları; çoğunlukla kamu kurumları ve akredite araştırma kuruluşları başvurabilir; özel sektör doğrudan başvurma hakkı sınırlıdır (publicOnly=true: kural olarak kamu kurumu).",
+    "url": "https://www.oecd.org/digital/security/"
+  }
+];
+
+DATA.forEach((d,i)=>d._i=i);
+
+// Proje özetleri (başlık ile eşleşir). Eksik olanlar için kart açıklaması yedek olarak gösterilir.
+const SUM = {
+  "Horizon Europe CL3-2026-02 Siber Güvenlik (ECCC)": {
+    "frist": "Açılış: 03 Mart 2026 | Son teslim: 15 Eylül 2026",
+    "kimler": "En az 3 farklı AB/ortak ülkeden bağımsız tüzel kişi (KOBİ, üniversite, araştırma enstitüsü, dernek); en az 1'i AB üye devletinde",
+    "butce": "Proje başına €5–15M; %100 eş finansman (IA aksiyonları için)",
+    "sartlar": [
+      "En az 3 ülkeden konsorsiyum zorunlu",
+      "Konu: yazılım/donanım güvenliği, SecureAI veya ileri kriptografi",
+      "TRL 4–7 hedef",
+      "Etki ve uygulama planı gerekli"
+    ],
+    "nasil": "EC Funding & Tenders Portal üzerinden (ec.europa.eu/info/funding-tenders); önce kurum PIC numarası alınmalı",
+    "ipucu": "CL3-2026-02 çağrıları (CS-ECCC) için erken ortak bulma kritik; SEREN NCP ağı ve ulusal temas noktaları ücretsiz danışmanlık sunar"
+  },
+  "Horizon Europe CL3-2026-01 Sivil Güvenlik (FCT/INFRA/DRS)": {
+    "frist": "Açılış: 06 Mayıs 2026 | Son teslim: 05 Kasım 2026",
+    "kimler": "KOBİ, üniversite, araştırma kuruluşu, dernek, vakıf; bazı konular polis/sınır birimi zorunluluğu içerebilir",
+    "butce": "Proje başına €3–8M; %100 eş finansman mümkün",
+    "sartlar": [
+      "En az 3 ülkeden konsorsiyum",
+      "Konu uyumuna dikkat (FCT/DRS/INFRA seç)",
+      "Bazı konularda polis otoritesi katılımı zorunlu",
+      "Uygulamalı etki kanıtı bekleniyor"
+    ],
+    "nasil": "EC Funding & Tenders Portal; konuya göre REA veya EISMEA yönetimli",
+    "ipucu": "Endüstriyel ortakla karma konsorsiyum başarı oranını artırır; NCP Almanya'yı erkenden dahil edin"
+  },
+  "DIGITAL Europe ECCC Cyber-10 (Cross-Border Cyber Hubs)": {
+    "frist": "Açılış: 21 Nisan 2026 | Son teslim: 01 Ekim 2026",
+    "kimler": "Siber güvenlik kuruluşları, araştırma merkezleri, KOBİ konsorsiyumları, kamu kurumları (AB/ilişkili ülkeler)",
+    "butce": "Toplam €50M; eş finansman %50",
+    "sartlar": [
+      "Birden fazla ülkeden Cross-Border Cyber Hub hedefi",
+      "SOC altyapısı veya benzer deneyim",
+      "Cyber Solidarity Act Art. 12(5) uyumu",
+      "Ön İfade of Interest prosedürü var"
+    ],
+    "nasil": "cybersecurity-centre.europa.eu/funding-opportunities_en adresinden başvuru; ECCC Funding Portal",
+    "ipucu": "ECCC tarafından finanse edildiğinden normal Tenders Portal'dan farklı; ön ifade of interest adımını kaçırmayın"
+  },
+  "DIGITAL Europe Siber-09 KOBİ Çözümleri Dağıtımı": {
+    "frist": "Açılış: 28 Ekim 2025 | Son teslim: 31 Mart 2026 (geçmiş – yeni çağrı takip edilmeli)",
+    "kimler": "KOBİ, araştırma, kamu kurumları (AB ve ilişkili ülkeler)",
+    "butce": "Toplam €50M (Cyber-09); eş finansman %50",
+    "sartlar": [
+      "NIS2/AI Act uyumu vurgulayın",
+      "KOBİ uptake kanıtı sunun",
+      "AB ülkesinde tescil zorunlu",
+      "Çağrı kapatıldıysa Cyber-10'u takip edin"
+    ],
+    "nasil": "EC Funding & Tenders Portal veya cybersecurity-centre.europa.eu",
+    "ipucu": "Bu çağrı kapanmış olabilir; ECCC web sitesinde Cyber-10 ve sonraki çağrıları izleyin"
+  },
+  "EIC Accelerator 2026 (Açık Çağrı)": {
+    "frist": "Kısa başvuru: sürekli açık | Tam başvuru (Step 2): 7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas 2026",
+    "kimler": "AB veya ilişkili ülkede kurulu startup ve KOBİ'ler (maks. 500 çalışan); bireyler de başvurabilir",
+    "butce": "Hibe ≤ €2,5M + özkaynak €1–10M (karma finans); yalnızca hibe de mümkün",
+    "sartlar": [
+      "TRL 6 ve üzeri",
+      "Devrimci/pazar yaratan inovasyon",
+      "Uluslararası ölçeklendirme planı",
+      "Finansal olgunluk kanıtı"
+    ],
+    "nasil": "eic.ec.europa.eu üzerinden kısa başvuru (3 dk video + pitch deck + yazılı form); GO sonrası tam başvuru",
+    "ipucu": "2026'dan itibaren 6 tarih var; kısa başvuruya hemen başlanabilir; değerlendirme 4–6 hafta sürer"
+  },
+  "EU Cybersecurity Skills Academy – Eğitim Fonu": {
+    "frist": "Sürekli açık (rolling); en son çağrı tarihleri ECCC/ENISA sitesinde duyurulur",
+    "kimler": "Yükseköğretim, mesleki eğitim kurumları, araştırma, KOBİ ve NCCler; konsorsiyum gerekli",
+    "butce": "Aktivite 1: ≤ €4M; Aktivite 2: ≤ €2M",
+    "sartlar": [
+      "KOBİ ve kamu sektörüne odaklı eğitim",
+      "En az 3 AB dilinde kurs",
+      "ENISA ECSF çerçevesiyle uyum",
+      "AB genelinde erişilebilirlik"
+    ],
+    "nasil": "EC Funding & Tenders Portal – ilgili DIGITAL çağrı numarasıyla başvuru",
+    "ipucu": "Women4Cyber ve ENISA ECSF bağlantısı teklifinizi güçlendirir; mevcut eğitim materyallerini yeniden kullanabilirsiniz"
+  },
+  "DIGITAL Europe 10. Çağrı – Dijital Beceriler (ELEVATE)": {
+    "frist": "Açılış: 21 Nisan 2026 | Son teslim: 01 Ekim 2026",
+    "kimler": "Üniversite, mesleki eğitim, araştırma kurumları, KOBİ, vakıf/dernek konsorsiyumları",
+    "butce": "≈ €12,5M toplam; %50 eş finansman",
+    "sartlar": [
+      "Siber güvenlik, AI veya kuantum odaklı olmalı",
+      "AB genelinde koordine çerçeve",
+      "Digital Skills Platform ile sinerji",
+      "Çok ülkeli konsorsiyum tercih edilir"
+    ],
+    "nasil": "EC Funding & Tenders Portal; HaDEA tarafından yönetilir",
+    "ipucu": "Info day 29 Nisan 2026'da yapıldı; kayıt ve soru/cevap dokümanları HaDEA sitesinde mevcut"
+  },
+  "EDIH (Avrupa Dijital İnovasyon Merkezi) – KOBİ Hizmetleri": {
+    "frist": "Sürekli başvuru (rolling) – her EDIH kendi randevu sistemini işletir",
+    "kimler": "KOBİ, startup, orta ölçekli şirket ve kamu kurumları; AB genelinde mevcut",
+    "butce": "KOBİ için hizmetler büyük ölçüde ücretsiz; De Minimis devlet yardımı kapsamında",
+    "sartlar": [
+      "AB'de veya ilişkili ülkede kayıtlı olma",
+      "Dijital dönüşüm ihtiyacı tanımlaması",
+      "Hizmet talebi EDIH portal üzerinden"
+    ],
+    "nasil": "european-digital-innovation-hubs.ec.europa.eu – katalogdan NRW'deki EDIH'i bulun ve doğrudan başvurun",
+    "ipucu": "NRW'de siber güvenlik odaklı EDIH'ler için DAISEC (Hannover) veya EDIH-AICS (Baden-Württemberg) referans alınabilir; ücretsiz 'test before invest' hizmeti var"
+  },
+  "BMBF IT-Sicherheit in der Wirtschaft – Transferstelle / Fokusprojekte": {
+    "frist": "Fokusprojekte: yılda 2 stichtag (01.02 ve 01.08) – 01.08.2026 askıya alındı; bir sonraki duyuru bekleyin",
+    "kimler": "KOBİ, üniversite, araştırma kurumları, sivil toplum kuruluşları; Almanya'da faaliyet şartı",
+    "butce": "KOBİ: %50; üniversite/araştırma: %100 eş finansman",
+    "sartlar": [
+      "Almanya'da faaliyet zorunlu",
+      "KOBİ IT/siber güvenlik odaklı çözüm",
+      "Transferstelle ile işbirliği önerilir",
+      "Skizze Deutsch dilinde sunulmalı"
+    ],
+    "nasil": "easyprojekt-it.de veya mittelstand-digital.de üzerinden skizze yükle",
+    "ipucu": "Fokusprojekte temaları stichtag'dan 4 ay önce mittelstand-digital.de'de yayınlanır; erken takip kritik"
+  },
+  "BMBF Plattform Privatheit – IT-Sicherheit & Demokratie": {
+    "frist": "Yıllık stichtag: 15 Mart; son stichtag: 15 Mart 2027",
+    "kimler": "Üniversite, araştırma enstitüsü, KOBİ, sivil toplum; Almanya'da merkez/faaliyet şartı",
+    "butce": "Proje bütçesinin %50–100'ü (kuruma göre)",
+    "sartlar": [
+      "IT güvenliği ve gizlilik/demokrasi kesişimi",
+      "Konsorsiyum önerilir",
+      "Skizze 15 Mart'a kadar teslim",
+      "Almanca dil zorunluluğu"
+    ],
+    "nasil": "DLR Projektträger üzerinden skizze submission; foerderinfo.bund.de referans",
+    "ipucu": "Siber güvenlik + GDPR + demokratik değerler üçgenini güçlü vurgulayın"
+  },
+  "EXIST Gründungsstipendium (Üniversite Kaynaklı Startup)": {
+    "frist": "Sürekli başvuru (rolling); üniversite iç takvimi belirleyicidir",
+    "kimler": "Öğrenciler, mezunlar, üniversite araştırmacıları; takım maks. 3 kişi; en az 1 üniversite bağlantısı",
+    "butce": "≤ €150.000 / 12 ay (yaşam gideri + malzeme + koçluk); geri ödemesiz",
+    "sartlar": [
+      "Üniversite veya araştırma kurumuyla bağlantı",
+      "Teknoloji/bilgi tabanlı iş fikri",
+      "Şirket henüz kurulmamış veya çok yeni",
+      "Businessplan hazırlığı"
+    ],
+    "nasil": "Başvuru doğrudan değil, üniversitenin girişimcilik ofisi üzerinden yapılır; exist.de – Hochschule listesi",
+    "ipucu": "Almanya'daki üniversitelerin çoğunda EXIST danışmanı mevcut; önce üniversite Gründungsbüro ile görüşün"
+  },
+  "Gründungsstipendium.NRW": {
+    "frist": "Son başvuru: 30 Eylül 2026; jüri toplantıları Nisan 2026'dan itibaren geçici askıya alındı – yıl içinde yeniden başlayacak",
+    "kimler": "NRW'de ikamet eden 18+ yaş bireyler veya takımlar (maks. 3 kişi); şirket kurmamış veya <1 yıl önce kurulmuş",
+    "butce": "€1.200/ay/kişi x 12 ay; çok cinsiyetli ekiplere +€300/ay (Diversität+)",
+    "sartlar": [
+      "NRW'de kayıtlı adres zorunlu",
+      "İnovatif ve USP'li iş fikri",
+      "Ticaret/ticaret siciline kaydedilecek şirket",
+      "Serbest meslek/freelance hariç"
+    ],
+    "nasil": "gruendungsstipendium.nrw üzerinden akredite Gründungsnetzwerk seç, ideenpapier hazırla ve gönder; jüri daveti takip eder",
+    "ipucu": "Jüri öncesi digitalHUB Aachen, STARTERCENTER NRW gibi ağlardan koçluk alın; ideenpapier tek sayfa özlü olmalı"
+  },
+  "ZIM – Merkezi Orta Ölçekli İnovasyon Programı": {
+    "frist": "Sürekli başvuru (rolling); değerlendirme sürekli yapılır",
+    "kimler": "Almanya'da faaliyeti olan KOBİ'ler (≤ €50M ciro); araştırma kurumları KOBİ ile işbirliğinde",
+    "butce": "Tek proje: %25–45; işbirliği: %30–55; maks. €2,3M (konsorsiyum toplam)",
+    "sartlar": [
+      "Almanya'da merkez/faaliyet",
+      "Piyasa hazır olmayan AR-GE odaklı proje",
+      "Risk içeren teknolojik yenilik",
+      "Ticari işletme niteliği"
+    ],
+    "nasil": "zim.de – dijital portal üzerinden tam başvuru; AiF Projekt GmbH ve VDI/VDE-IT değerlendirme yapar",
+    "ipucu": "ZIM + EXIST kombinasyonu mümkün; siber güvenlik ürün geliştirme ve AI güvenlik araçları özellikle uygun"
+  },
+  "NIS2 & DORA GRC Uyum Projesi Danışmanlık Desteği (BAFA)": {
+    "frist": "31 Aralık 2026 (mevcut richtlinie süresi)",
+    "kimler": "Almanya'da kayıtlı KOBİ'ler (≤ 250 çalışan)",
+    "butce": "Max. €4.000 proje başına; eski eyaletlerde %50, yeni eyaletlerde %80",
+    "sartlar": [
+      "BAFA kayıtlı danışman kullanımı zorunlu",
+      "Danışmanlık öncesi başvuru ve onay alınmalı",
+      "Yılda max. 2 danışmanlık",
+      "Aynı konu için başka kamu desteği yasak"
+    ],
+    "nasil": "bafa.de – online başvuru; danışmanın BAFA listesinde kayıtlı olduğundan emin ol",
+    "ipucu": "NIS2UmsuCG Almanya'da Aralık 2025'te yürürlüğe girdi; uyum danışmanlığı için doğru zamanlama"
+  },
+  "EU AI Act Uyum & GRC Otomasyon Araştırması – Horizon Europe": {
+    "frist": "Teyit edilmeli; çeşitli Horizon Europe iş programı çağrıları kapsamında rolling",
+    "kimler": "Üniversite, araştırma kurumları, KOBİ konsorsiyumları, vakıf/dernek",
+    "butce": "Proje başına değişken; genellikle %70–100 eş finansman",
+    "sartlar": [
+      "AB genelinde uygulanabilirlik",
+      "Konsorsiyum gerekli",
+      "AI Act ve NIS2/GDPR çakışımı odaklı",
+      "Etki ve diseminasyon planı"
+    ],
+    "nasil": "EC Funding & Tenders Portal – Horizon Europe Cluster 4 (dijital) veya EIC Pathfinder çağrılarına bakın",
+    "ipucu": "AI Act'in 2024'ten itibaren kademeli uygulanması GRC otomasyon araştırmasına yönelik finansman fırsatı yaratıyor; çağrı takibinde DIGITAL + CL3 birlikte izleyin"
+  },
+  "Mittelstand-Digital Zentren (Dijital Dönüşüm Ağı)": {
+    "frist": "Sürekli başvuru (rolling); Fokusprojekte skizleri yılda 2 kez (01.02 ve 01.08)",
+    "kimler": "KOBİ ve esnaf işletmeleri; Almanya'da faaliyet",
+    "butce": "KOBİ hizmetleri ücretsiz; Fokusprojekte için BMBF desteği ayrıca açılır",
+    "sartlar": [
+      "Almanya'da kayıtlı KOBİ veya esnaf",
+      "Dijitalleşme veya siber güvenlik ihtiyacı",
+      "Hizmet talebi online ya da yerinde"
+    ],
+    "nasil": "mittelstand-digital.de – bölgesel Zentrum bul ve doğrudan iletişime geç",
+    "ipucu": "NRW'de aktif Mittelstand-Digital Zentren var; ücretsiz siber güvenlik kontrolleri ve NIS2 hazırlık atölyeleri için ilk başvuru noktası"
+  },
+  "NRW.Bank – Gründungs- und Wachstumsfinanzierung": {
+    "frist": "Sürekli başvuru (rolling)",
+    "kimler": "NRW'de kurulacak veya faaliyette olan girişimciler ve KOBİ'ler",
+    "butce": "€25.000 – €7,5M; düşük faizli kredi ve katılım payı kombinasyonu",
+    "sartlar": [
+      "NRW'de merkez veya faaliyet",
+      "Ticari işletme niteliği",
+      "İş planı ve finansal projeksiyon",
+      "Ev bankası (Hausbank) aracılığı zorunlu"
+    ],
+    "nasil": "nrwbank.de – Hausbank üzerinden başvuru; NRW.Bank doğrudan bireylerle muhatap değil",
+    "ipucu": "Gründungsstipendium.NRW ile kombine edilebilir; siber güvenlik startup'ları için de uygun teknoloji girişimi kategorisi var"
+  },
+  "DIGITAL Europe – Siber Güvenlik Beceri Yarışmaları (COMPETITIONS)": {
+    "frist": "Açılış: 4 Kasım 2025 | Son teslim: 01 Ekim 2026",
+    "kimler": "Üniversite, mesleki eğitim, araştırma kurumları ve konsorsiyumları",
+    "butce": "Çağrı başına değişken; %50 eş finansman (teyit edilmeli)",
+    "sartlar": [
+      "Konsorsiyum gerekli",
+      "Çok ülkeli katılım beklentisi",
+      "Ölçülebilir yetkinlik geliştirme hedefi",
+      "ENISA ECSF ile uyum"
+    ],
+    "nasil": "EC Funding & Tenders Portal – DIGITAL-2026-SKILLS-09-COMPETITIONS çağrı numarasıyla",
+    "ipucu": "EuroSkills/WorldSkills benzeri siber güvenlik yarışmaları organize etmek için ideal; gençlere yönelik CTF etkinlikleri bu çağrıya uygun"
+  },
+  "Dünya Bankası – Dijital Kalkınma Hibeleri": {
+    "frist": "Rolling; proje bağlamına göre değişir",
+    "kimler": "Araştırma kurumları, STK ve vakıflar; özel sektör IFC üzerinden uygun olabilir",
+    "butce": "Genellikle $500K–$5M; tam hibe veya imtiyazlı kredi",
+    "sartlar": [
+      "Gelişmekte olan ülke bağlamı veya ortağı",
+      "Dijital altyapı veya siber güvenlik kapasite odağı",
+      "Kalkınma etkisi kanıtlanabilir olmali",
+      "Kamu ortağı çoğu çağrı için zorunlu"
+    ],
+    "nasil": "worldbank.org/projects – ilgili ülke ve sektör filtreleriyle çağrı tarayın; IFC portalı özel sektör için",
+    "ipucu": "Türkiye veya MENA bağlantılı siber güvenlik projelerinde WB fonları araştırılabilir; ortak kamu kurumu gerekli"
+  },
+  "OECD – Dijital Ekonomi ve Siber Güvenlik Politika Projeleri": {
+    "frist": "Rolling; OECD programına bağlı",
+    "kimler": "Esas olarak kamu kurumları ve akredite araştırma kuruluşları (publicOnly=true kural olarak)",
+    "butce": "Proje bazlı; doğrudan hibe değil, katılım/araştırma ortaklığı biçiminde",
+    "sartlar": [
+      "OECD üyesi veya ortağı ülkede faaliyet",
+      "Kamu politikası odaklı çalışma",
+      "Akademik akreditasyon veya kamu yetkisi",
+      "Özel sektör katılımı genellikle danışman/ortak düzeyi"
+    ],
+    "nasil": "oecd.org/digital/security – ilgili OECD çalışma grubu veya proje çağrısına bakın",
+    "ipucu": "Çoğu OECD çağrısı kamu-only; ancak üniversite ya da düşünce kuruluşu sıfatıyla ortak olunabilir"
+  }
+};
+
+function statusOf(d){
+  if(d==='rolling') return {key:'rolling',label:'Sürekli / Açık',cls:'b-rolling'};
+  const dl=new Date(d); const days=Math.ceil((dl-TODAY)/86400000);
+  if(days<0) return {key:'closed',label:'Kapandı',cls:'b-closed'};
+  if(days<=45) return {key:'soon',label:'Son '+days+' gün',cls:'b-soon'};
+  return {key:'open',label:'Açık',cls:'b-open'};
+}
+function fmtDate(d){
+  if(d==='rolling') return 'Sürekli';
+  const dl=new Date(d);
+  return dl.toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'});
+}
+
+let activeCat='', activeStatus='', kpiMode='all';
+
+function setKpi(m){ kpiMode = (kpiMode===m && m!=='all') ? 'all' : m;
+  // KPI ile durum chip'leri çakışmasın diye durum chip'ini sıfırla
+  activeStatus=''; [...stWrap.children].forEach((x,i)=>x.classList.toggle('active',i===0));
+  render();
+}
+
+const cats=[...new Set(DATA.map(d=>d.cat))];
+const regions=[...new Set(DATA.map(d=>d.region))];
+
+document.getElementById('updated').textContent = TODAY.toLocaleDateString('tr-TR',{day:'2-digit',month:'long',year:'numeric'});
+
+const regSel=document.getElementById('region');
+regions.forEach(r=>{const o=document.createElement('option');o.value=r;o.textContent=r;regSel.appendChild(o)});
+
+const catWrap=document.getElementById('catChips');
+const allCat=document.createElement('div');allCat.className='chip active';allCat.textContent='Tüm kategoriler';
+allCat.onclick=()=>{activeCat='';[...catWrap.children].forEach(c=>c.classList.remove('active'));allCat.classList.add('active');render()};
+catWrap.appendChild(allCat);
+cats.forEach(c=>{const el=document.createElement('div');el.className='chip';el.textContent=c;
+  el.onclick=()=>{activeCat=c;[...catWrap.children].forEach(x=>x.classList.remove('active'));el.classList.add('active');render()};
+  catWrap.appendChild(el)});
+
+const stWrap=document.getElementById('statusChips');
+const statuses=[['','Tüm durumlar'],['open','Açık'],['soon','Yaklaşan (≤45g)'],['rolling','Sürekli'],['closed','Kapanan']];
+statuses.forEach(([k,l],i)=>{const el=document.createElement('div');el.className='chip'+(i===0?' active':'');el.textContent=l;
+  el.onclick=()=>{activeStatus=k;kpiMode='all';[...stWrap.children].forEach(x=>x.classList.remove('active'));el.classList.add('active');render()};
+  stWrap.appendChild(el)});
+
+document.getElementById('search').oninput=render;
+document.getElementById('region').onchange=render;
+document.getElementById('sort').onchange=render;
+document.getElementById('hidePublic').onchange=()=>{if(kpiMode==='public')kpiMode='all';render()};
+
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const reg=document.getElementById('region').value;
+  const sort=document.getElementById('sort').value;
+  const hidePub=document.getElementById('hidePublic').checked;
+  let rows=DATA.filter(d=>{
+    const st=statusOf(d.deadline).key;
+    if(kpiMode==='public'){ if(!d.publicOnly) return false; }
+    else { if(hidePub&&d.publicOnly) return false; }
+    if(kpiMode==='active' && !['open','soon'].includes(st)) return false;
+    if(kpiMode==='soon' && st!=='soon') return false;
+    if(activeCat&&d.cat!==activeCat) return false;
+    if(activeStatus&&st!==activeStatus) return false;
+    if(reg&&d.region!==reg) return false;
+    if(q&&!(d.title+d.org+d.desc+d.cat+(d.elig||[]).join(' ')).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const order={soon:0,open:1,rolling:2,closed:3};
+  rows.sort((a,b)=>{
+    if(sort==='title') return a.title.localeCompare(b.title);
+    if(sort==='status') return order[statusOf(a.deadline).key]-order[statusOf(b.deadline).key];
+    const av=a.deadline==='rolling'?Infinity:new Date(a.deadline);
+    const bv=b.deadline==='rolling'?Infinity:new Date(b.deadline);
+    return av-bv;
+  });
+
+  const pool=DATA.filter(d=>!(hidePub&&d.publicOnly));
+  const open=pool.filter(d=>['open','soon'].includes(statusOf(d.deadline).key)).length;
+  const soon=pool.filter(d=>statusOf(d.deadline).key==='soon').length;
+  const pub=DATA.filter(d=>d.publicOnly).length;
+  const A=m=>kpiMode===m?' active':'';
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi${A('all')}" onclick="setKpi('all')" title="Tümünü göster (filtreyi sıfırla)"><div class="n">${pool.length}</div><div class="l">Başvurabileceğin fırsat</div></div>
+    <div class="kpi${A('active')}" onclick="setKpi('active')" title="Sadece açık + yaklaşan"><div class="n" style="color:var(--green)">${open}</div><div class="l">Aktif başvuru</div></div>
+    <div class="kpi${A('soon')}" onclick="setKpi('soon')" title="Sadece son 45 gün"><div class="n" style="color:var(--amber)">${soon}</div><div class="l">Yaklaşan (≤45g)</div></div>
+    <div class="kpi${A('public')}" onclick="setKpi('public')" title="Sadece kamu-only fırsatları"><div class="n" style="color:#aab4c0">${pub}</div><div class="l">Kamu-only</div></div>
+    <div class="kpi" onclick="setKpi('all')" style="cursor:default;opacity:.85" title="Şu an görüntülenen kart sayısı"><div class="n">${rows.length}</div><div class="l">Görüntülenen</div></div>`;
+
+  const grid=document.getElementById('grid');
+  if(!rows.length){grid.innerHTML='<div class="empty">Filtreye uygun fırsat bulunamadı.</div>';return}
+  grid.innerHTML=rows.map(d=>{
+    const st=statusOf(d.deadline);
+    const near=st.key==='soon', past=st.key==='closed';
+    const eligTags=(d.elig||[]).map(e=>`<span class="etag${d.publicOnly?' kamu':''}">${e}</span>`).join('');
+    return `<div class="card${d.publicOnly?' pub':''}">
+      <div class="card-top">
+        <h3>${d.title}</h3>
+        <div class="badges"><span class="badge ${st.cls}">${st.label}</span></div>
+      </div>
+      <div class="badges">
+        <span class="badge b-cat">${d.cat}</span>
+        <span class="badge b-reg">${d.region}</span>
+        ${d.publicOnly?'<span class="badge b-pub">Kamu-only</span>':''}
+      </div>
+      <div class="desc">${d.desc}</div>
+      <div>
+        <div class="elig-label">Kim başvurabilir:</div>
+        <div class="elig">${eligTags}</div>
+      </div>
+      <div class="meta">
+        <span><b>Bütçe:</b> ${d.budget}</span>
+        <span class="${near?'deadline-near':past?'deadline-past':''}"><b>Son tarih:</b> ${fmtDate(d.deadline)}</span>
+      </div>
+      <div><b style="font-size:12px;color:var(--muted)">${d.org}</b></div>
+      <div class="card-actions">
+        <button class="btn-sum" onclick="openSummary(${d._i})">📋 Proje Özeti</button>
+        <a class="link" href="${d.url}" target="_blank" rel="noopener">Resmi sayfayı aç →</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openSummary(i){
+  const d=DATA[i]; const s=SUM[d.title];
+  const st=statusOf(d.deadline);
+  const eligTags=(d.elig||[]).map(e=>`<span class="etag${d.publicOnly?' kamu':''}">${e}</span>`).join(' ');
+  let rows='';
+  const row=(lab,val)=>`<div class="srow"><div class="lab">${lab}</div><div class="val">${val}</div></div>`;
+  if(s){
+    rows+=row('Son tarih (Frist)', s.frist);
+    rows+=row('Kim başvurabilir', s.kimler+'<br><div class="elig" style="margin-top:6px">'+eligTags+'</div>');
+    rows+=row('Bütçe / Oran', s.butce);
+    rows+=row('Başvuru şartları', '<ul>'+s.sartlar.map(x=>`<li>${x}</li>`).join('')+'</ul>');
+    rows+=row('Nasıl başvurulur', s.nasil);
+    rows+=row('İpucu', s.ipucu);
+  } else {
+    rows+=row('Son tarih (Frist)', fmtDate(d.deadline));
+    rows+=row('Kim başvurabilir', '<div class="elig">'+eligTags+'</div>');
+    rows+=row('Bütçe', d.budget);
+    rows+=row('Açıklama', d.desc);
+  }
+  document.getElementById('modal').innerHTML=`
+    <button class="m-close" onclick="closeSummary()">×</button>
+    <h2>${d.title}</h2>
+    <div class="m-org">${d.org}</div>
+    <div class="m-badges">
+      <span class="badge ${st.cls}">${st.label}</span>
+      <span class="badge b-cat">${d.cat}</span>
+      <span class="badge b-reg">${d.region}</span>
+      ${d.publicOnly?'<span class="badge b-pub">Kamu-only</span>':''}
+    </div>
+    ${rows}
+    <a class="m-cta" href="${d.url}" target="_blank" rel="noopener">Resmi sayfaya git →</a>
+    <div class="m-note">Özet bilgilendirme amaçlıdır; bağlayıcı şartlar resmi çağrı dokümanındadır. Başvurmadan önce teyit edin.</div>`;
+  document.getElementById('overlay').classList.add('show');
+}
+function closeSummary(){document.getElementById('overlay').classList.remove('show')}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeSummary()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSummary()});
+
+render();
+</script>
+</body>
+</html>
