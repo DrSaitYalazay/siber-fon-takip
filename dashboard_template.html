@@ -502,18 +502,26 @@ function fmtDate(d){
 let activeCat='', activeStatus='', kpiMode='all', lastRows=[];
 
 // ---- Sesli okuma (Web Speech API; iOS Safari dahil çalışır) ----
-let ttsVoice=null;
+let ttsVoice=null, ttsWarned=false;
 function pickVoice(){
-  if(!window.speechSynthesis) return;
+  if(!window.speechSynthesis) return null;
   const vs=speechSynthesis.getVoices()||[];
-  ttsVoice=vs.find(v=>/tr[-_]?TR/i.test(v.lang)) || vs.find(v=>(v.lang||'').toLowerCase().startsWith('tr')) || null;
+  const tr=vs.filter(v=>/^tr(-|_)?/i.test(v.lang||'') || /türk|turkish|yelda/i.test(v.name||''));
+  // Kaliteli Türkçe sesleri (Google/Yelda/enhanced) önce seç
+  ttsVoice = tr.find(v=>/google|yelda|premium|enhanced|natural|gelişm/i.test(v.name||'')) || tr[0] || null;
+  return ttsVoice;
 }
 if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
 function speak(text){
   if(!window.speechSynthesis){ alert('Tarayıcın sesli okumayı desteklemiyor.'); return; }
   speechSynthesis.cancel();
+  if(!ttsVoice) pickVoice();   // sesler geç yüklenebilir; tıklama anında tekrar dene
+  if(!ttsVoice && !ttsWarned){
+    ttsWarned=true;
+    alert('Cihazında Türkçe konuşma sesi bulunamadığı için telaffuz bozuk olabilir.\n\nTürkçe ses eklemek için:\n• Mac: Sistem Ayarları → Erişilebilirlik → Sözlü İçerik → Sistem Sesi → Sesleri Yönet → Türkçe (Yelda) indir\n• iPhone: Ayarlar → Erişilebilirlik → Sözlü İçerik → Sesler → Türkçe ekle\n• Chrome: genelde "Google Türkçe" yüklüdür; sayfayı yenileyip tekrar dene.');
+  }
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='tr-TR'; if(ttsVoice) u.voice=ttsVoice; u.rate=1; u.pitch=1;
+  u.lang='tr-TR'; if(ttsVoice) u.voice=ttsVoice; u.rate=0.95; u.pitch=1;
   speechSynthesis.speak(u);
 }
 function stopSpeak(){ if(window.speechSynthesis) speechSynthesis.cancel(); }
