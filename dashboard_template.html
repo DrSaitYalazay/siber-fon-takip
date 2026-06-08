@@ -87,6 +87,28 @@
     font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:9px}
   .m-cta:hover{background:#2f6fd6}
   .m-note{font-size:11.5px;color:var(--muted);margin-top:14px;font-style:italic}
+  .fav{background:none;border:none;cursor:pointer;font-size:18px;line-height:1;color:#5b6573;padding:0 2px}
+  .fav.on{color:#fbbf24}
+  .status-sel{font-size:12px;padding:5px 8px;border-radius:8px}
+  .b-durum{background:rgba(34,211,238,.14);color:var(--accent2)}
+  .b-plan{background:rgba(245,158,11,.15);color:var(--amber)}
+  .b-applied{background:rgba(59,130,246,.16);color:#7eb3ff}
+  .b-won{background:rgba(34,197,94,.18);color:var(--green)}
+  .m-notes{width:100%;min-height:64px;background:var(--panel2);border:1px solid var(--border);
+    color:var(--text);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:vertical}
+  .m-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+  @media print{
+    body{padding:0;max-width:100%}
+    body *{visibility:hidden}
+    #overlay,#overlay *{visibility:visible}
+    #overlay{position:absolute;inset:0;background:#fff;display:block!important;padding:0;backdrop-filter:none}
+    .modal{box-shadow:none;border:none;max-width:100%;background:#fff}
+    .modal h2,.srow .val,.srow .val li{color:#111!important}
+    .srow .lab{color:#444!important}
+    .srow{border-top:1px solid #ccc}
+    .m-close,.m-tools,.m-cta,.btn-sum,.fav,.status-sel{display:none!important}
+    .badge{border:1px solid #999;color:#111!important;background:#eee!important}
+  }
 </style>
 </head>
 <body>
@@ -106,6 +128,7 @@
     <option value="title">İsme göre sırala</option>
   </select>
   <label class="toggle"><input type="checkbox" id="hidePublic" checked> Kamu-only olanları gizle</label>
+  <label class="toggle"><input type="checkbox" id="favOnly"> ⭐ Sadece favorilerim</label>
   <button class="btn-sum" onclick="speakAll()" title="Görünen fırsatları sesli oku">🔊 Tümünü Oku</button>
   <button class="btn-sum" onclick="stopSpeak()" title="Okumayı durdur">⏹ Durdur</button>
 </div>
@@ -501,6 +524,40 @@ function fmtDate(d){
 
 let activeCat='', activeStatus='', kpiMode='all', lastRows=[];
 
+// ---- Kişisel durum: favori / başvuru durumu / notlar (tarayıcıda saklanır) ----
+const LS_KEY='fonState_v1';
+function loadStore(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'{}'); }catch(e){ return {}; } }
+let store=loadStore(); store.fav=store.fav||{}; store.durum=store.durum||{}; store.notlar=store.notlar||{};
+function saveStore(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(store)); }catch(e){} }
+function toggleFav(i){ const t=DATA[i].title; if(store.fav[t]) delete store.fav[t]; else store.fav[t]=1; saveStore(); render(); }
+function setDurum(i,v){ const t=DATA[i].title; if(v) store.durum[t]=v; else delete store.durum[t]; saveStore(); render(); }
+function setNot(i,v){ const t=DATA[i].title; if(v.trim()) store.notlar[t]=v; else delete store.notlar[t]; saveStore(); }
+const DURUM_ETIKET={plan:'Planlıyorum',applied:'Başvurdum',won:'Kazandım'};
+const DURUM_CLS={plan:'b-plan',applied:'b-applied',won:'b-won'};
+
+// ---- Geri sayım ----
+function daysLeft(d){ if(d==='rolling') return null; return Math.ceil((new Date(d)-TODAY)/86400000); }
+function countdownText(d){ const n=daysLeft(d); if(n===null) return 'Sürekli'; if(n<0) return 'Kapandı'; if(n===0) return 'Bugün son!'; return n+' gün kaldı'; }
+
+// ---- Takvime ekle (.ics) ----
+function addToCalendar(i){
+  const d=DATA[i];
+  if(d.deadline==='rolling'){ alert('Bu fırsatın sabit bir son tarihi yok (sürekli/dönemsel).'); return; }
+  const dt=d.deadline.replace(/-/g,'');
+  const esc=s=>(s||'').replace(/[\\,;]/g,' ').replace(/\n/g,' ');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//SiberFon//TR//','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT','UID:fon-'+i+'-'+dt+'@siberfon','DTSTAMP:'+dt+'T090000Z',
+    'DTSTART;VALUE=DATE:'+dt,'DTEND;VALUE=DATE:'+dt,
+    'SUMMARY:Fon son tarihi: '+esc(d.title),
+    'DESCRIPTION:'+esc(d.desc)+' — '+d.url,
+    'BEGIN:VALARM','TRIGGER:-P7D','ACTION:DISPLAY','DESCRIPTION:Fon son tarihi 1 hafta sonra','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
+  a.download=('son-tarih-'+d.title).replace(/[^\w]+/g,'-').slice(0,40)+'.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
 // ---- Sesli okuma (Web Speech API; iOS Safari dahil çalışır) ----
 let ttsVoice=null, ttsWarned=false;
 function pickVoice(){
@@ -582,14 +639,17 @@ document.getElementById('search').oninput=render;
 document.getElementById('region').onchange=render;
 document.getElementById('sort').onchange=render;
 document.getElementById('hidePublic').onchange=()=>{if(kpiMode==='public')kpiMode='all';render()};
+document.getElementById('favOnly').onchange=render;
 
 function render(){
   const q=document.getElementById('search').value.toLowerCase();
   const reg=document.getElementById('region').value;
   const sort=document.getElementById('sort').value;
   const hidePub=document.getElementById('hidePublic').checked;
+  const favOnly=document.getElementById('favOnly').checked;
   let rows=DATA.filter(d=>{
     const st=statusOf(d.deadline).key;
+    if(favOnly && !store.fav[d.title]) return false;
     if(kpiMode==='public'){ if(!d.publicOnly) return false; }
     else { if(hidePub&&d.publicOnly) return false; }
     if(kpiMode==='active' && !['open','soon'].includes(st)) return false;
@@ -628,15 +688,22 @@ function render(){
     const st=statusOf(d.deadline);
     const near=st.key==='soon', past=st.key==='closed';
     const eligTags=(d.elig||[]).map(e=>`<span class="etag${d.publicOnly?' kamu':''}">${e}</span>`).join('');
+    const fav=store.fav[d.title], dr=store.durum[d.title];
+    const cdCls = (d.deadline!=='rolling' && daysLeft(d.deadline)!==null && daysLeft(d.deadline)>=0 && daysLeft(d.deadline)<=45)?'deadline-near':(past?'deadline-past':'');
+    const opt=(v,l)=>`<option value="${v}"${dr===v?' selected':''}>${l}</option>`;
     return `<div class="card${d.publicOnly?' pub':''}">
       <div class="card-top">
         <h3>${d.title}</h3>
-        <div class="badges"><span class="badge ${st.cls}">${st.label}</span></div>
+        <div class="badges">
+          <button class="fav ${fav?'on':''}" onclick="toggleFav(${d._i})" title="Favorilerime ekle/çıkar">${fav?'★':'☆'}</button>
+          <span class="badge ${st.cls}">${st.label}</span>
+        </div>
       </div>
       <div class="badges">
         <span class="badge b-cat">${d.cat}</span>
         <span class="badge b-reg">${d.region}</span>
         ${d.publicOnly?'<span class="badge b-pub">Kamu-only</span>':''}
+        ${dr?`<span class="badge ${DURUM_CLS[dr]}">${DURUM_ETIKET[dr]}</span>`:''}
       </div>
       <div class="desc">${d.desc}</div>
       <div>
@@ -646,11 +713,16 @@ function render(){
       <div class="meta">
         <span><b>Bütçe:</b> ${d.budget}</span>
         <span class="${near?'deadline-near':past?'deadline-past':''}"><b>Son tarih:</b> ${fmtDate(d.deadline)}</span>
+        <span class="${cdCls}"><b>Kalan:</b> ${countdownText(d.deadline)}</span>
       </div>
       <div><b style="font-size:12px;color:var(--muted)">${d.org}</b></div>
       <div class="card-actions">
         <button class="btn-sum" onclick="openSummary(${d._i})">📋 Proje Özeti</button>
         <button class="btn-sum" onclick="speakCard(${d._i})" title="Bu projeyi şartlarıyla sesli oku">🔊</button>
+        <button class="btn-sum" onclick="addToCalendar(${d._i})" title="Son tarihi takvime ekle (.ics)">📅</button>
+        <select class="btn-sum status-sel" onchange="setDurum(${d._i},this.value)" title="Başvuru durumun">
+          ${opt('','Durum…')}${opt('plan','Planlıyorum')}${opt('applied','Başvurdum')}${opt('won','Kazandım')}
+        </select>
         <a class="link" href="${d.url}" target="_blank" rel="noopener">Resmi sayfayı aç →</a>
       </div>
     </div>`;
@@ -663,12 +735,21 @@ function openSummary(i){
   const eligTags=(d.elig||[]).map(e=>`<span class="etag${d.publicOnly?' kamu':''}">${e}</span>`).join(' ');
   let rows='';
   const row=(lab,val)=>`<div class="srow"><div class="lab">${lab}</div><div class="val">${val}</div></div>`;
+  const lst=v=>'<ul>'+(Array.isArray(v)?v:[v]).map(x=>`<li>${x}</li>`).join('')+'</ul>';
   if(s){
     rows+=row('Son tarih (Frist)', s.frist);
+    rows+=row('Kalan süre', countdownText(d.deadline));
     rows+=row('Kim başvurabilir', s.kimler+'<br><div class="elig" style="margin-top:6px">'+eligTags+'</div>');
     rows+=row('Bütçe / Oran', s.butce);
-    rows+=row('Başvuru şartları', '<ul>'+s.sartlar.map(x=>`<li>${x}</li>`).join('')+'</ul>');
+    if(s.es_finansman) rows+=row('Eş finansman / öz kaynak', s.es_finansman);
+    if(s.basari_orani) rows+=row('Başarı oranı / rekabet', s.basari_orani);
+    if(s.konsorsiyum) rows+=row('Konsorsiyum şartı', s.konsorsiyum);
+    if(s.hazirlik) rows+=row('Hazırlık süresi & efor', s.hazirlik);
+    rows+=row('Başvuru şartları', lst(s.sartlar));
+    if(s.belgeler) rows+=row('Gerekli belgeler', lst(s.belgeler));
+    if(s.kriterler) rows+=row('Değerlendirme kriterleri', s.kriterler);
     rows+=row('Nasıl başvurulur', s.nasil);
+    if(s.kaynaklar) rows+=row('Yardım kaynakları', s.kaynaklar);
     rows+=row('İpucu', s.ipucu);
   } else {
     rows+=row('Son tarih (Frist)', fmtDate(d.deadline));
@@ -687,8 +768,21 @@ function openSummary(i){
       ${d.publicOnly?'<span class="badge b-pub">Kamu-only</span>':''}
     </div>
     ${rows}
-    <a class="m-cta" href="${d.url}" target="_blank" rel="noopener">Resmi sayfaya git →</a>
-    <button class="btn-sum" style="margin-top:18px;margin-left:8px" onclick="speakCard(${i})">🔊 Sesli Oku</button>
+    <div class="srow"><div class="lab">Başvuru durumun</div><div class="val">
+      <select class="btn-sum status-sel" onchange="setDurum(${i},this.value)">
+        <option value=""${!store.durum[d.title]?' selected':''}>Durum…</option>
+        <option value="plan"${store.durum[d.title]==='plan'?' selected':''}>Planlıyorum</option>
+        <option value="applied"${store.durum[d.title]==='applied'?' selected':''}>Başvurdum</option>
+        <option value="won"${store.durum[d.title]==='won'?' selected':''}>Kazandım</option>
+      </select></div></div>
+    <div class="srow"><div class="lab">Notların</div><div class="val">
+      <textarea class="m-notes" oninput="setNot(${i},this.value)" placeholder="Bu fona dair kişisel notların (tarayıcında saklanır)...">${(store.notlar[d.title]||'').replace(/</g,'&lt;')}</textarea></div></div>
+    <div class="m-tools">
+      <a class="m-cta" href="${d.url}" target="_blank" rel="noopener">Resmi sayfaya git →</a>
+      <button class="btn-sum" onclick="speakCard(${i})">🔊 Sesli Oku</button>
+      <button class="btn-sum" onclick="addToCalendar(${i})">📅 Takvime ekle</button>
+      <button class="btn-sum" onclick="window.print()">🖨️ PDF / Yazdır</button>
+    </div>
     <div class="m-note">Özet bilgilendirme amaçlıdır; bağlayıcı şartlar resmi çağrı dokümanındadır. Başvurmadan önce teyit edin.</div>`;
   document.getElementById('overlay').classList.add('show');
 }

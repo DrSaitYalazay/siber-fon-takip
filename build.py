@@ -36,11 +36,13 @@ Almanya, NRW ve dünya çapında GÜNCEL ve YAKLAŞAN fon çağrıları, startup
 destekleri, eğitim/awareness ve GRC/uyum projelerini web aramasıyla bul:
 
 - AB fonları: Horizon Europe (Cluster 3 / ECCC cybersecurity), Digital Europe
-  Programme (DIGITAL/CYBER), EIC Accelerator, cascade funding / FSTP
+  Programme (DIGITAL/CYBER), EIC Accelerator, EIT Digital, ESF+, Interreg NWE,
+  cascade funding / FSTP
 - Almanya & NRW: BMBF/BMFTR IT-Sicherheit, BSI (KoPa45), Cyberagentur,
-  Gründungsstipendium.NRW, NRW.Bank, EDIH
+  Gründungsstipendium.NRW, NRW.Bank programları, EDIH, EXIST, ZIM, Invest-BW
 - Startup: cybersecurity akseleratör/inkübatör/yarışma
-- Eğitim & awareness: EU Cybersecurity Skills Academy, awareness training, pentest
+- Eğitim & awareness: EU Cybersecurity Skills Academy, awareness training, pentest,
+  DAAD (akademik işbirliği/değişim)
 - GRC, AI Act & Uyum: NIS2, DORA, GDPR, EU AI Act, GRC automation, security risk
 - Uluslararası: World Bank, OECD (genelde kamu-only)
 
@@ -67,21 +69,32 @@ publicOnly=true işaretle (silme, işaretle).
   ],
   "sum": {{
     "Kısa benzersiz başlık": {{
-      "frist": "son tarih/Frist detayı",
+      "frist": "son tarih/Frist detayı (aşama bilgisi varsa ekle)",
       "kimler": "kim başvurabilir detayı",
-      "butce": "bütçe ve eş finansman oranı",
-      "sartlar": ["şart 1","şart 2","şart 3"],
+      "butce": "toplam bütçe ve hibe miktarı",
+      "es_finansman": "eş finansman/öz kaynak oranı (ör. %75 hibe, %25 öz kaynak) — yoksa boş",
+      "basari_orani": "tahmini başarı oranı / rekabet seviyesi (ör. Horizon ~%15, EIC <%10) — biliniyorsa",
+      "konsorsiyum": "konsorsiyum/ortaklık şartı (ör. min 3 ülke/3 kurum) — varsa, yoksa 'Tekil başvuru mümkün'",
+      "hazirlik": "ne kadar erken başlamalı + başvuru yükü (ağır/orta/hafif)",
+      "sartlar": ["kısa şart 1","kısa şart 2","kısa şart 3"],
+      "belgeler": ["gerekli belge/ek 1","belge 2"],
+      "kriterler": "neye göre değerlendirilir (ör. Excellence/Impact/Implementation)",
       "nasil": "nasıl/nereden başvurulur",
+      "kaynaklar": "yardım kaynakları: NCP/ulusal irtibat, webinar, FAQ, partner-arama (varsa link/isim)",
       "ipucu": "pratik ipucu"
     }}
   }}
 }}
 
 KURALLAR:
-- 16-20 fırsat hedefle; köklü programları (Horizon, DIGITAL, EIC, BMBF, NRW,
-  Skills Academy, World Bank, OECD) her zaman dahil et, varsa yenileri ekle.
+- 18-26 fırsat hedefle; köklü programları (Horizon, DIGITAL, EIC, BMBF, NRW,
+  Skills Academy, EXIST, ZIM, EIT Digital, ESF+, Interreg NWE, DAAD, World Bank,
+  OECD) her zaman dahil et, varsa yenileri ekle.
 - "sum" içindeki her anahtar "data" içindeki bir "title" ile birebir aynı olmalı.
-- "sartlar" en fazla 4 KISA madde; tüm metinler kısa ve öz olsun.
+- "sartlar" ve "belgeler" en fazla 4 KISA madde; tüm metinler kısa ve öz olsun.
+- Yeni sum alanlarını (es_finansman, basari_orani, konsorsiyum, hazirlik, belgeler,
+  kriterler, kaynaklar) uygun olduğunda doldur; bilgi yoksa o alanı boş string ya da
+  boş dizi bırak (uydurma yapma).
 - Tarih ve başvuru hakkını resmi kaynaktan doğrula; eminsizsen desc'e
   "teyit edilmeli" yaz.
 - Tüm metin Türkçe.
