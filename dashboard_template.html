@@ -106,6 +106,8 @@
     <option value="title">İsme göre sırala</option>
   </select>
   <label class="toggle"><input type="checkbox" id="hidePublic" checked> Kamu-only olanları gizle</label>
+  <button class="btn-sum" onclick="speakAll()" title="Görünen fırsatları sesli oku">🔊 Tümünü Oku</button>
+  <button class="btn-sum" onclick="stopSpeak()" title="Okumayı durdur">⏹ Durdur</button>
 </div>
 
 <div class="chips" id="catChips"></div>
@@ -497,7 +499,48 @@ function fmtDate(d){
   return dl.toLocaleDateString('tr-TR',{day:'2-digit',month:'short',year:'numeric'});
 }
 
-let activeCat='', activeStatus='', kpiMode='all';
+let activeCat='', activeStatus='', kpiMode='all', lastRows=[];
+
+// ---- Sesli okuma (Web Speech API; iOS Safari dahil çalışır) ----
+let ttsVoice=null;
+function pickVoice(){
+  if(!window.speechSynthesis) return;
+  const vs=speechSynthesis.getVoices()||[];
+  ttsVoice=vs.find(v=>/tr[-_]?TR/i.test(v.lang)) || vs.find(v=>(v.lang||'').toLowerCase().startsWith('tr')) || null;
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text){
+  if(!window.speechSynthesis){ alert('Tarayıcın sesli okumayı desteklemiyor.'); return; }
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='tr-TR'; if(ttsVoice) u.voice=ttsVoice; u.rate=1; u.pitch=1;
+  speechSynthesis.speak(u);
+}
+function stopSpeak(){ if(window.speechSynthesis) speechSynthesis.cancel(); }
+function cardText(d){
+  const p=[ d.title+'.',
+    'Durum: '+statusOf(d.deadline).label+'.',
+    'Son tarih: '+fmtDate(d.deadline)+'.',
+    'Kimler başvurabilir: '+(d.elig||[]).join(', ')+'.' ];
+  const s=SUM[d.title];
+  if(s){
+    p.push('Bütçe: '+s.butce+'.');
+    p.push('Başvuru şartları: '+s.sartlar.join('; ')+'.');
+    p.push('Nasıl başvurulur: '+s.nasil+'.');
+    p.push('İpucu: '+s.ipucu+'.');
+  } else { p.push(d.desc); }
+  return p.join(' ');
+}
+function speakCard(i){ speak(cardText(DATA[i])); }
+function speakAll(){
+  const rows=lastRows.length?lastRows:DATA;
+  let t='Toplam '+rows.length+' fırsat okunuyor. ';
+  rows.forEach((d,idx)=>{
+    t+=(idx+1)+'. '+d.title+'. Durum: '+statusOf(d.deadline).label
+      +'. Son tarih: '+fmtDate(d.deadline)+'. Kimler: '+(d.elig||[]).join(', ')+'. ';
+  });
+  speak(t);
+}
 
 function setKpi(m){ kpiMode = (kpiMode===m && m!=='all') ? 'all' : m;
   // KPI ile durum chip'leri çakışmasın diye durum chip'ini sıfırla
@@ -558,6 +601,7 @@ function render(){
     return av-bv;
   });
 
+  lastRows=rows;
   const pool=DATA.filter(d=>!(hidePub&&d.publicOnly));
   const open=pool.filter(d=>['open','soon'].includes(statusOf(d.deadline).key)).length;
   const soon=pool.filter(d=>statusOf(d.deadline).key==='soon').length;
@@ -598,6 +642,7 @@ function render(){
       <div><b style="font-size:12px;color:var(--muted)">${d.org}</b></div>
       <div class="card-actions">
         <button class="btn-sum" onclick="openSummary(${d._i})">📋 Proje Özeti</button>
+        <button class="btn-sum" onclick="speakCard(${d._i})" title="Bu projeyi şartlarıyla sesli oku">🔊</button>
         <a class="link" href="${d.url}" target="_blank" rel="noopener">Resmi sayfayı aç →</a>
       </div>
     </div>`;
@@ -635,6 +680,7 @@ function openSummary(i){
     </div>
     ${rows}
     <a class="m-cta" href="${d.url}" target="_blank" rel="noopener">Resmi sayfaya git →</a>
+    <button class="btn-sum" style="margin-top:18px;margin-left:8px" onclick="speakCard(${i})">🔊 Sesli Oku</button>
     <div class="m-note">Özet bilgilendirme amaçlıdır; bağlayıcı şartlar resmi çağrı dokümanındadır. Başvurmadan önce teyit edin.</div>`;
   document.getElementById('overlay').classList.add('show');
 }
