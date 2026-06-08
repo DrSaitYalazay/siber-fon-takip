@@ -88,6 +88,8 @@ KURALLAR:
 - ÇOK ÖNEMLİ: Yanıtın TAMAMI tek bir geçerli JSON nesnesi olmalı. JSON'dan önce
   veya sonra HİÇBİR açıklama/metin yazma. JSON'ı eksiksiz kapat (tüm parantezler
   dengeli). String içinde satır başı kullanma.
+- String DEĞERLERİNİN İÇİNDE çift tırnak (") KULLANMA. Vurgu/alıntı gerekiyorsa
+  tek tırnak (') veya köşeli/eğik tırnak kullan. Aksi halde JSON bozulur.
 """
 
 
@@ -103,7 +105,46 @@ def get_opportunities() -> dict:
         final = stream.get_final_message()
     # Web arama tool'u birden çok metin bloğu döndürebilir; hepsini birleştir.
     text = "".join(b.text for b in final.content if getattr(b, "type", "") == "text")
-    return extract_json(text)
+    try:
+        return extract_json(text)
+    except (ValueError, json.JSONDecodeError):
+        # Metin JSON'ı bozuksa: zorunlu araç şemasıyla garantili geçerli JSON al.
+        return coerce_json(client, text)
+
+
+def coerce_json(client, raw_text: str) -> dict:
+    """Bozuk JSON metnini, zorunlu araç (tool) şemasıyla geçerli JSON'a çevirir."""
+    tool = {
+        "name": "submit_data",
+        "description": "Fon verisini yapılandırılmış JSON olarak gönder.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "data": {"type": "array", "items": {"type": "object"}},
+                "sum": {"type": "object"},
+            },
+            "required": ["data", "sum"],
+        },
+    }
+    with client.messages.stream(
+        model=MODEL,
+        max_tokens=32000,
+        tools=[tool],
+        tool_choice={"type": "tool", "name": "submit_data"},
+        messages=[{
+            "role": "user",
+            "content": (
+                "Aşağıdaki içeriği AYNEN koruyarak submit_data aracına geçerli JSON "
+                "olarak gönder. Hiçbir bilgiyi değiştirme veya silme; yalnızca geçerli "
+                "JSON haline getir.\n\n" + raw_text
+            ),
+        }],
+    ) as stream:
+        final = stream.get_final_message()
+    for b in final.content:
+        if getattr(b, "type", "") == "tool_use":
+            return b.input
+    raise ValueError("coerce_json: araç çıktısı bulunamadı.")
 
 
 def _clean(s: str) -> str:
