@@ -149,16 +149,16 @@
 </footer>
 
 <script>
-const TODAY = new Date('2026-06-08');
+const TODAY = new Date('2026-06-09');
 
 // elig: kimler başvurabilir. publicOnly:true => yalnızca kamu (varsayılan gizli)
 const DATA = [
   {
-    "title": "Horizon Europe Cluster 3 – Siber Güvenlik (ECCC) 2026",
-    "org": "Avrupa Komisyonu / ECCC",
+    "title": "Horizon Europe CL3 – Siber Güvenlik (ECCC)",
+    "org": "Avrupa Komisyonu / ECCC (REA)",
     "cat": "AB fon çağrısı",
     "region": "AB",
-    "budget": "≈ €1M–€8M / proje; %100 finansman",
+    "budget": "≈ €4–8 milyon / proje, %100 eş finansman mümkün",
     "deadline": "2026-09-15",
     "elig": [
       "Firma/KOBİ",
@@ -166,15 +166,15 @@ const DATA = [
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "HORIZON-CL3-2026-02-CS-ECCC çağrıları; güvenli yazılım/donanım geliştirme, SecureAI ve ileri kriptografi konularını kapsar. Açılış: 03 Mart 2026, kapanış: 15 Eylül 2026.",
-    "url": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe/cluster-3-civil-security-society_en"
+    "desc": "HORIZON-CL3-2026-02-CS-ECCC kapsamında yazılım/donanım güvenliği, SecureAI ve ileri kriptografi konularında 3 açık çağrı; 3 Mart 2026'da açıldı, 15 Eylül 2026 kapanış.",
+    "url": "https://cybersecurity-centre.europa.eu/funding-opportunities/calls-proposals/cybersecurity-horizon-cl3-2026-02-cs-eccc_en"
   },
   {
-    "title": "Horizon Europe Cluster 3 – Sivil Güvenlik 2026 (Genel)",
+    "title": "Horizon Europe CL3 – Sivil Güvenlik 2026 (Genel)",
     "org": "Avrupa Komisyonu / REA",
     "cat": "AB fon çağrısı",
     "region": "AB",
-    "budget": "≈ €1M–€8M / proje; %100 finansman",
+    "budget": "€1–8 milyon / proje, genelde %100 finansman",
     "deadline": "2026-11-05",
     "elig": [
       "Firma/KOBİ",
@@ -182,31 +182,15 @@ const DATA = [
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "HORIZON-CL3-2026-01 çağrısı; kritik altyapı, sınır güvenliği, afet direnci ve suç önleme konularını kapsar. Açılış: 06 Mayıs 2026, kapanış: 05 Kasım 2026.",
-    "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society_en"
+    "desc": "HORIZON-CL3-2026-01: Kritik altyapı, suç önleme, sınır yönetimi ve afet dayanıklılığı konularında çoklu çağrılar; 6 Mayıs – 5 Kasım 2026.",
+    "url": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe/cluster-3-civil-security-society_en"
   },
   {
-    "title": "DIGITAL / ECCC Cybersecurity Deploy 2026 (Siber Hub'lar)",
+    "title": "DIGITAL Europe – Siber Güvenlik Dağıtım Çağrısı 10",
     "org": "Avrupa Komisyonu / ECCC / HaDEA",
     "cat": "AB fon çağrısı",
     "region": "AB",
-    "budget": "≈ €340M toplam (Horizon + DIGITAL 2026-27)",
-    "deadline": "2026-05-28",
-    "elig": [
-      "Firma/KOBİ",
-      "Üniversite/Araştırma",
-      "Dernek/Vakıf"
-    ],
-    "publicOnly": false,
-    "desc": "DIGITAL-ECCC-2026-DEPLOY-CYBER-10: Ulusal Siber Hub'lar ve Sınır Ötesi Siber Hub'lar için yeni çağrı; başvuru son tarihi 28 Mayıs 2026 (İlgi Beyanı dahil).",
-    "url": "https://cybersecurity-centre.europa.eu/funding-opportunities_en"
-  },
-  {
-    "title": "Digital Europe Programme 10. Çağrı (AI-Data, Skills, BestUse)",
-    "org": "Avrupa Komisyonu / HaDEA",
-    "cat": "AB fon çağrısı",
-    "region": "AB",
-    "budget": "≈ €63.2M+ (10. çağrı çerçevesi)",
+    "budget": "Değişken; çağrıya göre %50–75 hibe oranı",
     "deadline": "2026-10-01",
     "elig": [
       "Firma/KOBİ",
@@ -214,7 +198,7 @@ const DATA = [
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "DIGITAL-2026-AI-DATA-10, DIGITAL-2026-SKILLS-10 ve DIGITAL-2026-BESTUSE-RSF-10 çağrıları 21 Nisan 2026'da açıldı; 1 Ekim 2026'ya kadar başvuru alınacak.",
+    "desc": "DIGITAL-ECCC-2026-DEPLOY-CYBER-10 kapsamında Cross-Border Cyber Hub ve ulusal siber merkez güçlendirme dahil siber güvenlik konuşlandırma projeleri; 21 Nisan – 1 Ekim 2026.",
     "url": "https://digital-strategy.ec.europa.eu/en/activities/work-programmes-digital"
   },
   {
@@ -222,281 +206,324 @@ const DATA = [
     "org": "Avrupa İnovasyon Konseyi (EIC)",
     "cat": "AB fon çağrısı",
     "region": "AB",
-    "budget": "≈ €414M / Hibe maks. €2.5M + özkaynak maks. €10M",
+    "budget": "≈ €414 milyon toplam; hibe maks. €2,5M + hisse €1–10M",
     "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
       "Birey (startup kurucu)"
     ],
     "publicOnly": false,
-    "desc": "Siber güvenlik dahil her sektörden derin teknoloji KOBİ ve startup'lara yönelik; 2026'da altı tam başvuru kesim tarihi var (7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas). Kısa başvuru her zaman yapılabilir.",
+    "desc": "Siber güvenlik dahil her sektörden derin teknoloji startupları ve KOBİ'lere yönelik; 2026'da 6 tam başvuru kesim tarihi (7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas).",
     "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en"
   },
   {
-    "title": "EIT Digital Champions 2026",
+    "title": "EIT Digital – Open Innovation Factory 2026",
     "org": "EIT Digital",
-    "cat": "Startup desteği",
+    "cat": "AB fon çağrısı",
     "region": "AB",
-    "budget": "1 yıl fundraising desteği + yatırımcı erişimi",
+    "budget": "Maks. €400.000 / proje",
+    "deadline": "2026-05-15",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": false,
+    "desc": "AI, veri ve siber güvenlik çözümleri dahil dijital dönüşümü hedefleyen açık inovasyon ortaklıkları; en az 2 ülkeden 2 ortak şartı.",
+    "url": "https://www.eitdigital.eu/innovation/open-innovation-factory/"
+  },
+  {
+    "title": "ESF+ Almanya – Dijital Beceriler ve Girişimcilik",
+    "org": "Almanya Federal Hükümeti / AB Avrupa Sosyal Fonu+",
+    "cat": "Almanya & NRW desteği",
+    "region": "AB / Almanya",
+    "budget": "Program dönemine göre değişken; %75'e kadar AB eş finansmanı",
     "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf",
       "Birey (startup kurucu)"
     ],
     "publicOnly": false,
-    "desc": "EIT Digital'in 12. edisyon yarışması; dijital ve siber alanda 50 finalist seçilir, kazananlar uluslararası yatırımcı ağına bağlanır ve büyüme hizmetleri alır.",
-    "url": "https://28digital.eu/champions"
+    "desc": "ESF+ kapsamında siber güvenlik eğitimi, nitelik geliştirme ve girişimcilik destekleri; NRW'de MAGS üzerinden dağıtılmaktadır. Teyit edilmeli: spesifik çağrı için NRW ESF-Verwaltungsbehörde'ye başvurun.",
+    "url": "https://www.esf.de/portal/EN/Home/home.html"
   },
   {
-    "title": "CYSSDE Open Call 3 – Sızma Testi & Güvenlik Açığı Değerlendirmesi",
-    "org": "CYSSDE (Digital Europe Programı projesi)",
-    "cat": "AB fon çağrısı",
-    "region": "AB",
-    "budget": "Maks. €200.000 / kurum; eş finansman",
-    "deadline": "rolling",
-    "elig": [
-      "Firma/KOBİ",
-      "Üniversite/Araştırma"
-    ],
-    "publicOnly": false,
-    "desc": "NIS2, DORA, CRA, ISO27k uyum için sızma testi ve güvenlik açığı değerlendirmesi yapılmasını destekler; ağırlıklı olarak mikro ve KOBİ'ler hedeflenir.",
-    "url": "https://cyssde.eu/open-call-3-opening-january-2026/"
-  },
-  {
-    "title": "BMFTR 'Digital. Sicher. Souverän.' – KMU-innovativ IKT",
-    "org": "BMFTR (eski BMBF) / DLR Projektträger",
+    "title": "BMFTR – Siber Güvenlik ve Dijital Egemenlik AR-GE",
+    "org": "BMFTR (Bundesministerium für Forschung, Technologie und Raumfahrt)",
     "cat": "Almanya & NRW desteği",
     "region": "Almanya",
-    "budget": "≈ €350M (2021-2026 çerçevesi); proje başına değişken",
-    "deadline": "rolling",
-    "elig": [
-      "Firma/KOBİ",
-      "Üniversite/Araştırma"
-    ],
-    "publicOnly": false,
-    "desc": "KMU-innovativ: IKT programı ile siber güvenlik odaklı araştırma işbirliği projeleri desteklenir; stichtag'lar 15 Nisan ve 15 Ekim her yıl.",
-    "url": "https://www.forschung-it-sicherheit-kommunikationssysteme.de/forschung/it-sicherheit/digital_sicher_souveraen"
-  },
-  {
-    "title": "BMFTR Quantenkommunikation Transfer (IT-Sicherheit)",
-    "org": "BMFTR",
-    "cat": "Almanya & NRW desteği",
-    "region": "Almanya",
-    "budget": "Proje bazlı hibe; %50-100",
+    "budget": "Proje başına değişken; 5 yıllık programda toplam €30M+ öngörülmüş",
     "deadline": "2026-11-30",
     "elig": [
       "Firma/KOBİ",
-      "Üniversite/Araştırma"
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "Kuantum iletişim teknolojisinin transferi ve IKT ağlarına entegrasyonu için AR-GE projeleri; sonraki stichtag 30 Kasım 2026.",
-    "url": "https://www.forschung-it-sicherheit-kommunikationssysteme.de/foerderung/bekanntmachungen"
+    "desc": "'Digital. Sicher. Souverän.' çerçevesinde Kuantum iletişimi ve siber güvenlik AR-GE'si; Projektskizze için bir sonraki stichtag 30 Kasım 2026.",
+    "url": "https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"
   },
   {
-    "title": "ZIM – Zentrales Innovationsprogramm Mittelstand 2026",
-    "org": "BMWE / AiF / VDI-VDE-IT",
+    "title": "BMFTR – Zivile Sicherheit Demonstrasyon Projeleri",
+    "org": "BMFTR / VDI/VDE-IT (Projektträger)",
     "cat": "Almanya & NRW desteği",
     "region": "Almanya",
-    "budget": "KOBİ: %25-45 hibe, maks. €690K / proje; işbirliği: maks. €3M",
+    "budget": "Proje bazlı değişken; %50–80 hibe",
     "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
-      "Üniversite/Araştırma"
+      "Üniversite/Araştırma",
+      "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "Teknoloji ve sektör sınırı olmayan KOBİ AR-GE destek programı; siber güvenlik projeleri de dahil. Dijital başvuru portalı üzerinden sürekli alım yapılır.",
-    "url": "https://www.zim.de"
+    "desc": "'Forschung für die zivile Sicherheit' programı kapsamında siber güvenlik dahil yenilikçi çözümlerin gösterim ve test projeleri; Projektskizze gözden geçirme Ocak 2026 itibarıyla yürürlükte.",
+    "url": "https://www.foerderdatenbank.de/FDB/Content/DE/Foerderprogramm/Bund/BMBF/bmftr-zivile-sicherheit.html"
   },
   {
-    "title": "EXIST-Gründungsstipendium 2026",
-    "org": "BMWE / Hochschulen",
+    "title": "ZIM – Zentrales Innovationsprogramm Mittelstand",
+    "org": "BMWE (Bundesministerium für Wirtschaft und Energie)",
     "cat": "Almanya & NRW desteği",
     "region": "Almanya",
-    "budget": "Kişisel burs + €10K-€30K malzeme/mentörlük",
+    "budget": "IT Güvenliği dahil her teknoloji; hibe oranı %25–70 (KOBİ büyüklüğüne göre)",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ"
+    ],
+    "publicOnly": false,
+    "desc": "Teknoloji ve sektör bağımsız KOBİ AR-GE destek programı; IT güvenliği projeleri dahil Einzelprojekt veya Kooperationsprojekt olarak başvurulabilir.",
+    "url": "https://www.zim.de/ZIM/Navigation/DE/"
+  },
+  {
+    "title": "EXIST Gründungsstipendium",
+    "org": "BMWE / Projektträger Jülich",
+    "cat": "Almanya & NRW desteği",
+    "region": "Almanya",
+    "budget": "Aylık €1.000–3.000 kişisel destek + €10.000–30.000 maddi kaynak; 12 ay",
     "deadline": "rolling",
     "elig": [
       "Birey (startup kurucu)",
       "Üniversite/Araştırma"
     ],
     "publicOnly": false,
-    "desc": "Üniversite ve araştırma kurumlarından teknoloji odaklı startup kurmak isteyen öğrenci, mezun ve araştırmacılara 1 yıl burs desteği; program 2029 sonuna kadar devam eder.",
-    "url": "https://www.ptj.de/foerdermoeglichkeiten/exist/gruendungsstipendium"
+    "desc": "Üniversite ve araştırma kurumlarından siber güvenlik dahil teknoloji tabanlı girişimleri destekleyen bireysel/takım stipendyumu; ESF+ eş finansmanlı.",
+    "url": "https://exist.de/en/programm/exist-gruendungsstipendium/"
   },
   {
-    "title": "Gründungsstipendium.NRW 2026",
-    "org": "NRW.BANK / MWIKE NRW",
+    "title": "Gründungsstipendium.NRW",
+    "org": "NRW MWIKE (Wirtschaftsministerium NRW)",
     "cat": "Almanya & NRW desteği",
     "region": "NRW",
-    "budget": "%70 hibe, maks. €16.000 (tek seferlik)",
-    "deadline": "2026-09-30",
+    "budget": "Aylık €1.000–2.000 + ekstra destekler; onay son tarihi 31.12.2026",
+    "deadline": "2026-12-31",
     "elig": [
-      "Birey (startup kurucu)",
-      "Firma/KOBİ"
-    ],
-    "publicOnly": false,
-    "desc": "NRW'de yeni kurulan KOBİ ve startup'lara ticaret sicil kaydından itibaren 12 ay içinde başvurulabilir; onay 31 Aralık 2026'ya kadar mümkün.",
-    "url": "https://www.nrwbank.de/de/foerderung/foerderprodukte/15916/gruendungsstipendiumnrw.html"
-  },
-  {
-    "title": "NRW.Bank – Mittelstand innovativ & digital (MID NRW)",
-    "org": "NRW.BANK / MWIKE NRW",
-    "cat": "Almanya & NRW desteği",
-    "region": "NRW",
-    "budget": "Maks. €15.000 / proje; %50 hibe",
-    "deadline": "rolling",
-    "elig": [
-      "Firma/KOBİ"
-    ],
-    "publicOnly": false,
-    "desc": "250'den az çalışanı olan NRW KOBİ'lerine ERP, IT güvenliği, süreç dijitalizasyonu gibi dijital dönüşüm projelerinde hibe; Bund programlarıyla kombinlenebilir.",
-    "url": "https://www.nrwbank.de"
-  },
-  {
-    "title": "EDIH Cybersecurity NRW / Almanya (Digital Innovation Hub)",
-    "org": "Avrupa Komisyonu / NRW Bölgesel EDIH",
-    "cat": "Almanya & NRW desteği",
-    "region": "AB / Almanya",
-    "budget": "Ücretsiz danışmanlık + proje desteği (DIGITAL Programı)",
-    "deadline": "rolling",
-    "elig": [
-      "Firma/KOBİ",
-      "Dernek/Vakıf"
-    ],
-    "publicOnly": false,
-    "desc": "KOBİ ve kamu kuruluşlarına siber güvenlik, AI ve dijital dönüşüm konularında test-before-invest hizmetleri; NRW bölgesinde aktif EDIH ağı mevcuttur.",
-    "url": "https://digital-strategy.ec.europa.eu/en/activities/edihs"
-  },
-  {
-    "title": "ESF+ NRW – Digitale Kompetenzen & Cybersicherheit",
-    "org": "MAGS NRW / ESF+ / AB",
-    "cat": "Eğitim & araştırma",
-    "region": "NRW",
-    "budget": "Proje bazlı; %75 ESF+ eş finansman",
-    "deadline": "rolling",
-    "elig": [
-      "Firma/KOBİ",
-      "Üniversite/Araştırma",
-      "Dernek/Vakıf"
-    ],
-    "publicOnly": false,
-    "desc": "ESF+ NRW programı 2021-2027 çerçevesinde dijital yetkinlik ve siber güvenlik eğitimi projelerini destekler; üniversite, dernek ve KOBİ konsorsiyumları başvurabilir.",
-    "url": "https://www.esf.nrw.de"
-  },
-  {
-    "title": "Interreg NWE – Kapitalizasyon Çağrısı 2026",
-    "org": "Interreg Kuzey-Batı Avrupa Programı",
-    "cat": "AB fon çağrısı",
-    "region": "AB / Almanya",
-    "budget": "Proje başına değişken; %60 ERDF eş finansman",
-    "deadline": "2026-05-28",
-    "elig": [
-      "Firma/KOBİ",
-      "Üniversite/Araştırma",
-      "Dernek/Vakıf"
-    ],
-    "publicOnly": false,
-    "desc": "Interreg NWE'nin ilk kapitalizasyon çağrısı 11 Aralık 2025'te açıldı ve 28 Mayıs 2026'da kapanacak; daha önce finanse edilen projelerin sonuçlarının ölçeklendirilmesine odaklanır.",
-    "url": "https://www.nweurope.eu/calls-for-projects"
-  },
-  {
-    "title": "DAAD – İkili Akademik Değişim & Araştırma İşbirliği 2026",
-    "org": "DAAD / BMFTR",
-    "cat": "Eğitim & araştırma",
-    "region": "Dünya / Almanya",
-    "budget": "Araştırmacı başına €2.000-€2.150 / ay; proje bazlı",
-    "deadline": "rolling",
-    "elig": [
-      "Üniversite/Araştırma",
       "Birey (startup kurucu)"
     ],
     "publicOnly": false,
-    "desc": "Almanya ile yabancı üniversiteler arasında siber güvenlik dahil her alanda akademisyen değişimi ve araştırma işbirliğini finanse eder; 2026 başvuruları süren açık çağrılar mevcuttur.",
-    "url": "https://www.daad.de/de/stipendien/"
+    "desc": "NRW'de yenilikçi şirket kuruluşunu destekleyen stipendyum programı; siber güvenlik startup'ları uygun, Diversität+ ek desteği mevcut.",
+    "url": "https://www.gründungsstipendium.nrw/"
   },
   {
-    "title": "EU Cybersecurity Skills Academy – Eğitim Çağrıları (DIGITAL)",
-    "org": "Avrupa Komisyonu / HaDEA / ENISA",
+    "title": "NRW MID – Dijital Güvenlik Desteği (KOBİ)",
+    "org": "NRW MWIKE / Mittelstand Innovativ & Digital",
+    "cat": "Almanya & NRW desteği",
+    "region": "NRW",
+    "budget": "Maks. €15.000 / proje; %50 hibe oranı",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ"
+    ],
+    "publicOnly": false,
+    "desc": "NRW KOBİ'lerini siber güvenlik yatırımlarında destekleyen 'MID-Digitale Sicherheit' bileşeni; ek olarak MID-Assistent/in (max. €48.000) ile siber güvenlik uzmanı istihdamı destekleniyor.",
+    "url": "https://www.mittelstand-innovativ-digital.nrw/foerderportale"
+  },
+  {
+    "title": "CYSSDE – Pentest & Güvenlik Açığı Değerlendirme OC3",
+    "org": "CYSSDE Konsorsiyumu (DIGITAL Europe finansmanlı)",
     "cat": "Eğitim & araştırma",
     "region": "AB",
-    "budget": "Aktivite 1: maks. €4M; Aktivite 2: maks. €2M",
+    "budget": "Maks. €200.000 / kuruluş; cascade/FSTP modeli",
     "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": false,
+    "desc": "NIS2/DORA/CRA/ISO27k uyum amaçlı penetrasyon testi ve güvenlik değerlendirmesi için ortak finansman; KOBİ'ler ve araştırma kuruluşları öncelikli.",
+    "url": "https://cyssde.eu/open-call-3-opening-january-2026/"
+  },
+  {
+    "title": "EU Cybersecurity Skills Academy – Eğitim Çağrısı",
+    "org": "Avrupa Komisyonu / ECCC / ENISA",
+    "cat": "Eğitim & araştırma",
+    "region": "AB",
+    "budget": "Aktivite 1: maks. €4M; Aktivite 2: maks. €2M / proje",
+    "deadline": "rolling",
+    "elig": [
       "Üniversite/Araştırma",
+      "Firma/KOBİ",
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "KOBİ, startup ve kamu sektörü için siber güvenlik eğitimi tasarlayan konsorsiyumlara yönelik; Avrupa'da 299.000 siber uzman açığını kapatmaya odaklanır.",
+    "desc": "KOBİ, startup ve kamu sektörü için siber güvenlik eğitim programları ile Akademi destek operasyonları; DIGITAL Skills Academy çerçevesinde devam eden çağrılar. Sonraki çağrı tarihi teyit edilmeli.",
     "url": "https://digital-skills-jobs.europa.eu/en/cybersecurity-skills-academy"
   },
   {
-    "title": "Horizon Europe – DIGITAL-2026-SKILLS-10 (Gelişmiş Dijital Beceriler)",
+    "title": "DIGITAL Europe – Beceri Akademileri Ligi (ELEVATE)",
     "org": "Avrupa Komisyonu / HaDEA",
     "cat": "Eğitim & araştırma",
     "region": "AB",
-    "budget": "≈ €204M (9. çağrı toplam referans); 10. çağrı teyit edilmeli",
-    "deadline": "2026-10-01",
+    "budget": "≈ €204M (9. set toplam); siber güvenlik dahil dijital beceriler",
+    "deadline": "2026-03-03",
     "elig": [
-      "Firma/KOBİ",
       "Üniversite/Araştırma",
+      "Firma/KOBİ",
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "DIGITAL-2026-SKILLS-10 ile AI, siber güvenlik, kuantum ve yarı iletken alanında gelişmiş beceri akademileri kurulmasına destek; 21 Nisan 2026'da açıldı.",
-    "url": "https://digital-strategy.ec.europa.eu/en/activities/work-programmes-digital"
+    "desc": "DIGITAL-2026-SKILLS-09-LEAGUE-OF-ACADEMIES: Yapay zeka, siber güvenlik ve kuantum beceri akademilerini birbirine bağlayan Avrupa çerçevesi; kapanış tarihi 3 Mart 2026 idi, 10. set çağrıları Ekim 2026'ya kadar açık.",
+    "url": "https://digital-skills-jobs.europa.eu/en/latest/news/eu-launches-new-set-open-calls-under-digital-boost-innovative-technologies-uptake"
   },
   {
-    "title": "NIS2 / DORA / AI Act GRC Uyum Projeleri – DIGITAL Cascade / FSTP",
-    "org": "Çeşitli DIGITAL Programı projeleri (CYSSDE, ECCC vb.)",
+    "title": "DAAD – Akademik İşbirliği ve Değişim (Siber Güvenlik)",
+    "org": "DAAD (Deutscher Akademischer Austauschdienst)",
+    "cat": "Eğitim & araştırma",
+    "region": "Dünya",
+    "budget": "Program türüne göre değişken; burs + seyahat desteği",
+    "deadline": "rolling",
+    "elig": [
+      "Üniversite/Araştırma",
+      "Birey (startup kurucu)"
+    ],
+    "publicOnly": false,
+    "desc": "Siber güvenlik dahil dijital teknolojilerde akademik değişim, ortak araştırma ve çift diploma programları; yıllık temalar değişmekte, 2026 çağrıları için resmi site teyit edilmeli.",
+    "url": "https://www.daad.de/en/"
+  },
+  {
+    "title": "NIS2 / DORA Uyum Geliştirme – BSI / BMI Desteği",
+    "org": "BSI (Bundesamt für Sicherheit in der Informationstechnik)",
+    "cat": "GRC, AI Act & Uyum",
+    "region": "Almanya",
+    "budget": "Ücretsiz araçlar, danışmanlık ve sertifikasyon; KOBİ lump-sum teyit edilmeli",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Dernek/Vakıf"
+    ],
+    "publicOnly": false,
+    "desc": "BSI'ın NIS2 uygulama rehberleri, Grundschutz profilleri ve KOBİ uyum araçları; DORA kapsamı Ocak 2025'ten itibaren zorunlu, BSI doğrudan finansman değil danışmanlık sağlar.",
+    "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Kritische-Infrastrukturen/NIS-2-Richtlinie/nis-2-richtlinie_node.html"
+  },
+  {
+    "title": "EU AI Act Uyum – DIGITAL Europe / Horizon Cascade",
+    "org": "Avrupa Komisyonu / HaDEA / ECCC",
     "cat": "GRC, AI Act & Uyum",
     "region": "AB",
-    "budget": "Proje başına €50K–€200K; %70-100 hibe",
+    "budget": "FSTP/cascade çağrılarında €50.000–€200.000 / KOBİ",
     "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
       "Üniversite/Araştırma"
     ],
     "publicOnly": false,
-    "desc": "NIS2, DORA, CRA, GDPR, EU AI Act uyum süreçlerini kolaylaştıran cascade/FSTP alt çağrıları; CYSSDE OC3 sızma testi bu kategorinin en aktif örneğidir.",
-    "url": "https://cyssde.eu"
+    "desc": "AI Act yüksek riskli sistem uyumu için test, belgelendirme ve denetim projelerini kapsayan cascade funding; Cyber Resilience Act Haziran 2026'dan itibaren aşamalı devreye giriyor.",
+    "url": "https://digital-strategy.ec.europa.eu/en/activities/digital-programme"
   },
   {
-    "title": "EU AI Act Uyum Desteği – DIGITAL Düzenleyici Uyum Çağrısı 2026",
-    "org": "Avrupa Komisyonu / HaDEA",
-    "cat": "GRC, AI Act & Uyum",
+    "title": "Interreg NWE – Dijital ve Güvenli Bölgeler",
+    "org": "Interreg Kuzey-Batı Avrupa Programı",
+    "cat": "AB fon çağrısı",
     "region": "AB",
-    "budget": "≈ €6M (tek proje); %100 finansman",
-    "deadline": "2026-10-01",
+    "budget": "Proje başına %60 ERDF finansmanı, ortalama €2–5M",
+    "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
       "Üniversite/Araştırma",
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "DIGITAL-2026-BESTUSE-AWARENESS çağrısı; bilgi bütünlüğü ve düzenleyici uyum için araştırma çerçevesi kurar; en az %60 FSTP ile alt taraflar desteklenir.",
-    "url": "https://digital-strategy.ec.europa.eu/en/news/new-open-call-proposals-under-digital-europe-programme"
+    "desc": "NRW dahil Kuzey-Batı Avrupa bölgelerinde siber güvenlik, dijital dönüşüm ve inovasyon ortaklık projeleri; teyit edilmeli – sonraki çağrı açılışı için resmi Interreg NWE sitesi izlenmeli.",
+    "url": "https://www.nweurope.eu/about-the-programme/"
   },
   {
-    "title": "EIC Accelerator Challenges 2026 (Stratejik Teknoloji)",
+    "title": "EIC Accelerator Challenges 2026",
     "org": "Avrupa İnovasyon Konseyi (EIC)",
     "cat": "Startup desteği",
     "region": "AB",
-    "budget": "≈ €220M toplam; hibe maks. €2.5M + özkaynak maks. €10M",
-    "deadline": "rolling",
+    "budget": "€220M toplam; €20–50M / tema; proje başı maks. €2,5M hibe + €10M hisse",
+    "deadline": "2026-11-04",
     "elig": [
       "Firma/KOBİ",
       "Birey (startup kurucu)"
     ],
     "publicOnly": false,
-    "desc": "Beş tematik zorluk alanında (ileri malzemeler, füzyon, biyoteknoloji, kritik hammadde, iklim adaptasyonu) derin teknoloji KOBİ'lerine yönelik; 2026'da 6 kesim tarihi uygulanır.",
-    "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en"
+    "desc": "2026 tematik challengeları: İleri malzeme, füzyon, biyoteknoloji, kritik hammaddeler ve iklim adaptasyonu; siber güvenlik doğrudan tema değil, genel Open call kapsar.",
+    "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator/eic-accelerator-challenges-2026_en"
   },
   {
-    "title": "Interreg NWE – Gelecek Çağrı (2026 sonrası, izleme)",
-    "org": "Interreg Kuzey-Batı Avrupa",
+    "title": "EIT Digital Champions – Scaleup Yarışması",
+    "org": "EIT Digital / 28Digital",
+    "cat": "Startup desteği",
+    "region": "AB",
+    "budget": "Finansal destek yok; 1 yıllık fundraising koçluğu",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ"
+    ],
+    "publicOnly": false,
+    "desc": "Siber güvenlik dahil derin teknoloji Avrupalı scaleupları için yatırımcı pitch yarışması; 50 finalist seçilip yatırımcı ağına sunuluyor. 12. edisyon 2026.",
+    "url": "https://28digital.eu/champions"
+  },
+  {
+    "title": "BMFTR – Wege zur Innovation (AB Hazırlık Desteği)",
+    "org": "BMFTR / NKS Sicherheitsforschung",
+    "cat": "Almanya & NRW desteği",
+    "region": "Almanya",
+    "budget": "Maks. €100.000 / proje; 9–12 ay süre",
+    "deadline": "rolling",
+    "elig": [
+      "Firma/KOBİ",
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": false,
+    "desc": "Horizon Europe Cluster 3 başvurusu hazırlayan Alman kuruluşlara destek; 2026'da bir Stichtag öngörülmüş. Başvuru öncesi NKS Sicherheitsforschung danışmanlığı zorunlu.",
+    "url": "https://www.sifo.de/sifo/de/nks-sicherheitsforschung/unterstuetzung-deutscher-antragsteller-fit-fuer-europa/aktuelle-foerderrichtlinie/aktuelle-foerderrichtlinie_node.html"
+  },
+  {
+    "title": "World Bank – Dijital Kalkınma / Siber Güvenlik Projeleri",
+    "org": "Dünya Bankası (World Bank)",
+    "cat": "Uluslararası fon (WB/OECD)",
+    "region": "Dünya",
+    "budget": "Ülkeye ve projeye göre $1M–$100M+",
+    "deadline": "rolling",
+    "elig": [
+      "Üniversite/Araştırma",
+      "Firma/KOBİ"
+    ],
+    "publicOnly": true,
+    "desc": "Dijital altyapı, e-devlet ve siber güvenlik kapasitesi için ülke hükümeti ortaklığıyla proje finansmanı; genellikle kamu kurumu liderliği gerektirir, özel sektör alt yüklenici olabilir.",
+    "url": "https://www.worldbank.org/en/topic/digitaldevelopment"
+  },
+  {
+    "title": "OECD – Dijital Güvenlik Politikası ve Analiz",
+    "org": "OECD",
+    "cat": "Uluslararası fon (WB/OECD)",
+    "region": "Dünya",
+    "budget": "Hibe yok; analitik/politika işbirliği çerçevesi",
+    "deadline": "rolling",
+    "elig": [
+      "Üniversite/Araştırma"
+    ],
+    "publicOnly": true,
+    "desc": "OECD Dijital Güvenlik Birimi'nin politika araştırması ve gösterge çalışmaları; doğrudan proje finansmanı sunmaz, akademik işbirliği ve politika analizi ortaklığı mümkün.",
+    "url": "https://www.oecd.org/en/topics/digital-security.html"
+  },
+  {
+    "title": "Interreg Avrupa – Dijital ve Yenilik Bölgesel Politika",
+    "org": "Interreg Europe / ERDF",
     "cat": "AB fon çağrısı",
-    "region": "AB / Almanya",
-    "budget": "%60 ERDF; büyük proje için €800K–€5M",
+    "region": "AB",
+    "budget": "Proje başı €0.5–5M; %75 ERDF eş finansmanı",
     "deadline": "rolling",
     "elig": [
       "Firma/KOBİ",
@@ -504,51 +531,22 @@ const DATA = [
       "Dernek/Vakıf"
     ],
     "publicOnly": false,
-    "desc": "Interreg NWE Çağrı 5 Ocak 2025'te kapandı; yeni çağrı takvimi için programın resmi sayfası izlenmelidir (teyit edilmeli).",
-    "url": "https://www.nweurope.eu/call-calendar"
+    "desc": "Bölgesel politika öğrenme ve siber güvenlik alanında iyi uygulama transferi; en az 3 AB ülkesinden ortak gerektirir. 4. çağrı dönemi teyit edilmeli.",
+    "url": "https://www.interregeurope.eu/calls-for-proposals"
   },
   {
-    "title": "DAAD SDG Ortaklık Programı 2026 (Akademik Geliştirme)",
-    "org": "DAAD / BMFTR",
-    "cat": "Eğitim & araştırma",
-    "region": "Dünya",
-    "budget": "Proje bazlı; miktar bütçeye bağlı (teyit edilmeli)",
+    "title": "EDIH NRW – Dijital İnovasyon Merkezi Hizmetleri",
+    "org": "EDIH Ağı NRW / Avrupa Komisyonu",
+    "cat": "Almanya & NRW desteği",
+    "region": "NRW",
+    "budget": "Ücretsiz test, tarama ve koçluk hizmetleri; proje desteği değişken",
     "deadline": "rolling",
     "elig": [
-      "Üniversite/Araştırma"
+      "Firma/KOBİ"
     ],
     "publicOnly": false,
-    "desc": "Gelişmekte olan ülkelerdeki ortaklarla Almanya üniversitelerinin SDG odaklı araştırma ve kapasite geliştirme işbirliğini finanse eder; 2026 bütçesi finansman koşuluna tabidir.",
-    "url": "https://www.daad.de/de/infos-services-fuer-hochschulen/programme-der-projektfoerderung/detail/detail/sdg-partnerschaften/"
-  },
-  {
-    "title": "Dünya Bankası – Dijital Kalkınma & Siber Güvenlik Programları",
-    "org": "World Bank Group",
-    "cat": "Uluslararası fon (WB/OECD)",
-    "region": "Dünya",
-    "budget": "Ülke bazlı; milyonlarca USD / proje",
-    "deadline": "rolling",
-    "elig": [
-      "Üniversite/Araştırma",
-      "Dernek/Vakıf"
-    ],
-    "publicOnly": true,
-    "desc": "Ağırlıklı olarak kamu kurumları hedeflidir; akademik/sivil kuruluşlar teknik yardım bileşenlerinde danışman/ortak olabilir. Güneyde siber kapasite inşası projelerinde kısmi STK katılımı mümkün.",
-    "url": "https://www.worldbank.org/en/topic/digitaldevelopment"
-  },
-  {
-    "title": "OECD – Dijital Güvenlik ve GRC Politika Projeleri",
-    "org": "OECD",
-    "cat": "Uluslararası fon (WB/OECD)",
-    "region": "Dünya",
-    "budget": "Çoğunlukla üye devlet katkısı; danışman/araştırmacı bazlı",
-    "deadline": "rolling",
-    "elig": [
-      "Üniversite/Araştırma"
-    ],
-    "publicOnly": true,
-    "desc": "OECD Dijital Güvenlik programları ağırlıklı kamu-odaklıdır; akademik kuruluşlar araştırma ortağı ve uzman danışman rolüyle katılabilir.",
-    "url": "https://www.oecd.org/digital/security/"
+    "desc": "NRW EDIH'leri (Digital Hub Initiative ortakları) KOBİ'lere siber güvenlik testi, AI adaptasyonu ve dijital dönüşüm danışmanlığı sunmaktadır; ücretsiz 'test before invest' hizmetleri mevcuttur.",
+    "url": "https://digital-strategy.ec.europa.eu/en/activities/edih"
   }
 ];
 
@@ -556,608 +554,638 @@ DATA.forEach((d,i)=>d._i=i);
 
 // Proje özetleri (başlık ile eşleşir). Eksik olanlar için kart açıklaması yedek olarak gösterilir.
 const SUM = {
-  "Horizon Europe Cluster 3 – Siber Güvenlik (ECCC) 2026": {
-    "frist": "Açılış 03 Mart 2026 / Kapanış 15 Eylül 2026 (HORIZON-CL3-2026-02-CS-ECCC)",
-    "kimler": "KOBİ dahil firmalar, üniversiteler, araştırma enstitüleri, dernekler; min. 3 ülkeden 3 bağımsız kuruluş konsorsiyumu",
-    "butce": "Proje başına yaklaşık €1M–€8M; %100 finansman oranı",
-    "es_finansman": "%100 hibe (çoğu RIA/IA için); öz kaynak gerekmez",
-    "basari_orani": "Horizon geneli ~%15; siber güvenlik topiclerinde yüksek rekabet",
-    "konsorsiyum": "Min. 3 farklı ülkeden 3 bağımsız tüzel kişi; en az 1 AB üyesi",
-    "hazirlik": "En az 6-9 ay önce; başvuru yükü AĞIR (teknik ek, bütçe, etki analizi)",
+  "Horizon Europe CL3 – Siber Güvenlik (ECCC)": {
+    "frist": "Açılış: 3 Mart 2026 | Kapanış: 15 Eylül 2026, 17:00 CET; 3 konu (CS-ECCC-01/02/03)",
+    "kimler": "Firmalar, KOBİ'ler, üniversiteler, araştırma kurumları, sivil toplum kuruluşları; min. 3 tüzel kişi / 3 farklı ülke",
+    "butce": "Konu başına değişken; yaklaşık €4–8M / proje, %100 finansman mümkün",
+    "es_finansman": "%100 AB finansmanı (RIA/IA tipine göre)",
+    "basari_orani": "Horizon ortalaması ~%15; siber güvenlik çağrılarında rekabet yüksek",
+    "konsorsiyum": "Min. 3 ülke / 3 bağımsız tüzel kişi zorunlu",
+    "hazirlik": "En az 6–9 ay önceden başlanmalı; başvuru yükü AĞIR",
     "sartlar": [
-      "Min. 3 ülkeden konsorsiyum",
-      "Horizon Avrupa uygun ülke",
-      "TRL 4-8 arası proje",
-      "ECCC indirectly managed action kuralları"
+      "Min. 3 farklı ülkede bağımsız partner",
+      "Konu bazında polis/sivil toplum katılımı gerekebilir",
+      "Projenin TRL seviyesi uygun olmalı",
+      "ECCC üzerinden sunulacak"
     ],
     "belgeler": [
       "Tam proje önerisi (Funding & Tenders Portal)",
-      "Bütçe ve iş planı tabloları",
       "Konsorsiyum anlaşması taslağı",
-      "Etik öz-değerlendirme formu"
-    ],
-    "kriterler": "Mükemmeliyet / Etki / Uygulama (Excellence / Impact / Implementation)",
-    "nasil": "EU Funding & Tenders Portal üzerinden online başvuru; ECCC indirectly managed actions için ayrıca ECCC portalı",
-    "kaynaklar": "NKS DIT (nks-dit.de), SEREN5 NCP ağı, ECCC (cybersecurity-centre.europa.eu), Cluster 3 Info Day kayıtları",
-    "ipucu": "SecureAI ve Post-Kuantum konuları 2026'nın en rekabetçi topic'leri; erken partner arayışı başlatın ve NKS DIT broker etkinliklerine katılın."
-  },
-  "Horizon Europe Cluster 3 – Sivil Güvenlik 2026 (Genel)": {
-    "frist": "Açılış 06 Mayıs 2026 / Kapanış 05 Kasım 2026 (HORIZON-CL3-2026-01)",
-    "kimler": "Firmalar, üniversiteler, araştırma enstitüleri, STK'lar; bazı topicler için polis/sınır otoritesi katılımı zorunlu olabilir",
-    "butce": "Proje başına €1M–€8M; %100 finansman",
-    "es_finansman": "%100 hibe",
-    "basari_orani": "~%15 (Horizon ortalama)",
-    "konsorsiyum": "Min. 3 ülkeden 3 bağımsız tüzel kişi",
-    "hazirlik": "En az 6 ay; AĞIR başvuru yükü",
-    "sartlar": [
-      "Min. 3 ülkeden konsorsiyum",
-      "Uygun Horizon ülkesi",
-      "Bazı topicler özel güvenlik kurumu katılımı gerektirir"
-    ],
-    "belgeler": [
-      "Teknik öneri",
       "Bütçe tablosu",
+      "Her partnerin tüzel kişilik belgesi"
+    ],
+    "kriterler": "Excellence (bilimsel kalite), Impact (etki ve yayılım), Implementation (proje planı ve konsorsiyum kalitesi)",
+    "nasil": "Funding & Tenders Portal üzerinden elektronik başvuru; https://ec.europa.eu/info/funding-tenders/opportunities/portal",
+    "kaynaklar": "NKS Sicherheitsforschung (Almanya NCP): sifo.de | SEREN5 ağı: seren-project.eu | ECCC info: cybersecurity-centre.europa.eu",
+    "ipucu": "ECCC 'Yayımlanan Çağrılar' sayfasını haftalık izleyin; NCP desteği başvuru öncesi ücretsiz ve stratejik açıdan kritik"
+  },
+  "Horizon Europe CL3 – Sivil Güvenlik 2026 (Genel)": {
+    "frist": "Açılış: 6 Mayıs 2026 | Kapanış: 5 Kasım 2026",
+    "kimler": "Firmalar, üniversiteler, araştırma kurumları, sivil toplum; bazı çağrılar polis/sınır güvenlik kurumlarını zorunlu kılıyor",
+    "butce": "€1–8M / proje; %100 finansman",
+    "es_finansman": "%100 AB finansmanı",
+    "basari_orani": "~%15 (Horizon ortalaması)",
+    "konsorsiyum": "Min. 3 farklı ülkeden 3 bağımsız ortak zorunlu",
+    "hazirlik": "6–9 ay; başvuru yükü AĞIR",
+    "sartlar": [
+      "Min. 3 ülke/3 partner",
+      "Bazı konularda polis kurumu zorunlu",
+      "İşlevsel konsorsiyum anlaşması",
+      "Açık çağrı sayfasında konu özel şartlar kontrol edilmeli"
+    ],
+    "belgeler": [
+      "Teknik proje önerisi",
       "Konsorsiyum anlaşması",
-      "Etik form"
+      "Bütçe/maliyet detayı",
+      "Ethics self-assessment"
     ],
-    "kriterler": "Excellence / Impact / Implementation",
-    "nasil": "EU Funding & Tenders Portal",
-    "kaynaklar": "seren-project.eu, NKS DIT, FFG (Avusturya NCP)",
-    "ipucu": "INFRA ve DRS topiclerinde kamu kurumu olmadan da başvurulabilir; uygunluğu çağrı metninden doğrulayın."
+    "kriterler": "Excellence / Impact / Implementation üçlüsü",
+    "nasil": "Funding & Tenders Portal; eş ortaklar için SEREN5 partner-arama aracı",
+    "kaynaklar": "seren-project.eu | iuk-business-connect.org.uk (UK NCP) | NKS Sicherheitsforschung",
+    "ipucu": "4 Mart 2026 Brüksel Info Day kaydı henüz yayınlanmadı; güncel bilgi için SEREN5 bültenine abone olun"
   },
-  "DIGITAL / ECCC Cybersecurity Deploy 2026 (Siber Hub'lar)": {
-    "frist": "İlgi Beyanı + Başvuru: 28 Mayıs 2026 (17:00 Brüksel saati)",
-    "kimler": "Kamu ve özel siber güvenlik paydaşları, ulusal yetkililer, KOBİ, araştırma kuruluşları",
-    "butce": "Toplam bütçe teyit edilmeli; çağrı başına onlarca milyon €",
-    "es_finansman": "Çağrıya göre değişkен; %50-100 arası",
-    "basari_orani": "",
-    "konsorsiyum": "Cross-Border Hub'lar için çok ortaklı yapı gerekli",
-    "hazirlik": "3-6 ay; ORTA-AĞIR başvuru yükü",
+  "DIGITAL Europe – Siber Güvenlik Dağıtım Çağrısı 10": {
+    "frist": "Açılış: 21 Nisan 2026 | Kapanış: 1 Ekim 2026; Cross-Border Cyber Hub EoI: 28 Mayıs 2026",
+    "kimler": "KOBİ'ler, araştırma kurumları, kamu kurumları, teknoloji sağlayıcıları; ECCC üye devlet ortakları",
+    "butce": "Konu bazlı değişken; toplamda 10. çağrı seti dahilinde önemli bütçe",
+    "es_finansman": "Genellikle %50–75 AB eş finansmanı; siber güvenlik dağıtım projelerinde %75'e kadar",
+    "basari_orani": "DIGITAL programında rekabet Horizon'dan düşük (~%20–30)",
+    "konsorsiyum": "Çoğu çağrıda tek başvuru mümkün; bazı konular konsorsiyum önerir",
+    "hazirlik": "3–6 ay; başvuru yükü ORTA",
     "sartlar": [
-      "ECCC portalından İlgi Beyanı",
-      "AB Siber Dayanışma Yasası kapsam uyumu",
-      "Ulusal Hub için ilgili makam desteği"
+      "AB üye devleti veya ilgili ülkede yerleşik olma",
+      "Siber güvenlik alanında somut dağıtım/uygulama planı",
+      "KPI ve ölçülebilir çıktılar",
+      "Teknik yeterlilik belgesi"
     ],
     "belgeler": [
-      "Başvuru formu (cybersecurity-centre.europa.eu)",
-      "Aktivite ve görev planı",
-      "Ekipman/hizmet tedarik planı"
+      "Proje uygulama formu (Funding & Tenders Portal)",
+      "Teknik açıklama ve çalışma paketi",
+      "Bütçe tablosu",
+      "İfade beyanı (EoI) – Cross-Border Cyber Hub için"
     ],
-    "kriterler": "Teknik kapasite, hizmet kapsamı, coğrafi etki",
-    "nasil": "cybersecurity-centre.europa.eu/funding-opportunities_en",
-    "kaynaklar": "ECCC (cybersecurity-centre.europa.eu), NKS DIT",
-    "ipucu": "İlgi Beyanı (EoI) başvurudan önce zorunludur; NCH ve CBCH topiclerini birlikte gönderin."
-  },
-  "Digital Europe Programme 10. Çağrı (AI-Data, Skills, BestUse)": {
-    "frist": "Açılış 21 Nisan 2026 / Kapanış 01 Ekim 2026",
-    "kimler": "Firmalar, üniversiteler, kamu kurumları, STK'lar; topice göre değişir",
-    "butce": "Referans: €63.2M+ AI+sağlık çağrısı; her topic ayrı bütçe",
-    "es_finansman": "Çoğunlukla %50; bazı topicler %100",
-    "basari_orani": "DIGITAL programı ortalama ~%20",
-    "konsorsiyum": "Topice göre; bazıları tekil başvuruya açık",
-    "hazirlik": "3-5 ay; ORTA başvuru yükü",
-    "sartlar": [
-      "Uygun ülke tescili",
-      "Topic'e özgü dijital olgunluk düzeyi",
-      "Avrupa ölçeğinde uygulama planı"
-    ],
-    "belgeler": [
-      "Başvuru formi (Funding & Tenders Portal)",
-      "Bütçe planı",
-      "İş planı/yaygınlaştırma stratejisi"
-    ],
-    "kriterler": "Etki, uygulama hazırlığı, Avrupa değeri",
-    "nasil": "EU Funding & Tenders Portal (ec.europa.eu/info/funding-tenders)",
-    "kaynaklar": "digital-strategy.ec.europa.eu, NKS DIT, HaDEA info günleri",
-    "ipucu": "DIGITAL-2026-BESTUSE-RSF-10 ve SKILLS-10 beraber değerlendirilebilir; 8 Haziran 2026 info oturumuna katılın."
+    "kriterler": "Teknik alaka, dağıtım kalitesi, AB siber güvenlik ekosistemine katkı, etki/yayılım",
+    "nasil": "cybersecurity-centre.europa.eu/funding-opportunities_en üzerinden başvuru",
+    "kaynaklar": "ECCC resmi sitesi | HaDEA: hadea.ec.europa.eu | Info Session kayıtları",
+    "ipucu": "Cross-Border Cyber Hub için ön EoI son tarihi 28 Mayıs 2026; ana başvurudan önce tamamlanması gerekir"
   },
   "EIC Accelerator Open 2026": {
-    "frist": "Kısa başvuru: her zaman açık. Tam başvuru kesim tarihleri: 7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas 2026",
-    "kimler": "Tek başvuru olarak yalnızca KOBİ ve startup'lar (maks. 500 çalışan); küçük mid-cap dahil",
-    "butce": "€414M toplam 2026; hibe maks. €2.5M + özkaynak maks. €10M",
-    "es_finansman": "Hibe için %70 finansman oranı; geri kalan öz kaynak",
-    "basari_orani": "%5-8 tarihsel; iyi hazırlanmış başvurular ortalamayı aşar",
-    "konsorsiyum": "Tekil başvuru zorunlu (tek tüzel kişi)",
-    "hazirlik": "Kısa başvuru için 4-8 hafta; tam başvuru için 3-6 ay; AĞIR süreç",
+    "frist": "Kısa öneri: her ay ilk Salı toplanıyor (rolling) | Tam öneri kesim tarihleri: 7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas 2026",
+    "kimler": "Startuplar, KOBİ'ler ve küçük mid-cap'lar (< 500 çalışan); AB veya Horizon ilişkili ülkede kurulu; bireyler (şirket kurmak kaydıyla) başvurabilir",
+    "butce": "€414M Open + €220M Challenges; hibe maks. €2,5M + hisse €1–10M (blended finance)",
+    "es_finansman": "Hibe bileşeni için %70 AB, %30 şirket katkısı; hisse bileşeni EIC Fund üzerinden",
+    "basari_orani": "Tarihsel %5–8; iyi hazırlanmış başvurularda daha yüksek",
+    "konsorsiyum": "Tekil başvuru mümkün (tek KOBİ/startup); konsorsiyum zorunlu değil",
+    "hazirlik": "Kısa öneri için 2–4 hafta; tam öneri için 2–3 ay; başvuru yükü ORTA (20 sayfa)",
     "sartlar": [
-      "Tek KOBİ/startup başvurucu",
-      "TRL 5+ tamamlanmış",
-      "Yüksek riskli, piyasayı dönüştürücü inovasyon",
-      "AB/ortak ülke tescili"
+      "TRL 6+ tamamlanmış teknoloji",
+      "Yüksek riskli / yüksek etkili inovasyon",
+      "Pazar potansiyeli ve ölçeklendirme planı",
+      "AB/Horizon ülkesinde kurulu KOBİ veya startup"
     ],
     "belgeler": [
-      "Kısa başvuru (yazılı+pitch deck+3dk video)",
-      "Tam başvuru (maks. 20 sayfa+teknik ekler)",
-      "FTO analizi",
-      "Finansal bilgiler"
+      "20 sayfalık tam öneri formu",
+      "Pitch deck (PDF)",
+      "3 dakikalık video pitch",
+      "Uygulama planı ve finansal bilgi"
     ],
-    "kriterler": "Mükemmeliyet (teknoloji), Etki (pazar+toplum), Uygulama (ekip+plan)",
-    "nasil": "eic.ec.europa.eu > Funding & Tenders Portal",
-    "kaynaklar": "EIC NCP ağı, eic.ec.europa.eu/faq, Enterprise Europe Network",
-    "ipucu": "Kısa başvuruyu erkenden gönderin; 4-6 hafta geri bildirim alırsınız. Siber güvenlik 'dijital dönüşüm' önceliğine dahildir."
+    "kriterler": "Excellence (TRL, IP pozisyonu) / Impact (pazar potansiyeli, ölçek) / Risk & Implementation (ekip, iş planı)",
+    "nasil": "eic.ec.europa.eu üzerinden Funding & Tenders Portal; Kısa öneri her ay toplanıyor",
+    "kaynaklar": "EIC NCP (ulusal irtibat noktaları) | eic.ec.europa.eu/eic-funding-opportunities | EIC Info Day kayıtları",
+    "ipucu": "Kısa öneri (Step 1) rolling; tam öneri (Step 2) belirli kesim tarihlerine bağlı. İlk GO aldıktan sonra en yakın tam öneri tarihini hedefleyin"
   },
-  "EIT Digital Champions 2026": {
-    "frist": "Dönemsel; resmi sayfa üzerinden teyit edilmeli",
-    "kimler": "Dijital ve derin teknoloji alanında ölçeklenmek isteyen startup/scaleup'lar",
-    "butce": "Para ödülü değil; 1 yıl yatırımcı erişimi ve büyüme servisleri",
-    "es_finansman": "",
-    "basari_orani": "50 finalist seçilir; yüksek rekabet",
-    "konsorsiyum": "Tekil başvuru mümkün",
-    "hazirlik": "2-4 hafta; HAFİF-ORTA",
-    "sartlar": [
-      "Dijital/derin teknoloji odaklı startup",
-      "AB veya ortak ülke tescili",
-      "Aktif fundraising süreci tercih edilir"
-    ],
-    "belgeler": [
-      "Başvuru formu",
-      "Pitch deck",
-      "Ürün/teknoloji tanıtımı"
-    ],
-    "kriterler": "İnovasyon seviyesi, piyasa potansiyeli, ekip yetkinliği",
-    "nasil": "28digital.eu/champions",
-    "kaynaklar": "EIT Digital (eitdigital.eu), 28DIGITAL platformu",
-    "ipucu": "Siber güvenlik girişimleri EIT Digital'in stratejik önceliğindedir; yarışma kazanmasanız da yatırımcı ağına erişim sağlanır."
-  },
-  "CYSSDE Open Call 3 – Sızma Testi & Güvenlik Açığı Değerlendirmesi": {
-    "frist": "Ocak 2026'da açıldı; son tarih için cyssde.eu izlenmeli",
-    "kimler": "Mikro işletmeler, KOBİ'ler, araştırma kuruluşları, kamu kurumları; ağırlıklı küçük şirketler",
-    "butce": "Maks. €200.000 / kurum; eş finansman oranı değişken",
-    "es_finansman": "Değişken; teyit edilmeli",
+  "EIT Digital – Open Innovation Factory 2026": {
+    "frist": "Kapanış: 15 Mayıs 2026 (teyit edilmeli – resmi EIT Digital sitesi kontrol edilmeli)",
+    "kimler": "KOBİ'ler, büyük şirketler, araştırma kuruluşları; min. 2 farklı AB ülkesinden 2 ortak",
+    "butce": "Maks. €400.000 / proje",
+    "es_finansman": "EIT Digital eş finansman oranı teyit edilmeli",
     "basari_orani": "",
-    "konsorsiyum": "Tekil başvuru mümkün",
-    "hazirlik": "2-4 hafta; HAFİF başvuru yükü",
+    "konsorsiyum": "Min. 2 ülke / 2 partner zorunlu",
+    "hazirlik": "2–3 ay; başvuru yükü ORTA",
     "sartlar": [
-      "AB'de kayıtlı tüzel kişi",
-      "NIS2/DORA/ISO27k uyum ihtiyacı veya olgunlaşma hedefi",
-      "Penetrasyon testi hizmetini dış kaynak olarak kullanacak"
+      "Min. 2 farklı ülkede partner",
+      "Dijital teknoloji odaklı proje (AI, siber güvenlik, veri)",
+      "Açık inovasyon yaklaşımı",
+      "Endüstri-akademi işbirliği önerilir"
+    ],
+    "belgeler": [
+      "Proje teknik açıklaması",
+      "Konsorsiyum bilgileri",
+      "Bütçe tablosu",
+      "İş etkisi analizi"
+    ],
+    "kriterler": "Teknik yenilik, Avrupa dijital dönüşümüne katkı, ortaklık kalitesi, piyasaya uygulanabilirlik",
+    "nasil": "eitdigital.eu üzerinden başvuru; portal ayrıntıları için resmi çağrı sayfası kontrol edilmeli",
+    "kaynaklar": "eitdigital.eu | EIT Digital ofisleri (Almanya dahil birçok ülke)",
+    "ipucu": "EIT Digital'ın Almanya ve NRW ağ ortakları aracılığıyla eş ortak bulmak başarı şansını artırır"
+  },
+  "ESF+ Almanya – Dijital Beceriler ve Girişimcilik": {
+    "frist": "Rolling; NRW'deki spesifik çağrılar MAGS NRW tarafından duyurulur",
+    "kimler": "KOBİ'ler, üniversiteler, eğitim kurumları, dernekler, bireyler (belirli programlara göre)",
+    "butce": "Program dönemine göre; %75'e kadar AB eş finansmanı",
+    "es_finansman": "%25 öz kaynak veya ulusal katkı genellikle gerekli",
+    "basari_orani": "",
+    "konsorsiyum": "Program türüne göre değişir; tekil başvuru da mümkün",
+    "hazirlik": "2–4 ay; başvuru yükü ORTA",
+    "sartlar": [
+      "NRW'de faaliyet",
+      "Eğitim/yetkinlik geliştirme odaklı proje",
+      "Hedef grup tanımı",
+      "Sonuç göstergeleri"
+    ],
+    "belgeler": [
+      "Proje başvurusu (Verwaltungsbehörde portalı)",
+      "Bütçe planı",
+      "Eşleşme finansmanı belgesi"
+    ],
+    "kriterler": "Hedef gruba erişim, istihdam etkisi, yenilik, verimlilik",
+    "nasil": "esf.nrw.de ve mags.nrw.de üzerinden; spesifik çağrı duyuruları için bülten takibi önerilir",
+    "kaynaklar": "ESF NRW Verwaltungsbehörde | esf.de federal portal",
+    "ipucu": "NRW ESF çağrıları çoğunlukla Avrupa Sosyal Fonu öncelikleriyle uyumlu; dijital güvenlik ve girişimcilik projeleri yüksek uyum gösterir"
+  },
+  "BMFTR – Siber Güvenlik ve Dijital Egemenlik AR-GE": {
+    "frist": "Sonraki stichtag: 30 Kasım 2026 (Kuantum iletişimi ve IT güvenliği AR-GE); Plattform Privatheit için 15 Mart ve 15 Ekim stichtag'ları geçerli (son: 15.03.2027)",
+    "kimler": "KMU'lar, üniversiteler, araştırma kurumları; birlikte Verbundprojekte veya Einzelvorhaben",
+    "butce": "'Digital. Sicher. Souverän.' çerçevesinde 5 yıllık program; proje başı değişken",
+    "es_finansman": "KMU için genellikle %50 hibe; büyük firmalar için daha düşük",
+    "basari_orani": "BMBF/BMFTR programlarında ~%20–30",
+    "konsorsiyum": "Verbundprojekte tercih edilir; Einzelprojekte de mümkün",
+    "hazirlik": "3–4 ay; 2 aşamalı başvuru (Skizze + Vollantrag); başvuru yükü ORTA",
+    "sartlar": [
+      "IT güvenliği AR-GE odaklı proje",
+      "Alman hukukuna tabi tüzel kişilik",
+      "Proje öncesi skizze onayı",
+      "VDI/VDE-IT veya DLR PT koordinasyonu"
+    ],
+    "belgeler": [
+      "Projektskizze (easy-online)",
+      "Vollantrag (onay sonrası)",
+      "Verbundvereinbarung (ortaklık anlaşması)",
+      "Bütçe detayı"
+    ],
+    "kriterler": "Bilimsel-teknik kalite, KMU transferi, uygulama potansiyeli, AR-GE kapasitesi",
+    "nasil": "easy-online.de üzerinden Projektskizze; foerderinfo.bund.de rehber kaynak",
+    "kaynaklar": "VDI/VDE-IT Projektträger | DLR Projektträger | foerderinfo.bund.de",
+    "ipucu": "Skizze aşamasında kısa ve somut teknik yenilik vurgusu yapın; PT'nin sektör uzmanlarıyla önceden görüşün"
+  },
+  "BMFTR – Zivile Sicherheit Demonstrasyon Projeleri": {
+    "frist": "Rolling / ganzjährig (sabit stichtag yok); her zaman başvurulabilir",
+    "kimler": "KMU'lar, üniversiteler, araştırma kurumları, güvenlik sektörü firmaları",
+    "butce": "Proje bazlı; %50–80 hibe tipik",
+    "es_finansman": "%20–50 öz kaynak/eş finansman",
+    "basari_orani": "",
+    "konsorsiyum": "Verbundprojekte tercih edilir (güvenlik kullanıcı + teknoloji geliştirici)",
+    "hazirlik": "3–5 ay; başvuru yükü ORTA-AĞIR",
+    "sartlar": [
+      "Zivile Sicherheit (siber güvenlik dahil) odaklı demonstrasyon",
+      "Alman yerleşik tüzel kişilik",
+      "Endüstri-akademi konsorsiyumu önerilir",
+      "easy-online üzerinden başvuru"
+    ],
+    "belgeler": [
+      "Projektskizze",
+      "Vollantrag (skizze onayı sonrası)",
+      "Verbundvereinbarung",
+      "Etik değerlendirme (gerekiyorsa)"
+    ],
+    "kriterler": "Teknik yenilik, uygulamaya yakınlık (TRL 5+), sosyal etki ve güvenlik politikasına katkı",
+    "nasil": "easy-online.de üzerinden; Projektträger VDI/VDE-IT veya DLR PT",
+    "kaynaklar": "sifo.de (Nationales Kontaktstelle Sicherheitsforschung) | vdivde-it.de",
+    "ipucu": "Skizze öncesi sifo.de ile bağlantı kurmak önerilir; BMFTR-Wege zur Innovation ile AB başvurusu paralel planlanabilir"
+  },
+  "ZIM – Zentrales Innovationsprogramm Mittelstand": {
+    "frist": "Rolling; bilateral çağrılar için spesifik tarihler: Güney Kore 18.06.2026, Kanada 19.06.2026, Taiwan 28.10.2026",
+    "kimler": "KMU'lar (< 500 çalışan); araştırma kurumları KMU ile birlikte; serbest meslek sahipleri",
+    "butce": "IT güvenliği dahil teknoloji-bağımsız; %25–70 hibe (KMU büyüklüğüne göre)",
+    "es_finansman": "%30–75 öz kaynak; genç/küçük KMU'lara yüksek destek",
+    "basari_orani": "ZIM'de ortalama başarı oranı ~%40–50; nispeten erişilebilir",
+    "konsorsiyum": "Tek başvuru (Einzelprojekt) mümkün; Kooperationsprojekte için 2+ ortak",
+    "hazirlik": "4–8 hafta; başvuru yükü HAFIF-ORTA",
+    "sartlar": [
+      "Almanya'da yerleşik KMU",
+      "Somut AR-GE projesi ve teknik yenilik",
+      "Proje öncesi başvuru (Vorhabenbeginn yasaklı)",
+      "KMU statüsü (< 500 çalışan, < €50M ciro)"
+    ],
+    "belgeler": [
+      "Projektantrag (Förderzentrale Deutschland dijital portal)",
+      "Technische Beschreibung",
+      "Kosten- und Finanzierungsplan",
+      "Kooperationsvertrag (ortaklık varsa)"
+    ],
+    "kriterler": "İnovasyon içeriği, teknik uygulanabilirlik, pazar potansiyeli, sürdürülebilirlik katkısı",
+    "nasil": "zim.de üzerinden tam dijital başvuru (Förderzentrale Deutschland)",
+    "kaynaklar": "zim.de | IHK inovasyon danışmanları | AiF Projekt GmbH (ZIM PT)",
+    "ipucu": "ZIM'e başvurmadan önce proje başlatmayın; dijital başvuru sistemi sürekli açık ve hızlı değerlendirme sunuyor"
+  },
+  "EXIST Gründungsstipendium": {
+    "frist": "Rolling; yıl boyunca kabul; onay süreci ~3–6 ay",
+    "kimler": "Öğrenciler, akademisyenler, mezunlar (son 5 yıl içinde), araştırmacılar; üniversite/araştırma kurumunun gründungsnetzwerk'i aracılığıyla başvuru",
+    "butce": "Aylık €1.000 (öğrenci), €2.000 (mezun), €3.000 (doktora); + €10.000–30.000 maddi gider; 12 ay",
+    "es_finansman": "%100 kamu finansmanı; eş finansman yok",
+    "basari_orani": "~%30–40 (gründungsnetzwerk ön eleme dahil)",
+    "konsorsiyum": "Tekil başvuru; max. 3 kişilik ekip; üniversite aracılık ediyor",
+    "hazirlik": "2–3 ay (ideapaper → mentor → başvuru); başvuru yükü HAFIF",
+    "sartlar": [
+      "Üniversite/araştırma kurumu bağlantısı zorunlu",
+      "İnovatif teknoloji/bilgi tabanlı iş fikri",
+      "Gründungsnetzwerk onayı",
+      "Paralel başka stipendyum/çalışma yasağı"
+    ],
+    "belgeler": [
+      "Ideapapier ve businessplan taslağı",
+      "Mentor onay mektubu",
+      "Gründungsnetzwerk başvuru formu",
+      "Özgeçmiş/kariyer belgesi"
+    ],
+    "kriterler": "İş fikrinin yeniliği ve piyasa potansiyeli, ekip yetkinliği, sürdürülebilir iş modeli",
+    "nasil": "Üniversitenin gründungsnetzwerk'ine başvuru; Projektträger Jülich (PtJ) onaylar",
+    "kaynaklar": "exist.de | Projektträger Jülich (PtJ) | NRW: campus-start-ups.nrw",
+    "ipucu": "NRW'de EXIST + Gründungsstipendium.NRW kombinasyonu mümkün (dikkat: aynı anda canlı yaşam desteği programları kombine edilemez)"
+  },
+  "Gründungsstipendium.NRW": {
+    "frist": "Onay son tarihi: 31 Aralık 2026; başvurular yıl boyunca kabul edilir",
+    "kimler": "Bireysel girişimciler ve ekipler; NRW'de gründungsnetzwerk üyesi olmak gerekli",
+    "butce": "Aylık €1.000–2.000 + Diversität+ bileşeni için €3.600 ek ödeme",
+    "es_finansman": "%100 NRW devlet finansmanı; eş finansman yok",
+    "basari_orani": ">4.500 fon verilen (köklü program); aylık jüri oturumlarıyla erişilebilir",
+    "konsorsiyum": "Tekil başvuru; network aracılığıyla",
+    "hazirlik": "1–2 ay; başvuru yükü HAFIF",
+    "sartlar": [
+      "NRW gründungsnetzwerk üyeliği",
+      "İnovatif iş fikri (siber güvenlik uygun)",
+      "Aktif başka istihdam veya stipendyum yasağı",
+      "Businessplan gelişimi taahhüdü"
+    ],
+    "belgeler": [
+      "Başvuru formu (network portalı)",
+      "İş fikri özeti",
+      "Ekip profili",
+      "Businessplan taslağı"
+    ],
+    "kriterler": "İnovasyon içeriği, pazar fizibilitesi, ekip motivasyonu",
+    "nasil": "gründungsstipendium.nrw üzerinden; en yakın NRW gründungsnetzwerk jüri toplantısına yönlendirilir",
+    "kaynaklar": "gründungsstipendium.nrw | STARTPLATZ Düsseldorf/Köln | Üniversite gründungsbüros",
+    "ipucu": "Cinsiyet çeşitliliği içeren ekiplere Diversität+ ek bileşeniyle €3.600 ilave destek sunulmaktadır"
+  },
+  "NRW MID – Dijital Güvenlik Desteği (KOBİ)": {
+    "frist": "Rolling; Losverfahren (kura) ve Wartesaalverfahren (bekleme listesi) modeli",
+    "kimler": "NRW'de yerleşik KMU'lar; MID-Digitale Sicherheit için küçük işletmeler öncelikli",
+    "butce": "MID-Digitale Sicherheit: maks. €15.000 / proje (%50 hibe); MID-Assistent: maks. €48.000 (2 yıl)",
+    "es_finansman": "%50 öz kaynak zorunlu",
+    "basari_orani": "Losverfahren modeli – şans faktörü var; sürekli tur açılıyor",
+    "konsorsiyum": "Tekil başvuru mümkün",
+    "hazirlik": "2–4 hafta; başvuru yükü HAFIF",
+    "sartlar": [
+      "NRW'de kayıtlı KMU",
+      "Proje öncesi başvuru",
+      "Dijital güvenlik yatırımı (proje veya danışmanlık)",
+      "Min. €4.000 hibe tutarı için min. €8.000 proje maliyeti"
+    ],
+    "belgeler": [
+      "Dijital başvuru formu (mittelstand-innovativ-digital.nrw)",
+      "Maliyet tahmini / teklif",
+      "İşletme kaydı belgesi"
+    ],
+    "kriterler": "Dijital güvenlik ihtiyacı, proje fizibilitesi, NRW KMU statüsü",
+    "nasil": "mittelstand-innovativ-digital.nrw/foerderportale üzerinden",
+    "kaynaklar": "Mittelstand-Digital Zentrum Rheinland | IHK NRW | mittelstand-innovativ-digital.nrw",
+    "ipucu": "Losverfahren turlarını kaçırmamak için portal bildirimlerine kayıt olun; MID-Assistent daha uzun hazırlık gerektirir"
+  },
+  "CYSSDE – Pentest & Güvenlik Açığı Değerlendirme OC3": {
+    "frist": "OC3: Ocak 2026'da açıldı; spesifik kapanış tarihi için cyssde.eu kontrol edilmeli",
+    "kimler": "AB'de yerleşik mikro işletmeler, KOBİ'ler, araştırma kurumları ve kamu kurumları",
+    "butce": "Maks. €200.000 / kuruluş; cascade/FSTP modeli",
+    "es_finansman": "DIGITAL Europe programından %75'e kadar; FSTP yapısı",
+    "basari_orani": "",
+    "konsorsiyum": "Tekil başvuru mümkün (pentest hizmeti alıcı kuruluş)",
+    "hazirlik": "2–3 hafta; başvuru yükü HAFIF",
+    "sartlar": [
+      "AB'de kayıtlı kuruluş",
+      "NIS2/DORA/CRA veya ISO27k uyum ihtiyacı belgelenmeli",
+      "Pentest veya güvenlik değerlendirmesine yönelik plan",
+      "CYSSDE platform kaydı"
     ],
     "belgeler": [
       "CYSSDE platform başvuru formu",
-      "Kurum tanımı",
-      "Kapsam ve ihtiyaç beyanı"
+      "Kuruluş profili ve ihtiyaç analizi",
+      "Uyum gereklilikleri özeti"
     ],
-    "kriterler": "Siber güvenlik olgunluğu, uyum gereksinimleri, etki potansiyeli",
-    "nasil": "cyssde.eu platformu üzerinden kayıt ve başvuru",
-    "kaynaklar": "cyssde.eu, ECCC ağ üyeleri",
-    "ipucu": "OC3 açık; daha önce OC2'ye başvurup reddedilenler tekrar başvurabilir. NIS2 uyum gerekçesiyle başvuru güçlenir."
+    "kriterler": "Uyum ihtiyacı, organizasyon profili, beklenen güvenlik çıktısı",
+    "nasil": "cyssde.eu üzerinden platform kaydı ve başvuru",
+    "kaynaklar": "cyssde.eu | DIGITAL Europe ECCC desteği",
+    "ipucu": "NIS2/DORA kapsamındaki KOBİ'ler için düşük bürokratik yük ile yüksek finansal değer sunar; erken kayıt avantajlı"
   },
-  "BMFTR 'Digital. Sicher. Souverän.' – KMU-innovativ IKT": {
-    "frist": "Rolling; stichtag'lar 15 Nisan ve 15 Ekim her yıl",
-    "kimler": "KOBİ'ler (öncelikli ilk kez başvuranlar), üniversiteler, araştırma enstitüleri – KOBİ+araştırma işbirliği tercih edilir",
-    "butce": "Proje bazlı; çerçeve toplam ≥ €350M (2021-2026)",
-    "es_finansman": "KOBİ için ~%50 hibe; araştırma kurumları için ~%100",
-    "basari_orani": "Orta-yüksek; açık tematik alanlarda daha iyi",
-    "konsorsiyum": "Tekil KOBİ veya KOBİ+araştırma ortaklığı",
-    "hazirlik": "2-4 ay; ORTA başvuru yükü",
-    "sartlar": [
-      "Almanya'da kayıtlı KOBİ veya araştırma kurumu",
-      "Rekabete açık yenilikçi proje",
-      "IT güvenliği/siber güvenlik kapsam uyumu"
-    ],
-    "belgeler": [
-      "Proje skizi (DLR PT sistemine)",
-      "Teknik tanım",
-      "Finansman planı"
-    ],
-    "kriterler": "Teknolojik yenilik seviyesi, pazar potansiyeli, Almanya'da değer yaratma",
-    "nasil": "DLR Projektträger üzerinden (forschung-it-sicherheit-kommunikationssysteme.de/foerderung)",
-    "kaynaklar": "DLR-PT, BMBF/BMFTR, forschung-it-sicherheit-kommunikationssysteme.de",
-    "ipucu": "Quantenkommunikation ve Post-Quantum güvenlik konuları 2026'da aktif; son stichtag 30 Kasım 2026."
-  },
-  "BMFTR Quantenkommunikation Transfer (IT-Sicherheit)": {
-    "frist": "Sonraki stichtag: 30 Kasım 2026",
-    "kimler": "Üniversiteler, araştırma enstitüleri, firmalar (AR-GE odaklı)",
-    "butce": "Proje bazlı hibe; %50-100 finansman",
-    "es_finansman": "Kuruma ve proje tipine göre; genellikle %50 öz kaynak",
+  "EU Cybersecurity Skills Academy – Eğitim Çağrısı": {
+    "frist": "Önceki çağrılar kapandı; yeni çağrı açılışı için ECCC/DIGITAL portal izlenmeli (teyit edilmeli)",
+    "kimler": "Yükseköğretim kurumları, mesleki eğitim kurumları, araştırma kuruluşları, işletmeler, ulusal siber güvenlik yetkinlik merkezleri; konsorsiyum",
+    "butce": "Aktivite 1 (KOBİ/startup eğitimi): maks. €4M; Aktivite 2 (Akademi destek): maks. €2M",
+    "es_finansman": "Genellikle %80 AB finansmanı DIGITAL programı çerçevesinde",
     "basari_orani": "",
-    "konsorsiyum": "Tekil veya işbirliği projeleri; Verbundprojekte tercih edilir",
-    "hazirlik": "3-5 ay; ORTA başvuru yükü",
+    "konsorsiyum": "Konsorsiyum zorunlu; çok aktörlü ortaklık bekleniyor",
+    "hazirlik": "4–6 ay; başvuru yükü AĞIR",
     "sartlar": [
-      "Almanya'da kayıtlı kurum",
-      "Kuantum iletişim veya post-kuantum kriptografi kapsam uyumu",
-      "Önce proje skizi sunulmalı"
+      "AB üye devleti veya ilgili ülkede kurulu",
+      "Siber güvenlik eğitim uzmanlığı",
+      "ECSF çerçevesiyle uyum",
+      "KOBİ veya kamu sektörüne yönelik somut eğitim planı"
     ],
     "belgeler": [
-      "Proje skizi",
-      "Teknik tanım",
-      "Ortaklık beyanı (varsa)"
+      "Proje teknik önerisi",
+      "Konsorsiyum anlaşması",
+      "Eğitim metodolojisi tanımı",
+      "Bütçe ve çalışma paketleri"
     ],
-    "kriterler": "Teknolojik yenilik, transfer potansiyeli, güvenlik etkisi",
-    "nasil": "forschung-it-sicherheit-kommunikationssysteme.de/foerderung/bekanntmachungen",
-    "kaynaklar": "BMFTR, DLR-PT NKS DIT",
-    "ipucu": "IT-Sicherheit çerçevesindeki en kapsamlı uzun vadeli çağrılardan biri; 2027 ve ötesi için de devam edebilir."
+    "kriterler": "Eğitim kalitesi, erişilebilirlik (en az 3 AB dili), ölçeklendirme potansiyeli, ECSF uyumu",
+    "nasil": "Funding & Tenders Portal üzerinden; cybersecurity-centre.europa.eu başvuru rehberi",
+    "kaynaklar": "ECCC: cybersecurity-centre.europa.eu | ENISA: enisa.europa.eu | Digital Skills & Jobs Platform",
+    "ipucu": "Aktivite 1 KOBİ/startup odaklı; mevcut eğitim altyapısı olan kurumlar veya bunlarla konsorsiyum kuranlar için idealdir"
   },
-  "ZIM – Zentrales Innovationsprogramm Mittelstand 2026": {
-    "frist": "Rolling (sürekli başvuru); program en az Haziran 2027'ye kadar geçerli",
-    "kimler": "KOBİ'ler (tüm sektörler, siber dahil), serbest meslekler, araştırma enstitüleri (KOBİ ortaklığıyla)",
-    "butce": "FuE tek proje: maks. €690K/kurum; işbirliği: maks. €3M toplam",
-    "es_finansman": "KOBİ: %25-45 hibe; araştırma: %100 maks. €280K",
-    "basari_orani": "Orta-yüksek; ilk kez başvuranlara özel avantaj",
-    "konsorsiyum": "Tekil KOBİ veya KOBİ+araştırma işbirliği; Netzwerk modeli de var",
-    "hazirlik": "4-8 hafta; ORTA başvuru yükü",
-    "sartlar": [
-      "Almanya'da kayıtlı KOBİ",
-      "250'den az çalışan (büyük KOBİ için farklı kural)",
-      "Yenilikçi AR-GE projesi",
-      "Proje başlamamış olmalı"
-    ],
-    "belgeler": [
-      "Online başvuru formu (Förderzentrale Deutschland)",
-      "Proje skizi",
-      "Bütçe tablosu",
-      "Ortaklık beyanı (Kooperationsprojekte)"
-    ],
-    "kriterler": "Teknolojik yenilik seviyesi, rekabetçilik artışı, pazar fırsatı",
-    "nasil": "zim.de > Förderzentrale Deutschland online portal",
-    "kaynaklar": "zim.de, IHK danışmanlığı, AiF Projekt GmbH, VDI/VDE-IT",
-    "ipucu": "Antrag onaylanır onaylanmaz projeye başlanabilir; IHK Innovationsberatung ücretsiz ön danışmanlık sunar."
-  },
-  "EXIST-Gründungsstipendium 2026": {
-    "frist": "Üniversiteye göre değişir; sürekli alım (2023-2029 programı). Üniversite kontağa danışın.",
-    "kimler": "Üniversite öğrencileri (en az yarı mezun), mezunlar (5 yıl içinde), araştırmacılar; maks. 3 kişilik ekip",
-    "butce": "Kişisel burs (€1.000-€3.000/ay role göre) + maks. €30.000 malzeme+coaching",
-    "es_finansman": "Öz kaynak gerekmez",
-    "basari_orani": "Üniversiteye göre değişir; orta rekabet",
-    "konsorsiyum": "Tekil başvuru (ekip üçe kadar); üniversite aracı kurum",
-    "hazirlik": "2-3 ay; ORTA başvuru yükü",
-    "sartlar": [
-      "Üniversite/araştırma kurumu bağlantısı",
-      "Yenilikçi teknoloji/bilgi tabanlı fikir",
-      "İş planı taslağı",
-      "1 yıl destek aşaması"
-    ],
-    "belgeler": [
-      "Başvuru formu",
-      "İş planı/konsept",
-      "Üniversite mentör mektubu",
-      "Ekip CV'leri"
-    ],
-    "kriterler": "Yenilik ve pazar potansiyeli, ekip, uygulama planı",
-    "nasil": "Üniversitedeki EXIST bağlantı ofisi üzerinden; ptj.de/foerdermoeglichkeiten/exist/gruendungsstipendium",
-    "kaynaklar": "exist.de, PtJ (Projektträger Jülich), üniversite startup ofisleri (NRW: STARTPLATZ, Founders Foundation vb.)",
-    "ipucu": "Siber güvenlik startup'ları 'technologieorientiert' kategorisine girer; önce üniversite EXIST koordinatörüne başvurun."
-  },
-  "Gründungsstipendium.NRW 2026": {
-    "frist": "Ticaret siciline kayıttan itibaren 12 ay içinde; en geç 30 Eylül 2026'ya kadar başvuru; onay 31 Aralık 2026'ya kadar",
-    "kimler": "NRW'de yeni kurulmuş KOBİ / startup kurucular",
-    "butce": "%70 hibe; maks. €16.000 tek seferlik + NRW.Bank faiz avantajlı kredi",
-    "es_finansman": "%30 öz kaynak",
+  "DIGITAL Europe – Beceri Akademileri Ligi (ELEVATE)": {
+    "frist": "9. Set kapanışı: 3 Mart 2026 (geçti); 10. set çağrıları 21 Nisan – 1 Ekim 2026 açık",
+    "kimler": "Üniversiteler, mesleki eğitim kurumları, araştırma kuruluşları, işletmeler, STK'lar",
+    "butce": "9. set toplamı ≈ €204M; ELEVATE alt çağrısı için teyit edilmeli",
+    "es_finansman": "Genellikle %80 AB finansmanı",
     "basari_orani": "",
-    "konsorsiyum": "Tekil başvuru mümkün",
-    "hazirlik": "2-4 hafta; HAFİF",
+    "konsorsiyum": "Konsorsiyum tercih edilir; çok ülkeli ortaklık bekleniyor",
+    "hazirlik": "3–5 ay; başvuru yükü ORTA-AĞIR",
     "sartlar": [
-      "NRW'de şirket kaydı",
-      "12 aylık süre sınırı",
-      "Yenilikçi iş modeli",
-      "Başvuru öncesi proje başlamamış olmalı"
-    ],
-    "belgeler": [
-      "NRW.Bank başvuru formu",
-      "İş planı",
-      "Finansman planı",
-      "Ticaret sicil belgesi"
-    ],
-    "kriterler": "Yenilik ve pazar potansiyeli, NRW ekonomisine katkı",
-    "nasil": "nrwbank.de > Gründungsstipendium.NRW",
-    "kaynaklar": "NRW.BANK, MWIKE NRW, Startup.NRW ağı",
-    "ipucu": "EXIST ile kombinlenemez; ancak ZIM veya DIGITAL Europe FSTP çağrılarıyla eşzamanlı kullanılabilir."
-  },
-  "NRW.Bank – Mittelstand innovativ & digital (MID NRW)": {
-    "frist": "Rolling; teyit için nrwbank.de izlenmeli",
-    "kimler": "NRW'de faaliyet gösteren 250'den az çalışanlı KOBİ'ler",
-    "butce": "Maks. €15.000 / proje; %50 hibe",
-    "es_finansman": "%50 öz kaynak",
-    "basari_orani": "",
-    "konsorsiyum": "Tekil başvuru mümkün",
-    "hazirlik": "2-3 hafta; HAFİF",
-    "sartlar": [
-      "NRW'de kayıtlı KOBİ",
-      "250'den az çalışan",
-      "Dijitalleşme/IT güvenliği projesi",
-      "Proje başlamamış olmalı"
-    ],
-    "belgeler": [
-      "NRW.BANK başvuru formu",
-      "Proje tanımı",
-      "Maliyet planı"
-    ],
-    "kriterler": "Dijital dönüşüm katkısı, yenilik, NRW ekonomisi etkisi",
-    "nasil": "nrwbank.de veya Hausbank üzerinden",
-    "kaynaklar": "NRW.BANK, IHK NRW, Mittelstand.NRW",
-    "ipucu": "ZIM ve go-digital ile kombine kullanılabilir; toplam hibe oranı %40-60'a çıkabilir."
-  },
-  "EDIH Cybersecurity NRW / Almanya (Digital Innovation Hub)": {
-    "frist": "Rolling; hizmet kapasitesine göre",
-    "kimler": "KOBİ'ler, orta ölçekli firmalar, kamu kurumları, dernek/vakıflar",
-    "butce": "Danışmanlık ve erişim hizmetleri ücretsiz veya sübvansiyonlu; ek proje desteği için ayrı başvuru",
-    "es_finansman": "",
-    "basari_orani": "",
-    "konsorsiyum": "Tekil başvuru mümkün",
-    "hazirlik": "1-2 hafta; ÇOK HAFİF",
-    "sartlar": [
-      "AB'de kayıtlı kuruluş",
-      "Siber güvenlik/dijital dönüşüm ihtiyacı",
-      "EDIH hizmet kapsamı uyumu"
-    ],
-    "belgeler": [
-      "Başvuru/talep formu",
-      "Kurum tanımı"
-    ],
-    "kriterler": "Dijital dönüşüm ihtiyacı, KOBİ/kamu profili",
-    "nasil": "digital-strategy.ec.europa.eu/en/activities/edihs > NRW EDIH iletişim",
-    "kaynaklar": "EDIH portal, Enterprise Europe Network, NRW Digitalhub",
-    "ipucu": "EDIH 'test before invest' hizmetleri EIC veya DIGITAL başvurusu öncesi ürün olgunluk doğrulaması için idealdir."
-  },
-  "ESF+ NRW – Digitale Kompetenzen & Cybersicherheit": {
-    "frist": "Rolling; NRW ESF+ programı 2021-2027 çerçevesinde",
-    "kimler": "Üniversiteler, dernek/vakıflar, eğitim sağlayıcılar, KOBİ konsorsiyumları",
-    "butce": "Proje bazlı; %75 ESF+ eş finansman",
-    "es_finansman": "%25 öz kaynak veya ulusal kamu katkısı",
-    "basari_orani": "",
-    "konsorsiyum": "Çoğunlukla konsorsiyum gerekir",
-    "hazirlik": "3-5 ay; ORTA",
-    "sartlar": [
-      "NRW merkezli uygulama",
-      "Dijital yetkinlik/siber eğitim odağı",
-      "ESF+ uygun hedef grup (işçiler, KOBİ çalışanları)"
-    ],
-    "belgeler": [
-      "Proje başvurusu (esf.nrw.de)",
-      "Eğitim planı",
-      "Hedef grup tanımı",
-      "Bütçe"
-    ],
-    "kriterler": "İstihdam etkisi, yenilik, AB eşitlik politikasına uyum",
-    "nasil": "esf.nrw.de > Förderanträge",
-    "kaynaklar": "MAGS NRW, ESF+ NRW yönetim otoritesi",
-    "ipucu": "Siber güvenlik farkındalık eğitimi ESF+ NRW kapsamında açıkça desteklenmektedir; EDIH veya Mittelstand Digital ile kombine proje tasarlanabilir."
-  },
-  "Interreg NWE – Kapitalizasyon Çağrısı 2026": {
-    "frist": "Açılış: 11 Aralık 2025 / Kapanış: 28 Mayıs 2026",
-    "kimler": "Firmalar, üniversiteler, araştırma kurumları, STK'lar; NWE bölgesi ortakları (Almanya dahil)",
-    "butce": "%60 ERDF; küçük projeler €200K-€800K, büyük projeler daha fazla",
-    "es_finansman": "%40 öz kaynak / ulusal katkı",
-    "basari_orani": "Orta; kapitalizasyon çağrısında daha az rekabet",
-    "konsorsiyum": "Min. 3 NWE ülkesinden ortak gerekli",
-    "hazirlik": "3-6 ay; AĞIR",
-    "sartlar": [
-      "NWE bölgesi katılımcıları (Almanya uygun)",
-      "Daha önce finanse edilmiş proje sonuçlarının ölçeklendirilmesi (kapitalizasyon)",
-      "Min. 3 ülkeden ortak"
-    ],
-    "belgeler": [
-      "Proje başvuru formu",
-      "Ortak anlaşması",
-      "Bütçe planı",
-      "Etki değerlendirme planı"
-    ],
-    "kriterler": "Ölçeklendirme potansiyeli, NWE politika uyumu, çok-ülke etkisi",
-    "nasil": "nweurope.eu/calls-for-projects",
-    "kaynaklar": "Interreg NWE Sekretaryası, Almanya NWE NCP'leri",
-    "ipucu": "Kapitalizasyon çağrısında mevcut proje sonuçlarını genişletmek daha hızlı onay alır; aktif NWE projeleri olan kurumlar avantajlı."
-  },
-  "DAAD – İkili Akademik Değişim & Araştırma İşbirliği 2026": {
-    "frist": "Programa göre değişir; 2026 başvuruları sürmekte. Detay: daad.de",
-    "kimler": "Üniversite öğretim üyeleri, deneyimli akademisyenler ve araştırmacılar; doktora tercihen zorunlu",
-    "butce": "€2.000-€2.150/ay; seyahat desteği ayrıca",
-    "es_finansman": "",
-    "basari_orani": "",
-    "konsorsiyum": "Tekil başvuru mümkün",
-    "hazirlik": "4-8 hafta; ORTA",
-    "sartlar": [
-      "Üniversite veya araştırma enstitüsü üyeliği",
-      "Ortak ülke kültür anlaşması varlığı",
-      "Almanya konağı araştırma planı",
-      "Min. 7-14 gün konaklama"
-    ],
-    "belgeler": [
-      "Online başvuru formu (DAAD portalı)",
-      "Araştırma planı",
-      "Davet mektubu (Alman kurum)"
-    ],
-    "kriterler": "Akademik kalite, ikili işbirliği potansiyeli, araştırma planı uygunluğu",
-    "nasil": "daad.de/stipendien veya eu.daad.de",
-    "kaynaklar": "DAAD (daad.de), Alman Büyükelçilikleri",
-    "ipucu": "Siber güvenlik, AI güvenliği veya dijital hukuk gibi disiplinlerarası konular desteklenir; Almanya'daki ev sahibi kurum ilk adımda belirlenmelidir."
-  },
-  "EU Cybersecurity Skills Academy – Eğitim Çağrıları (DIGITAL)": {
-    "frist": "Önceki çağrı 2023-24'te kapandı; yeni çağrı 2026 için teyit edilmeli (nks-dit.de izlenmeli)",
-    "kimler": "Eğitim sağlayıcılar, üniversiteler, KOBİ konsorsiyumları, STK'lar",
-    "butce": "Aktivite 1: maks. €4M; Aktivite 2: maks. €2M",
-    "es_finansman": "",
-    "basari_orani": "",
-    "konsorsiyum": "Konsorsiyum güçlü tercih; çok ülkeli önerilir",
-    "hazirlik": "4-6 ay; ORTA-AĞIR",
-    "sartlar": [
-      "AB/ilgili ülke tescili",
-      "Siber güvenlik eğitimi odağı",
-      "KOBİ veya kamu sektörü hedef kitle",
-      "Ölçeklenebilir eğitim modeli"
-    ],
-    "belgeler": [
-      "Tam proje önerisi",
-      "Eğitim müfredatı/modül tanımı",
-      "Konsorsiyum bilgileri",
-      "Bütçe"
-    ],
-    "kriterler": "Erişilebilirlik, ölçek, KOBİ etkisi, AB yetenekler boşluğunu kapatma",
-    "nasil": "cybersecurity-centre.europa.eu/funding-opportunities_en",
-    "kaynaklar": "NKS DIT, digital-skills-jobs.europa.eu/en/cybersecurity-skills-academy, ENISA",
-    "ipucu": "Eğitim içeriğini ECSF (European Cybersecurity Skills Framework) rol profillerine göre tasarlayın; bu kriter değerlendirmede öne çıkar."
-  },
-  "Horizon Europe – DIGITAL-2026-SKILLS-10 (Gelişmiş Dijital Beceriler)": {
-    "frist": "Açılış: 21 Nisan 2026 / Kapanış: 01 Ekim 2026",
-    "kimler": "Firmalar, üniversiteler, STK'lar, kamu kurumları",
-    "butce": "Topic başına değişken; DIGITAL çerçevesinden",
-    "es_finansman": "Topice göre %50 veya %100",
-    "basari_orani": "",
-    "konsorsiyum": "Çoğunlukla çok ortaklı; bazı topicler tekil",
-    "hazirlik": "3-5 ay; ORTA",
-    "sartlar": [
-      "AB/ortak ülke tescili",
-      "AI, siber, kuantum veya yarı iletken beceri akademisi odağı",
-      "Avrupa ölçeğinde uygulama kapasitesi"
+      "AB üye devleti yerleşik kuruluş",
+      "AI/siber güvenlik/kuantum alanında eğitim kapasitesi",
+      "Dijital Skills & Jobs Platform uyumu",
+      "İzleme KPI'ları tanımı"
     ],
     "belgeler": [
       "Başvuru formu (Funding & Tenders Portal)",
-      "Müfredat tanımı",
-      "Ortaklık planı",
-      "Bütçe"
+      "Teknik ve metodoloji açıklaması",
+      "Konsorsiyum anlaşması",
+      "Bütçe tablosu"
     ],
-    "kriterler": "Avrupa dijital egemenliğine katkı, ölçek, sürdürülebilirlik",
-    "nasil": "EU Funding & Tenders Portal",
-    "kaynaklar": "NKS DIT, digital-skills-jobs.europa.eu, HaDEA info günleri",
-    "ipucu": "DIGITAL-SKILLS-09-LEAGUE-OF-ACADEMIES ile sinerji kurarak ELEVATE çerçevesine dahil olmak başvuruyu güçlendirir."
+    "kriterler": "AB dijital beceri öncelikleriyle uyum, ölçeklendirilebilirlik, yenilik, etki",
+    "nasil": "Funding & Tenders Portal üzerinden; digital-skills-jobs.europa.eu bilgi kaynağı",
+    "kaynaklar": "HaDEA: hadea.ec.europa.eu | Digital Skills & Jobs Platform | ENISA ECSF",
+    "ipucu": "10. set çağrılarında siber güvenlik becerileri öncelikli olmaya devam ediyor; Ekim 2026 kapanışını hedefleyin"
   },
-  "NIS2 / DORA / AI Act GRC Uyum Projeleri – DIGITAL Cascade / FSTP": {
-    "frist": "Değişken; CYSSDE OC3 aktif, diğer cascade çağrıları teyit edilmeli",
-    "kimler": "KOBİ'ler, araştırma kuruluşları; NIS2/DORA/AI Act kapsamındaki kuruluşlar öncelikli",
-    "butce": "€50K-€200K / kurum",
-    "es_finansman": "Değişken",
+  "DAAD – Akademik İşbirliği ve Değişim (Siber Güvenlik)": {
+    "frist": "Programa göre değişir; yıllık iki tema bazlı çağrı genellikle Ekim-Aralık döneminde",
+    "kimler": "Araştırmacılar, akademisyenler, doktora öğrencileri, Almanya'daki yabancı araştırmacılar; kurum bazlı ortaklık",
+    "butce": "Program türüne göre burs + seyahat; ortak proje fonları değişken",
+    "es_finansman": "Burs programlarında eş finansman yok; araştırma projeleri için katkı payı gerekebilir",
     "basari_orani": "",
-    "konsorsiyum": "Tekil başvuru genellikle mümkün",
-    "hazirlik": "2-4 hafta; HAFİF",
+    "konsorsiyum": "İkili veya çok taraflı akademik ortaklık; bazı programlar tekil başvuruya açık",
+    "hazirlik": "2–4 ay; başvuru yükü HAFIF-ORTA",
     "sartlar": [
-      "AB'de kayıtlı kuruluş",
-      "Siber güvenlik uyum ihtiyacı (NIS2/DORA/CRA/GDPR/AI Act)",
-      "FSTP çağrısı uygun kurum profili"
+      "Akademik kurum bağlantısı",
+      "Siber güvenlik veya dijital teknoloji araştırma odağı",
+      "Dil yeterliliği (Almanca/İngilizce)",
+      "Davet mektubu (bazı programlar için)"
     ],
     "belgeler": [
-      "FSTP başvuru formu",
-      "Uyum ihtiyaç beyanı",
-      "Kurum profili"
+      "Araştırma planı / proje özeti",
+      "Özgeçmiş ve yayın listesi",
+      "Kurum referans mektubu",
+      "Davet mektubu (gerekiyorsa)"
     ],
-    "kriterler": "Yasal uyum ihtiyacı, proje etkisi, AB politika uyumu",
-    "nasil": "İlgili cascade hub/FSTP platformu üzerinden (cyssde.eu gibi)",
-    "kaynaklar": "ECCC, ENISA, cybersecurity-centre.europa.eu",
-    "ipucu": "NIS2UmsuCG (Almanya'da Aralık 2025'te yayınlandı) altında kayıt yükümlülüğü olan firmalar güçlü başvuru gerekçesine sahiptir."
+    "kriterler": "Akademik kalite, araştırma relevansı, uluslararası işbirliği potansiyeli",
+    "nasil": "daad.de üzerinden program seçimi ve online başvuru",
+    "kaynaklar": "daad.de | DAAD Almanya ofisleri | Üniversite uluslararası ofisleri",
+    "ipucu": "Siber güvenlik tematik çağrıları için yıllık program takvimini Eylül-Ekim'de kontrol edin"
   },
-  "EU AI Act Uyum Desteği – DIGITAL Düzenleyici Uyum Çağrısı 2026": {
-    "frist": "Açılış: Nisan 2026 / Kapanış: 01 Ekim 2026",
-    "kimler": "Araştırma kurumları, sivil toplum, teknoloji sağlayıcıları, fact-checking kuruluşları",
-    "butce": "€6M (tek proje); %100 finansman; min. %60 FSTP ile alt taraflara dağıtım",
-    "es_finansman": "%100 hibe",
-    "basari_orani": "Tek proje seçilir; çok yüksek rekabet",
-    "konsorsiyum": "Konsorsiyum güçlü tercih",
-    "hazirlik": "4-6 ay; AĞIR",
-    "sartlar": [
-      "AB/ortak ülke tescili",
-      "Bilgi bütünlüğü ve düzenleyici uyum odağı",
-      "FSTP dağıtım kapasitesi"
-    ],
-    "belgeler": [
-      "Tam proje önerisi",
-      "FSTP dağıtım planı",
-      "Konsorsiyum bilgileri",
-      "Bütçe"
-    ],
-    "kriterler": "AB Demokrasi Kalkanı politikasına uyum, etki, FSTP dağıtım kapasitesi",
-    "nasil": "EU Funding & Tenders Portal",
-    "kaynaklar": "digital-strategy.ec.europa.eu, HaDEA",
-    "ipucu": "AI Act uyum + dezenformasyon mücadelesi kesişim projelerinde güçlü bir çerçeve; tek proje seçileceği için konsorsiyum kalitesi kritik."
-  },
-  "EIC Accelerator Challenges 2026 (Stratejik Teknoloji)": {
-    "frist": "Kısa başvuru: sürekli açık. Tam başvuru: 7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas 2026",
-    "kimler": "Tek başvuru olarak KOBİ ve startup'lar; maks. 500 çalışan",
-    "butce": "€220M toplam; hibe maks. €2.5M + özkaynak maks. €10M",
-    "es_finansman": "%70 hibe oranı; geri kalan öz kaynak",
-    "basari_orani": "%5-8",
-    "konsorsiyum": "Tekil başvuru zorunlu",
-    "hazirlik": "4-9 ay; AĞIR",
-    "sartlar": [
-      "Tek KOBİ/startup başvurucu",
-      "TRL 5+ tamamlanmış",
-      "5 tematik zorluktan birine uygunluk (ileri malzeme, füzyon, biyoteknoloji, kritik hammadde, iklim)"
-    ],
-    "belgeler": [
-      "Kısa başvuru (yazılı+pitch+video)",
-      "Tam başvuru (maks. 20 sayfa)",
-      "FTO analizi",
-      "Finansal tablolar"
-    ],
-    "kriterler": "Mükemmeliyet, Etki, Uygulama",
-    "nasil": "eic.ec.europa.eu > Funding & Tenders Portal",
-    "kaynaklar": "EIC NCP, Enterprise Europe Network, eic.ec.europa.eu/faq",
-    "ipucu": "Siber güvenlik doğrudan 2026 Challenges'ta yok; ancak 'dijital teknoloji' kapsamında Open çağrısına başvurulabilir."
-  },
-  "Interreg NWE – Gelecek Çağrı (2026 sonrası, izleme)": {
-    "frist": "Çağrı 6 kapanış tarihi teyit edilmeli; nweurope.eu/call-calendar izlenmeli",
-    "kimler": "NWE bölgesinde faaliyet gösteren firmalar, üniversiteler, STK'lar",
-    "butce": "%60 ERDF; büyük projeler için €800K-€5M arası",
-    "es_finansman": "%40 öz kaynak",
-    "basari_orani": "",
-    "konsorsiyum": "Min. 3 NWE ülkesinden ortak",
-    "hazirlik": "6-12 ay; AĞIR",
-    "sartlar": [
-      "NWE ülkesinde kayıt (Almanya dahil)",
-      "Min. 3 ülkeden ortak",
-      "Proje konu uygunluğu"
-    ],
-    "belgeler": [],
-    "kriterler": "Transnasyonal etki, program önceliklerine uyum",
-    "nasil": "nweurope.eu/calls-for-projects",
-    "kaynaklar": "Interreg NWE Sekretaryası",
-    "ipucu": "Çağrı 5 Ocak 2025'te kapandı; yeni çağrı için bülten aboneliği önerilir."
-  },
-  "DAAD SDG Ortaklık Programı 2026 (Akademik Geliştirme)": {
-    "frist": "Rolling; 2026 bütçesi finansman koşuluna tabi (teyit edilmeli)",
-    "kimler": "Almanya üniversiteleri (başvurucu), yükseköğretim ortakları gelişmekte olan ülkelerde",
-    "butce": "Proje bazlı; bütçeye bağlı",
+  "NIS2 / DORA Uyum Geliştirme – BSI / BMI Desteği": {
+    "frist": "Sürekli; BSI rehber ve araçları her zaman erişilebilir",
+    "kimler": "KMU'lar, firmalar, STK'lar; NIS2 kapsamındaki 'önemli' ve 'temel' kuruluşlar",
+    "butce": "Doğrudan finansman yok; ücretsiz BSI araçları, rehberler ve Grundschutz profilleri",
     "es_finansman": "",
     "basari_orani": "",
-    "konsorsiyum": "Almanya üniversitesi + yabancı ortak",
-    "hazirlik": "3-6 ay; ORTA",
+    "konsorsiyum": "Tekil kuruluş",
+    "hazirlik": "Gap analizi için 1–3 ay; uygulama için 6–12 ay",
     "sartlar": [
-      "Almanya üniversitesi başvurucu",
-      "SDG odaklı proje",
-      "Ortak ülke uygunluğu"
+      "NIS2 kapsam kontrolü (sektör + boyut)",
+      "DORA için finansal sektör kontrolü",
+      "AI Act Haziran 2026+ yüksek riskli AI tespiti"
     ],
     "belgeler": [
-      "Online başvuru (DAAD portalı)",
-      "Proje tanımı",
-      "Ortaklık mektubu"
+      "İç gap analiz raporu",
+      "Güvenlik politikaları ve risk yönetim belgesi",
+      "Olay bildirim prosedürleri",
+      "Tedarik zinciri güvenlik değerlendirmesi"
     ],
-    "kriterler": "SDG katkısı, sürdürülebilirlik, üniversite kapasitesi inşası",
-    "nasil": "daad.de/de/infos-services-fuer-hochschulen/programme-der-projektfoerderung",
-    "kaynaklar": "DAAD Partnerschaftsprogramme, daad.de",
-    "ipucu": "Siber güvenlik kapasitesi + SDG 9 (altyapı/inovasyon) ve SDG 16 (barış/kurumlar) çerçevesinde güçlü proje kurgulanabilir."
+    "kriterler": "NIS2 Madde 21 gereksinimleri; DORA ICT risk management çerçevesi",
+    "nasil": "bsi.bund.de – Grundschutz, IT-Grundschutz-Profile, NIS2 uygulama rehberleri ücretsiz",
+    "kaynaklar": "bsi.bund.de | nis-2-directive.com | digital-operational-resilience-act.com | BSI ICS/KRITIS uzmanları",
+    "ipucu": "NIS2 + ISO27001 örtüşmesi ~%60–70; mevcut ISO27001 sertifikası uyum maliyetini önemli ölçüde düşürür"
   },
-  "Dünya Bankası – Dijital Kalkınma & Siber Güvenlik Programları": {
-    "frist": "Ülke ve proje döngüsüne göre değişir; rolling",
-    "kimler": "Ağırlıklı hükümetler ve kamu kurumları; akademik/sivil kuruluşlar teknik yardımda ortak olabilir",
-    "butce": "Ülke başına milyonlarca USD",
+  "EU AI Act Uyum – DIGITAL Europe / Horizon Cascade": {
+    "frist": "Rolling; Cyber Resilience Act Haziran 2026'dan itibaren aşamalı; AI Act 2026–2027 faz geçişleri",
+    "kimler": "KMU'lar, teknoloji sağlayıcıları, araştırma kuruluşları; AI Act kapsam kontrolü yapılmalı",
+    "butce": "FSTP/cascade çerçevesinde €50.000–€200.000 / KMU; program bazlı değişir",
+    "es_finansman": "DIGITAL cascade'de %25 öz kaynak tipik",
+    "basari_orani": "",
+    "konsorsiyum": "Cascade call'larda tekil başvuru mümkün",
+    "hazirlik": "1–2 ay (cascade); 3–4 ay (ana DIGITAL çağrısı); başvuru yükü HAFIF-ORTA",
+    "sartlar": [
+      "AB'de yerleşik KMU/kuruluş",
+      "Yüksek riskli AI sistemi geliştirme veya dağıtımı",
+      "Teknik dokümantasyon ve insan denetim planı",
+      "Cyber Resilience Act uyum stratejisi"
+    ],
+    "belgeler": [
+      "Cascade başvuru formu",
+      "AI sistem teknik açıklaması",
+      "Risk değerlendirmesi",
+      "Uyum yol haritası"
+    ],
+    "kriterler": "AI Act risk kategorisi, uyum boşluğu analizi, teknik güvenilirlik, AB regülasyon uyumu",
+    "nasil": "ECCC ve DIGITAL Europe cascade hub'ları üzerinden; cybersecurity-centre.europa.eu izlenmeli",
+    "kaynaklar": "digital-strategy.ec.europa.eu | ECCC AI Act rehberleri | BSI AI Act bilgi sayfası",
+    "ipucu": "AI Act + NIS2 + CRA 'üçlü regülasyon' yaklaşımı ile tek bir uyum çerçevesi oluşturmak maliyet ve zaman tasarrufu sağlar"
+  },
+  "Interreg NWE – Dijital ve Güvenli Bölgeler": {
+    "frist": "Sonraki çağrı açılışı için interregnorthwesteurope.eu izlenmeli; teyit edilmeli",
+    "kimler": "KMU'lar, üniversiteler, araştırma kurumları, STK'lar, bölgesel kamu otoriteleri (NRW dahil)",
+    "butce": "Proje başı ortalama €2–5M; %60 ERDF finansmanı",
+    "es_finansman": "%40 eş finansman zorunlu",
+    "basari_orani": "Interreg çağrılarında ~%20–25",
+    "konsorsiyum": "Min. 3 farklı Kuzey-Batı Avrupa ülkesinden ortak zorunlu",
+    "hazirlik": "6–9 ay; başvuru yükü AĞIR",
+    "sartlar": [
+      "NWE bölgesinde yerleşik ortak (DE, NL, BE, FR, UK, IE, LU, CH)",
+      "Min. 3 ülke/3 ortak",
+      "Bölgesel politika etkisi gösterimi",
+      "Eş finansman taahhüdü"
+    ],
+    "belgeler": [
+      "Ortak başvuru formu",
+      "Konsorsiyum anlaşması",
+      "İş planı ve bütçe",
+      "Eş finansman taahhüt mektubu"
+    ],
+    "kriterler": "Bölgesel etki, inovasyon, çevre uyumu, ortaklık kalitesi",
+    "nasil": "nweurope.eu üzerinden; Joint Secretariat'a ön danışmanlık önerilir",
+    "kaynaklar": "nweurope.eu | NRW.EU Avrupa ofisleri | Interreg NWE Joint Secretariat",
+    "ipucu": "Ortak bulmak için Interreg partner-arama araçlarını ve NRW Avrupa ofisini kullanın; Hollanda-Almanya-Belçika üçgeni aktif partnerdir"
+  },
+  "EIC Accelerator Challenges 2026": {
+    "frist": "Tam öneri kesim tarihleri: 7 Oca, 4 Mar, 6 May, 8 Tem, 2 Eyl, 4 Kas 2026; Jüri görüşmeleri Mayıs ve Ekim",
+    "kimler": "Startuplar, KMU'lar, küçük mid-cap'lar (< 500 çalışan); AB veya Horizon ilişkili ülkede kurulu",
+    "butce": "€220M toplam (5 challenge); proje başı €20–50M challenge bütçesinden hibe maks. €2,5M + hisse €1–10M",
+    "es_finansman": "%30 şirket katkısı (hibe bileşeni için); hisse bileşeni EIC Fund",
+    "basari_orani": "EIC geneli <%10; challenge'larda rekabet yüksek",
+    "konsorsiyum": "Tekil başvuru (tek KOBİ/startup)",
+    "hazirlik": "3–4 ay (tam öneri için); başvuru yükü ORTA (20 sayfa)",
+    "sartlar": [
+      "2026 challenge temaları: malzeme, füzyon, biyoteknoloji, kritik hammadde, iklim adaptasyonu",
+      "TRL 6+ tamamlanmış",
+      "Ölçeklendirme potansiyeli",
+      "Siber güvenlik doğrudan tema değil (Open call tercih edilmeli)"
+    ],
+    "belgeler": [
+      "20 sayfalık tam öneri",
+      "Pitch deck",
+      "3 dakika video",
+      "FTO analizi + yatırım mektubu"
+    ],
+    "kriterler": "Excellence / Impact (challenge uyumu) / Risk & Implementation",
+    "nasil": "eic.ec.europa.eu; kısa öneri rolling kabul, tam öneri belirli tarihlerde",
+    "kaynaklar": "EIC NCP | eic.ec.europa.eu | EurA AG (Almanya danışmanlık)",
+    "ipucu": "Siber güvenlik startupları için Challenges değil EIC Accelerator Open çok daha uygun; DIGITAL Europe de paralel değerlendirilebilir"
+  },
+  "EIT Digital Champions – Scaleup Yarışması": {
+    "frist": "12. edisyon 2026; başvuru takvimi için 28digital.eu izlenmeli",
+    "kimler": "Hızlı büyüyen Avrupalı scaleup'lar; dijital derin teknoloji odaklı (siber güvenlik dahil)",
+    "butce": "Doğrudan finansman yok; 1 yıl boyunca ücretsiz fundraising danışmanlığı ve yatırımcı erişimi",
+    "es_finansman": "",
+    "basari_orani": "50 finalist seçiliyor",
+    "konsorsiyum": "Tekil şirket başvurusu",
+    "hazirlik": "2–4 hafta; başvuru yükü HAFIF",
+    "sartlar": [
+      "Avrupa merkezli scaleup",
+      "Farklılaşmış dijital ürün/hizmet",
+      "Büyüme kanıtı (gelir veya kullanıcı metrikleri)",
+      "Uluslararası ölçek hedefi"
+    ],
+    "belgeler": [
+      "Online başvuru formu",
+      "Şirket profili ve büyüme metrikleri",
+      "Ürün/teknoloji özeti"
+    ],
+    "kriterler": "Teknoloji yeniliği, pazar traksiyonu, ölçeklendirme potansiyeli, ekip",
+    "nasil": "28digital.eu üzerinden online başvuru",
+    "kaynaklar": "28digital.eu | EIT Digital Growth Services",
+    "ipucu": "Doğrudan finansman sunmasa da EIT Digital ağı üzerinden seri yatırımcılara ulaşmak için etkili bir platform"
+  },
+  "BMFTR – Wege zur Innovation (AB Hazırlık Desteği)": {
+    "frist": "2026'da bir stichtag öngörülmüş; sifo.de sitesinde yayımlanacak (teyit edilmeli)",
+    "kimler": "Almanya'da yerleşik tüm kuruluşlar (KMU, üniversite, araştırma, STK) – Cluster 3 başvurusu hazırlayanlar (siber güvenlik hariç Cluster 3 konuları)",
+    "butce": "Maks. €100.000 / proje; 9–12 ay süre",
+    "es_finansman": "Teyit edilmeli",
+    "basari_orani": "",
+    "konsorsiyum": "Tekil başvuru mümkün; ağ oluşturma destekleniyor",
+    "hazirlik": "1–2 ay; başvuru yükü HAFIF",
+    "sartlar": [
+      "NKS Sicherheitsforschung ön danışmanlığı zorunlu",
+      "Hedeflenen EU çağrısı tanımlanmış olmalı",
+      "2026 veya 2027 Cluster 3 çağrısına yönelik olmalı",
+      "easy-online üzerinden başvuru"
+    ],
+    "belgeler": [
+      "Resmi başvuru formu (easy-online)",
+      "EU çağrısına yönelik proje tanımı",
+      "Bütçe ve takvim",
+      "NKS danışmanlık notu"
+    ],
+    "kriterler": "EU başvurusu hazırlık kalitesi, konsorsiyum oluşturma planı, teknik alaka",
+    "nasil": "easy-online.de üzerinden; önce sifo.de üzerinden NKS ile iletişime geçin",
+    "kaynaklar": "sifo.de (NKS Sicherheitsforschung) | vdivde-it.de | bmftr.bund.de",
+    "ipucu": "Cluster 3 siber güvenlik çağrılarına hazırlanmak için bu destek ECCC/Horizon başvurusuyla paralel kullanılabilir; düşük bütçe, yüksek stratejik değer"
+  },
+  "World Bank – Dijital Kalkınma / Siber Güvenlik Projeleri": {
+    "frist": "Rolling; ülke programlarına ve proje döngülerine göre değişir",
+    "kimler": "Kamu kurumları lider ortak; araştırma kurumları ve özel sektör alt yüklenici veya teknik ortak olabilir",
+    "butce": "$1M–$100M+ ülkeye göre; siber güvenlik kapasitesi için genellikle $5–30M",
+    "es_finansman": "Ülke hükümeti katkısı genellikle %20–50",
+    "basari_orani": "",
+    "konsorsiyum": "Hükümet liderliği zorunlu; özel sektör teknik ortak rolünde",
+    "hazirlik": "6–18 ay (proje hazırlık döngüsü); başvuru yükü AĞIR",
+    "sartlar": [
+      "Dünya Bankası üyesi ülke hükümeti ortaklığı",
+      "Ulusal siber güvenlik strateji uyumu",
+      "Procurement kuralları (SWIFT procurement)"
+    ],
+    "belgeler": [
+      "Ülke ortaklık çerçeve belgesi",
+      "Proje değerlendirme raporu",
+      "Çevresel/sosyal değerlendirme"
+    ],
+    "kriterler": "Kalkınma etkisi, sürdürülebilirlik, teknik fizibilite, hükümet taahhüdü",
+    "nasil": "worldbank.org üzerinden ülke ofisi ile iletişim; Almanya/AB merkezli projeler için Dünya Bankası Brüksel ofisi",
+    "kaynaklar": "worldbank.org/en/topic/digitaldevelopment | WB Almanya ofisi",
+    "ipucu": "Araştırma kurumları ve üniversiteler için Dünya Bankası projelerinde teknik danışman/alt yüklenici rolü en erişilebilir katılım yolu"
+  },
+  "OECD – Dijital Güvenlik Politikası ve Analiz": {
+    "frist": "Rolling; politika analizi döngüleri yıllık",
+    "kimler": "Kamu kurumları ve akademik araştırmacılar; STK'lar danışma kapasitesinde",
+    "butce": "Doğrudan hibe yok; analitik işbirliği çerçevesi",
     "es_finansman": "",
     "basari_orani": "",
-    "konsorsiyum": "Proje tasarımına göre; çoğu hükümet liderliğinde",
-    "hazirlik": "Uzun; AĞIR",
+    "konsorsiyum": "Tekil kurum veya çok taraflı politika ağı",
+    "hazirlik": "OECD üyelik veya ilişkilendirme yoluyla; başvuru yükü değişken",
     "sartlar": [
-      "Dünya Bankası üye ülkesi hükümeti veya teknik ortak pozisyonu",
-      "Kalkınma odaklı siber güvenlik projesi"
+      "OECD üyesi ülkede kuruluş (Almanya dahil)",
+      "Politika araştırması veya veri katkısı kapasitesi"
     ],
     "belgeler": [],
-    "kriterler": "Kalkınma etkisi, sürdürülebilirlik, hükümet taahhüdü",
-    "nasil": "worldbank.org/en/topic/digitaldevelopment",
-    "kaynaklar": "World Bank (worldbank.org)",
-    "ipucu": "Araştırma kuruluşları ve üniversiteler teknik yardım bileşenlerinde alt yüklenici veya danışman olarak yer alabilir."
+    "kriterler": "Politika relevansı, metodoloji kalitesi, uluslararası karşılaştırmalı analiz",
+    "nasil": "oecd.org/en/topics/digital-security.html üzerinden ilgili birim ile iletişim",
+    "kaynaklar": "OECD Digital Security Unit | oecd.org/digital",
+    "ipucu": "Doğrudan fon sunmaz; ancak OECD araştırma ortaklığı akademik prestij ve politika etkisi açısından değerlidir"
   },
-  "OECD – Dijital Güvenlik ve GRC Politika Projeleri": {
-    "frist": "Rolling; üye devlet katkı döngülerine bağlı",
-    "kimler": "Ağırlıklı OECD üyesi hükümetler; akademisyenler uzman danışman olarak katılabilir",
-    "butce": "Üye devlet katkısı; araştırmacı bazlı",
+  "Interreg Avrupa – Dijital ve Yenilik Bölgesel Politika": {
+    "frist": "4. çağrı dönemi: teyit edilmeli; interregeurope.eu izlenmeli",
+    "kimler": "Bölgesel ve yerel kamu otoriteleri, üniversiteler, araştırma kurumları, kalkınma ajansları, STK'lar",
+    "butce": "Proje başı €0.5–5M; %75 ERDF; düşük bütçeli projeler de kabul",
+    "es_finansman": "%25 eş finansman zorunlu",
+    "basari_orani": "~%20–25",
+    "konsorsiyum": "Min. 3 farklı AB ülkesinden ortak; lead partner modeli",
+    "hazirlik": "4–6 ay; başvuru yükü ORTA",
+    "sartlar": [
+      "AB'de bölgesel/yerel otorite veya kurum",
+      "Min. 3 ülke/3 ortak",
+      "Bölgesel politika öğrenme odağı",
+      "Eş finansman taahhüdü"
+    ],
+    "belgeler": [
+      "Proje başvuru formu",
+      "Ortaklık anlaşması",
+      "Bütçe tablosu",
+      "Politika bağlamı analizi"
+    ],
+    "kriterler": "Politika öğrenme değeri, ortak profili, bölgesel uygulama potansiyeli, yayılım",
+    "nasil": "interregeurope.eu üzerinden online başvuru sistemi",
+    "kaynaklar": "Interreg Europe Joint Secretariat (Lille) | NRW Avrupa ofisleri | euregiosüz.eu",
+    "ipucu": "Siber güvenlik politikası ve dijital dönüşüm konuları 2021-2027 döneminde ön planda; NRW gibi güçlü bölgeler lead partner olarak başarılı"
+  },
+  "EDIH NRW – Dijital İnovasyon Merkezi Hizmetleri": {
+    "frist": "Rolling; hizmet başvuruları sürekli kabul edilmektedir",
+    "kimler": "NRW'deki KMU'lar; öncelikli olarak dijitalleşmesini hızlandırmak isteyen orta ölçekli firmalar",
+    "butce": "Test ve danışmanlık hizmetleri ücretsiz veya düşük maliyetli; finansman yönlendirmesi dahil",
     "es_finansman": "",
     "basari_orani": "",
-    "konsorsiyum": "Hükümet liderliğinde; akademik ortak mümkün",
-    "hazirlik": "Uzun; politika araştırması odaklı",
+    "konsorsiyum": "Tekil KMU başvurusu",
+    "hazirlik": "1–2 hafta; başvuru yükü HAFIF",
     "sartlar": [
-      "OECD üye ülkesi veya gözlemci ülke bağlantısı",
-      "Dijital güvenlik/GRC politika uzmanlığı"
+      "NRW'de yerleşik KMU statüsü",
+      "Dijital dönüşüm veya siber güvenlik ihtiyacı",
+      "Projenin 'test before invest' kapsamında olması"
     ],
-    "belgeler": [],
-    "kriterler": "Politika uygunluğu, araştırma kalitesi",
-    "nasil": "oecd.org/digital/security",
-    "kaynaklar": "OECD (oecd.org), OECD.AI platform",
-    "ipucu": "OECD AI Principles ve GRC çerçeveleri üzerine araştırma yapan akademisyenler için uzman çağrıları düzenli yayınlanır."
+    "belgeler": [
+      "EDIH'e iletişim formu",
+      "Şirket profili ve ihtiyaç tanımı"
+    ],
+    "kriterler": "KMU ihtiyacı, uygulama potansiyeli, dijital hazırlık seviyesi",
+    "nasil": "NRW EDIH'leri ile doğrudan iletişim; digital-strategy.ec.europa.eu/en/activities/edih harita üzerinden en yakın merkez",
+    "kaynaklar": "Digital Hub Initiative NRW | Mittelstand-Digital Zentren | IHK dijital danışmanlık",
+    "ipucu": "EDIH ücretsiz siber güvenlik olgunluk değerlendirmesi (maturity assessment) sunuyor; bu değerlendirme ZIM/BMBF başvurularında güçlü referans belgesi olur"
   }
 };
 
