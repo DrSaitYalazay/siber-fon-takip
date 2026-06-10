@@ -129,6 +129,7 @@
   </select>
   <label class="toggle"><input type="checkbox" id="hidePublic" checked> Kamu-only olanları gizle</label>
   <label class="toggle"><input type="checkbox" id="favOnly"> ⭐ Sadece favorilerim</label>
+  <button class="btn-sum" onclick="filterCat('Kredi / Finansman')" title="Sadece kredi/finansman fırsatları">💶 Krediler</button>
   <button class="btn-sum" onclick="speakAll()" title="Görünen fırsatları sesli oku">🔊 Tümünü Oku</button>
   <button class="btn-sum" onclick="stopSpeak()" title="Okumayı durdur">⏹ Durdur</button>
 </div>
@@ -145,7 +146,7 @@
 <footer>
   <b>Başvuru hakkı:</b> Yeşil etiketler bireysel / firma-KOBİ / dernek-vakıf / üniversite-araştırma başvurabildiğini gösterir. "Kamu-only" işaretli kayıtlar yalnızca kamu kurumları/ulusal otoriteler içindir ve varsayılan gizlidir.
   Durum etiketleri bugünün tarihine göre otomatik hesaplanır. Rakam/son tarihler resmi portallardan derlenmiştir; başvurmadan önce teyit edin.
-  Kaynaklar: EU Funding &amp; Tenders Portal, ECCC, EIC, BMBF, Gründungsstipendium.NRW, secure4sme.eu, DIGITAL SME Alliance, EU Cybersecurity Skills Academy, World Bank, OECD.
+  Kaynaklar: <a href="https://www.foerderdatenbank.de/FDB/DE/Foerderprogramme/foerderprogramme.html" target="_blank" rel="noopener" style="color:var(--accent)">Förderdatenbank des Bundes (BMWK)</a>, EU Funding &amp; Tenders Portal, ECCC, EIC, BMBF, Gründungsstipendium.NRW, secure4sme.eu, DIGITAL SME Alliance, EU Cybersecurity Skills Academy, World Bank, OECD.
 </footer>
 
 <script>
@@ -229,25 +230,25 @@ const DATA = [
    cat:"Eğitim & araştırma", region:"Almanya", budget:"Proje fonu", deadline:"2026-11-30",
    elig:["Üniversite/Araştırma","Firma/KOBİ"], publicOnly:false,
    desc:"Kuantum iletişiminin transferi ve ağ entegrasyonu yönergesi. Proje taslağı son tarihi 30 Kasım 2026.",
-   url:"https://www.forschung-it-sicherheit-kommunikationssysteme.de/foerderung/bekanntmachungen"},
+   url:"https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"},
 
   {title:"BSI — 5G/6G Siber Güvenlik & Dijital Egemenlik (KoPa45)", org:"BSI (BMI adına)",
    cat:"Almanya & NRW desteği", region:"Almanya", budget:"AR-GE proje fonu", deadline:"rolling",
    elig:["Firma/KOBİ","Üniversite/Araştırma"], publicOnly:false,
    desc:"5G/6G iletişim teknolojilerinde dijital egemenlik ve siber güvenlik için araştırma & geliştirme projeleri.",
-   url:"https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/5-G/KoPa45/Cyber-Sicherheit-digitale-Souveraenitaet-5G-6G_node.html"},
+   url:"https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"},
 
   {title:"BMBF — IT-Sicherheit in der Wirtschaft", org:"BMBF / foerderinfo.bund.de",
    cat:"Almanya & NRW desteği", region:"Almanya", budget:"Forschungsrahmenprogramm (≥€350M'e kadar)", deadline:"rolling",
    elig:["Firma/KOBİ","Üniversite/Araştırma"], publicOnly:false,
    desc:"Cybersecurity-Transferstelle ve odak projeleri; KOBİ'ler için IT güvenliği transferi. Yeni taslak dönemleri periyodik açılıyor.",
-   url:"https://www.forschung-it-sicherheit-kommunikationssysteme.de/foerderung/bekanntmachungen"},
+   url:"https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"},
 
   {title:"Cyberagentur — Robust & Secure Machine Learning (RSML)", org:"Agentur für Innovation in der Cybersicherheit",
    cat:"Eğitim & araştırma", region:"Almanya", budget:"Faz 4 (devam eden)", deadline:"rolling",
    elig:["Üniversite/Araştırma","Firma/KOBİ"], publicOnly:false,
    desc:"AI sistemlerinin eğitim sürecini manipülasyona karşı güvenli kılan araştırma programı. Gelecek çağrılar için ajansı takip edin.",
-   url:"https://www.research-in-germany.org/idw-news/en_US/2026/1/2026-01-26_AI_training_under_fire___Cyberagentur_focuses_on_defence_strategy.html"},
+   url:"https://www.cyberagentur.de/programme/rsml/"},
 
   {title:"EDIH / DAISEC — AI & Siber Güvenlik Dijital İnovasyon Hub", org:"European Digital Innovation Hub",
    cat:"Eğitim & araştırma", region:"AB / Almanya", budget:"EDIH dönemi 2026–2028", deadline:"rolling",
@@ -301,7 +302,67 @@ const DATA = [
    cat:"AB fon çağrısı", region:"AB", budget:"Değişken", deadline:"rolling",
    elig:["Firma/KOBİ","Üniversite/Araştırma","Dernek/Vakıf","Birey (startup kurucu)"], publicOnly:false,
    desc:"Tüm AB fon çağrılarının merkezi portalı. 'cybersecurity', 'data protection', 'NIS2', 'AI' filtreleriyle yeni çağrıları düzenli tarayın. Başvuran tipini portalda filtreleyin.",
-   url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals"}
+   url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals"},
+
+  {title:"Förderdatenbank des Bundes (BMWK) — Resmi Fon Veritabanı", org:"Bundesministerium für Wirtschaft (BMWK)",
+   cat:"Almanya & NRW desteği", region:"Almanya", budget:"Tüm federal/eyalet/AB programları", deadline:"rolling",
+   elig:["Firma/KOBİ","Üniversite/Araştırma","Dernek/Vakıf","Birey (startup kurucu)"], publicOnly:false,
+   desc:"Almanya Ekonomi Bakanlığı'nın resmi fon veritabanı: federal, eyalet (NRW dahil) ve AB programlarının tamamı burada yayınlanır. 'Cybersicherheit', 'IT-Sicherheit', 'Digitalisierung' anahtar kelimeleriyle filtreleyin.",
+   url:"https://www.foerderdatenbank.de/FDB/DE/Foerderprogramme/foerderprogramme.html"},
+
+  {title:"Smart Cities Modellprojekte (BMWSB / KfW – 436)", org:"BMWSB & KfW Bankengruppe",
+   cat:"Kommunal / Belediye", region:"Almanya", budget:"%65 hibe (mali sıkıntıda %90); ≤€2,5M strateji + ≤€15M uygulama", deadline:"rolling",
+   elig:["Kommune (başvuran)","Firma (tedarikçi/ortak)"], publicOnly:false,
+   desc:"Belediyelerin akıllı şehir / dijitalleşme stratejileri (siber güvenlik dahil) için hibe. Başvuran belediyedir; yılda bir proje çağrısı (Projektaufruf) açılır. Şu an başvuru kapalı, yeni tur bekleniyor. Sen hizmet sağlayıcı/ortak olarak ihale yoluyla dahil olabilirsin.",
+   url:"https://www.foerderdatenbank.de/FDB/Content/DE/Foerderprogramm/Bund/KfW/smart-cities-entwicklung-digitalisierung.html"},
+
+  {title:"BSI – Allianz für Cybersicherheit & Kommunen Eğitimleri", org:"Bundesamt für Sicherheit in der Informationstechnik (BSI)",
+   cat:"Kommunal / Belediye", region:"Almanya", budget:"Ücretsiz eğitim/danışmanlık + uzman aracılığı (hibe değil)", deadline:"rolling",
+   elig:["Kommune","Firma (eğitim sağlayıcı)","Üniversite/Araştırma"], publicOnly:false,
+   desc:"BSI, belediye personeline yönelik IT-Grundschutz-Praktiker eğitimleri (eyalet İçişleri bakanlıklarıyla birlikte) sunar ve uzman aracılığı yapar. Eğitim sağlayıcılar BSI müfredatıyla bu eğitimleri verebilir — belediye personeli siber farkındalık projesi için doğal giriş noktası.",
+   url:"https://www.allianz-fuer-cybersicherheit.de/"},
+
+  {title:"Kamu İhaleleri – Belediye Eğitim/Hizmet Çağrıları (Vergabe)", org:"service.bund.de · Vergabe.NRW · TED (EU)",
+   cat:"Kommunal / Belediye", region:"Almanya / AB", budget:"İhale/sözleşme bedeli", deadline:"rolling",
+   elig:["Firma (tedarikçi)","Dernek/Vakıf"], publicOnly:false,
+   desc:"Belediyeler 'personel siber eğitimi' gibi hizmetleri İHALE ile satın alır. Tedarikçi olarak teklif vereceğin yerler: service.bund.de (federal), NRW için Vergabe.NRW / Vergabemarktplatz, AB eşik üstü için TED. 'IT-Sicherheit Schulung Kommune' araması yap.",
+   url:"https://www.service.bund.de/"},
+
+  {title:"MID-Digitale Sicherheit NRW", org:"NRW.BANK / Wirtschaftsministerium NRW",
+   cat:"Almanya & NRW desteği", region:"NRW", budget:"%50 eş finansman · €4.000–15.000", deadline:"rolling",
+   elig:["Firma/KOBİ","Birey (startup kurucu)"], publicOnly:false,
+   desc:"NRW'deki KOBİ'lerin KENDİ personeli için siber farkındalık eğitimi, pentest/IST-analizi ve temel güvenlik yazılım/donanımı masraflarına hibe. 2026'dan beri NRW.BANK yürütüyor; aylık kura (Losverfahren) ile dağıtılır. (Belediye için değil, kendi firman için.)",
+   url:"https://www.digital-sicher.nrw/infomaterial/foerdermoeglichkeiten/foerdergeld-fuer-ihre-digitale-sicherheit"},
+
+  {title:"KfW ERP-Gründerkredit – StartGeld (067)", org:"KfW Bankengruppe",
+   cat:"Kredi / Finansman", region:"Almanya", budget:"≤€200.000 (≤€80k işletme) · %100 finansman", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"Yeni kurulanlar (≤5 yıl) için uygun faizli kurucu kredisi. 10 yıla kadar vade, 2 yıla kadar GERİ ÖDEMESİZ (tilgungsfrei) başlangıç. Özsermaye şartı yok; banka %80 sorumluluktan muaf. Aralık 2025'ten beri limit €200k.",
+   url:"https://www.kfw.de/inlandsfoerderung/Unternehmen/Gr%C3%BCnden-Nachfolgen/F%C3%B6rderprodukte/ERP-Gr%C3%BCnderkredit-Startgeld-(067)/"},
+
+  {title:"KfW ERP-Kapital für Gründung (058)", org:"KfW Bankengruppe",
+   cat:"Kredi / Finansman", region:"Almanya", budget:"≤€500.000 · sermaye benzeri ikincil kredi (Nachrangdarlehen)", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"En cazip geri ödeme: 15 yıl vade, İLK 7 YIL GERİ ÖDEMESİZ. Piyasada <3 yıl olan kurucular. %10–15 öz katkı gerekir. Özsermaye gibi sayıldığından başka kredilere kaldıraç olur; banka %100 sorumluluktan muaf.",
+   url:"https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-(Inlandsf%C3%B6rderung)/PDF-Dokumente/6000000213_M_058_ERP_Kapital_Gruendung.pdf"},
+
+  {title:"NRW/EU.Mikrodarlehen", org:"NRW.BANK",
+   cat:"Kredi / Finansman", region:"NRW", budget:"≤€50.000 · faiz ~%4,59 · teminat/öz sermaye yok", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"NRW'de kuruluş/büyüme için mikro kredi. 10 yıl vade, 6 ay geri ödemesiz. Teminat ve öz sermaye gerekmez — sınırlı kaynağı olan kurucular için ideal. Faiz %4,59'a indirildi.",
+   url:"https://www.nrwbank.de/de/foerderung/foerderprodukte/15262/nrwmikrodarlehen.html"},
+
+  {title:"NRW.BANK.Gründung und Wachstum", org:"NRW.BANK",
+   cat:"Kredi / Finansman", region:"NRW", budget:"≤€10 milyon · uygun faiz + geri ödemesiz başlangıç", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"NRW'deki kurucular, serbest meslek ve KOBİ'ler için uygun faizli yatırım/işletme kredisi; geri ödemesiz (tilgungsfrei) başlangıç ay/yılları. İlk 5 yıl içindeki firmalar için elverişli.",
+   url:"https://www.nrwbank.de/de/foerderung/foerderprodukte/60100/nrwbank-gruendung-und-wachstum.html"},
+
+  {title:"KfW ERP-Förderkredit Digitalisierung (511/512)", org:"KfW Bankengruppe",
+   cat:"Kredi / Finansman", region:"Almanya", budget:"Uygun faizli kredi + ERP faiz indirimi/zuschuss", deadline:"rolling",
+   elig:["Firma/KOBİ","Birey (startup kurucu)"], publicOnly:false,
+   desc:"Dijitalleşme (yazılım/donanım, AI, siber güvenlik) yatırımları VE işletme masrafları için uygun faizli kredi. Proje ne kadar yenilikçi/büyükse faiz indirimi ve ERP zuschuss o kadar artar. Siber güvenlik startup'ı için birebir.",
+   url:"https://www.kfw.de/inlandsfoerderung/Unternehmen/Innovation-und-Digitalisierung/F%C3%B6rderprodukte/ERP-F%C3%B6rderkredit-Digitalisierung-(511-512)/"}
 ];
 
 DATA.forEach((d,i)=>d._i=i);
@@ -506,7 +567,107 @@ const SUM = {
  butce:"Programa göre değişken.",
  sartlar:["EU Login + PIC numarası","İlgili çağrı dokümanları (call document, work programme)","Başvuran uygunluğunu her çağrıda ayrı kontrol"],
  nasil:"ec.europa.eu Funding & Tenders Portal arama + filtre.",
- ipucu:"'cybersecurity', 'NIS2', 'AI', 'data protection' anahtar kelimeleriyle kayıtlı arama (saved search) kurup e-posta uyarısı açın."}
+ ipucu:"'cybersecurity', 'NIS2', 'AI', 'data protection' anahtar kelimeleriyle kayıtlı arama (saved search) kurup e-posta uyarısı açın."},
+
+"Förderdatenbank des Bundes (BMWK) — Resmi Fon Veritabanı":{
+ frist:"Sürekli güncellenir; her programın kendi son tarihi vardır.",
+ kimler:"Programa göre: firma/KOBİ, üniversite, dernek/vakıf, bireysel kurucular.",
+ butce:"Tüm Almanya (federal + eyalet) ve AB programları tek yerde.",
+ es_finansman:"Programa göre değişir; her programın detay sayfasında belirtilir.",
+ konsorsiyum:"Programa göre; çoğu ulusal destekte tekil başvuru mümkün.",
+ sartlar:["Almanya'da yerleşik olmak (çoğu program)","Programın konu/bölge filtresine uyma","İlgili Projektträger'e başvuru"],
+ belgeler:["Proje taslağı/İş planı","Finansman planı"],
+ nasil:"foerderdatenbank.de → 'Förderprogramme' → konu/bölge (NRW)/başvuran tipine göre filtrele.",
+ kaynaklar:"BMWK Förderberatung (ücretsiz danışma hattı), IHK/Handwerkskammer danışmanları.",
+ ipucu:"'Cybersicherheit', 'IT-Sicherheit', 'Digitalisierung' ve bölge olarak 'Nordrhein-Westfalen' filtreleyin; en kapsamlı resmi kaynak budur."},
+
+"Smart Cities Modellprojekte (BMWSB / KfW – 436)":{
+ frist:"Yılda bir 'Projektaufruf'; şu an başvuru kapalı, yeni tur duyurusu beklenmeli.",
+ kimler:"Başvuran: belediyeler (Kommune), belediye birlikleri, belediyelerarası işbirlikleri. Sen: hizmet sağlayıcı/alt-yüklenici olarak.",
+ butce:"%65 hibe (mali sıkıntıdaki belediyelerde %90). Faz A ≤€2,5M (strateji), Faz B ≤€15M (uygulama).",
+ es_finansman:"Belediye %35 (veya %10) öz katkı koyar.",
+ konsorsiyum:"Belediyelerarası işbirliği teşvik edilir; uygulamada özel sektör tedarikçi olarak yer alır.",
+ sartlar:["Smart City Charta ilkelerine uyum","Şehir/belediye meclisi kararı","2 faz: strateji (A) → uygulama (B)","Deneyim paylaşımına katılım"],
+ belgeler:["Smart City stratejisi/konsept","Meclis kararı","Bütçe planı"],
+ nasil:"KfW üzerinden online proje çağrısında başvuru (belediye yapar).",
+ kaynaklar:"KfW (436) danışma hattı, BBSR Smart Cities ekibi.",
+ ipucu:"Bir belediyeyle erken temasa geç; çağrı açıldığında sen onların 'siber eğitim/güvenlik' iş paketinin tedarikçisi olarak konumlanabilirsin."},
+
+"BSI – Allianz für Cybersicherheit & Kommunen Eğitimleri":{
+ frist:"Sürekli; eğitim tarihleri dönemsel ilan edilir.",
+ kimler:"Belediye personeli (katılımcı); eğitim sağlayıcılar (BSI müfredatıyla); BSI ortakları.",
+ butce:"Genelde ücretsiz/sübvansiyeli — doğrudan hibe değil, eğitim+danışmanlık+uzman aracılığı.",
+ sartlar:["BSI IT-Grundschutz müfredatına uyum","Allianz für Cybersicherheit üyeliği/ortaklığı (sağlayıcı için)","Kamu yönetimi hedef kitlesi"],
+ nasil:"allianz-fuer-cybersicherheit.de üzerinden ortak/multiplikator ol; eyalet İçişleri (IM NRW) ile irtibat.",
+ kaynaklar:"BSI, eyalet CISO/İçişleri bakanlıkları, NKCS (Nationale Koordinierungsstelle).",
+ ipucu:"BSI 'IT-Grundschutz-Praktiker' müfredatına göre eğitim verirsen belediyeler için güvenilir/akredite sağlayıcı olursun. Projen için en somut yol bu."},
+
+"Kamu İhaleleri – Belediye Eğitim/Hizmet Çağrıları (Vergabe)":{
+ frist:"Sürekli — ihaleler yıl boyu yayınlanır.",
+ kimler:"Firma/tedarikçi, dernek/vakıf (hizmet sunan herkes).",
+ butce:"Sözleşme bedeli; AB eşiği üstü ihaleler TED'de yayınlanır.",
+ sartlar:["İlgili hizmette referans/yeterlilik","eVergabe platformlarına kayıt","Teklif dosyası (teknik+mali)"],
+ nasil:"service.bund.de (federal), NRW için vergabe.nrw / Vergabemarktplatz NRW, AB için ted.europa.eu. 'IT-Sicherheit Schulung / Sensibilisierung Kommune' ara.",
+ kaynaklar:"Auftragsberatungsstellen (ABSt NRW), IHK ihale danışmanlığı.",
+ ipucu:"Bu, belediye personeli siber eğitimi projeni HEMEN gerçekleştirebileceğin en doğrudan yol: hibe beklemeden, belediyenin açtığı ihaleye teklif verirsin."},
+
+"MID-Digitale Sicherheit NRW":{
+ frist:"Sürekli; aylık kura (Losverfahren) ile dağıtılır.",
+ kimler:"NRW'de yerleşik KOBİ/Kleinst işletmeler ve uygun startup'lar (kendi firman).",
+ butce:"%50 eş finansman; €4.000–15.000 (net).",
+ es_finansman:"Masrafların %50'sini sen karşılarsın (önce öde, sonra geri al).",
+ sartlar:["Firma merkezi NRW'de","Önlemler NRW'de uygulanmalı","3 odak: IST-analizi (pentest), Faktör İnsan (eğitim), temel güvenlik yazılım/donanımı"],
+ nasil:"NRW.BANK kundenportal üzerinden kayıt → aylık kura.",
+ kaynaklar:"digital-sicher.nrw, NRW.BANK Förderberatung.",
+ ipucu:"Kendi şirketinin personelini eğitmek/pentest yaptırmak için; belediye projesi DEĞİL ama domeninle birebir örtüşüyor."},
+
+"KfW ERP-Gründerkredit – StartGeld (067)":{
+ frist:"Sürekli; her zaman başvurulabilir.",
+ kimler:"Bireysel kurucular, serbest meslek, kuruluştan sonra ilk 5 yıldaki KOBİ'ler.",
+ butce:"≤€200.000 (en fazla €80k işletme sermayesi). %100 finansman.",
+ es_finansman:"Öz sermaye şart değil (önemli avantaj).",
+ hazirlik:"Orta — banka/Sparkasse üzerinden başvuru; iş planı gerekir. Erken başla.",
+ sartlar:["Almanya'da kuruluş/faaliyet","İş planı + finansman planı","Hausbank (kendi bankan) üzerinden başvuru"],
+ nasil:"Kendi bankan/Sparkasse'ne git → onlar KfW'ye iletir (Hausbankprinzip). Başvuruyu yatırımdan ÖNCE yap.",
+ ipucu:"Banka %80 sorumluluktan muaf olduğu için onay şansı yüksek. Bankayla görüşmeden önce net bir iş planıyla git."},
+
+"KfW ERP-Kapital für Gründung (058)":{
+ frist:"Sürekli.",
+ kimler:"Piyasada <3 yıl olan kurucular/serbest meslek; KOBİ kriterleri.",
+ butce:"≤€500.000. 15 yıl vade, ilk 7 yıl tamamen geri ödemesiz; ilk 10 yıl sabit düşük faiz.",
+ es_finansman:"En az %10 (yeni eyaletler/Berlin) veya %15 (eski eyaletler) öz katkı.",
+ hazirlik:"Orta-ağır — sermaye benzeri kredi, iyi bir plan ister.",
+ sartlar:["<3 yıl faaliyet","Asıl meslek olarak yürütme","%10–15 öz katkı","Hausbank üzerinden"],
+ nasil:"Hausbank üzerinden KfW'ye. Nachrangdarlehen olduğu için teminat istenmez.",
+ ipucu:"Bu kredi öz sermaye gibi sayılır → üstüne başka kredi/StartGeld eklersen toplam finansman büyür. Geri ödemesiz 7 yıl nakit akışını çok rahatlatır."},
+
+"NRW/EU.Mikrodarlehen":{
+ frist:"Sürekli.",
+ kimler:"NRW'de kuruluş/küçük işletme; sınırlı sermayeli kurucular.",
+ butce:"≤€50.000. 10 yıl vade, 6 ay geri ödemesiz. Faiz ~%4,59.",
+ es_finansman:"Öz sermaye/teminat gerekmez.",
+ hazirlik:"Hafif — mikro kredi, başvuru görece basit.",
+ sartlar:["NRW'de yerleşik","Kuruluş veya büyüme amacı","Kısa iş planı"],
+ nasil:"NRW.BANK / aracı danışma merkezleri (STARTERCENTER, Mikrofinanzinstitut) üzerinden.",
+ ipucu:"Küçük başlangıç sermayesi için en hızlı ve teminatsız yol. Daha büyük ihtiyaç varsa StartGeld ile birleştir."},
+
+"NRW.BANK.Gründung und Wachstum":{
+ frist:"Sürekli.",
+ kimler:"NRW'deki kurucular, serbest meslek, KOBİ'ler.",
+ butce:"≤€10 milyon. Uygun faiz + geri ödemesiz başlangıç ay/yılları.",
+ hazirlik:"Orta — Hausbank üzerinden, yatırım planı gerekir.",
+ sartlar:["NRW'de faaliyet","Yatırım/işletme finansmanı amacı","Hausbank üzerinden"],
+ nasil:"Kendi bankan üzerinden NRW.BANK'a iletilir.",
+ ipucu:"Büyüme aşaması için; StartGeld limitini aşan yatırımlarda buna geç."},
+
+"KfW ERP-Förderkredit Digitalisierung (511/512)":{
+ frist:"Sürekli.",
+ kimler:"Serbest meslek, KOBİ ve ≤€500M ciro orta ölçekli firmalar.",
+ butce:"Uygun faizli kredi; karmaşıklığa göre artan ERP faiz indirimi + zuschuss.",
+ hazirlik:"Orta — dijitalleşme/inovasyon planı.",
+ sartlar:["Dijitalleşme/inovasyon yatırımı (siber güvenlik dahil)","Hausbank üzerinden","Yatırım ÖNCESİ başvuru"],
+ nasil:"Hausbank → KfW. Yatırıma başlamadan önce başvur.",
+ ipucu:"Siber güvenlik/AI ürünü geliştiriyorsan 'Innovation' seviyesinden gir — faiz avantajı en yüksek olur."}
 };
 
 function statusOf(d){
@@ -610,6 +771,15 @@ function speakAll(){
 function setKpi(m){ kpiMode = (kpiMode===m && m!=='all') ? 'all' : m;
   // KPI ile durum chip'leri çakışmasın diye durum chip'ini sıfırla
   activeStatus=''; [...stWrap.children].forEach((x,i)=>x.classList.toggle('active',i===0));
+  render();
+}
+
+// "💶 Krediler" butonu: doğrudan bir kategoriye atla
+function filterCat(c){
+  activeCat = (activeCat===c) ? '' : c;   // tekrar basınca kapat
+  kpiMode='all'; activeStatus='';
+  [...catWrap.children].forEach(x=>x.classList.toggle('active', activeCat? x.textContent===c : x.textContent==='Tüm kategoriler'));
+  [...stWrap.children].forEach((x,i)=>x.classList.toggle('active',i===0));
   render();
 }
 
