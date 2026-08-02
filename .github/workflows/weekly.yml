@@ -61,8 +61,4 @@ jobs:
           to: ${{ secrets.MAIL_TO }}
           cc: ${{ secrets.MAIL_CC }}
           from: Fon Takip Bot <${{ secrets.MAIL_USERNAME }}>
-          html_body: |
-            <h2>🛡️ Siber Güvenlik & Fon Fırsatları — Haftalık Güncelleme</h2>
-            <p>Panon güncellendi. Canlı pano linkinden tüm fırsatları görebilirsin:</p>
-            <p><a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">Canlı Panoyu Aç →</a></p>
-            <p style="color:#888;font-size:12px">Bu e-posta GitHub Actions tarafından otomatik gönderildi.</p>
+          html_body: file://email_body.html
