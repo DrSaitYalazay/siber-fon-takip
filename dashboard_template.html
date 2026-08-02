@@ -87,6 +87,28 @@
     font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:9px}
   .m-cta:hover{background:#2f6fd6}
   .m-note{font-size:11.5px;color:var(--muted);margin-top:14px;font-style:italic}
+  .fav{background:none;border:none;cursor:pointer;font-size:18px;line-height:1;color:#5b6573;padding:0 2px}
+  .fav.on{color:#fbbf24}
+  .status-sel{font-size:12px;padding:5px 8px;border-radius:8px}
+  .b-durum{background:rgba(34,211,238,.14);color:var(--accent2)}
+  .b-plan{background:rgba(245,158,11,.15);color:var(--amber)}
+  .b-applied{background:rgba(59,130,246,.16);color:#7eb3ff}
+  .b-won{background:rgba(34,197,94,.18);color:var(--green)}
+  .m-notes{width:100%;min-height:64px;background:var(--panel2);border:1px solid var(--border);
+    color:var(--text);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:vertical}
+  .m-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+  @media print{
+    body{padding:0;max-width:100%}
+    body *{visibility:hidden}
+    #overlay,#overlay *{visibility:visible}
+    #overlay{position:absolute;inset:0;background:#fff;display:block!important;padding:0;backdrop-filter:none}
+    .modal{box-shadow:none;border:none;max-width:100%;background:#fff}
+    .modal h2,.srow .val,.srow .val li{color:#111!important}
+    .srow .lab{color:#444!important}
+    .srow{border-top:1px solid #ccc}
+    .m-close,.m-tools,.m-cta,.btn-sum,.fav,.status-sel{display:none!important}
+    .badge{border:1px solid #999;color:#111!important;background:#eee!important}
+  }
 </style>
 </head>
 <body>
@@ -106,6 +128,8 @@
     <option value="title">İsme göre sırala</option>
   </select>
   <label class="toggle"><input type="checkbox" id="hidePublic" checked> Kamu-only olanları gizle</label>
+  <label class="toggle"><input type="checkbox" id="favOnly"> ⭐ Sadece favorilerim</label>
+  <button class="btn-sum" onclick="filterCat('Kredi / Finansman')" title="Sadece kredi/finansman fırsatları">💶 Krediler</button>
   <button class="btn-sum" onclick="speakAll()" title="Görünen fırsatları sesli oku">🔊 Tümünü Oku</button>
   <button class="btn-sum" onclick="stopSpeak()" title="Okumayı durdur">⏹ Durdur</button>
 </div>
@@ -122,7 +146,7 @@
 <footer>
   <b>Başvuru hakkı:</b> Yeşil etiketler bireysel / firma-KOBİ / dernek-vakıf / üniversite-araştırma başvurabildiğini gösterir. "Kamu-only" işaretli kayıtlar yalnızca kamu kurumları/ulusal otoriteler içindir ve varsayılan gizlidir.
   Durum etiketleri bugünün tarihine göre otomatik hesaplanır. Rakam/son tarihler resmi portallardan derlenmiştir; başvurmadan önce teyit edin.
-  Kaynaklar: EU Funding &amp; Tenders Portal, ECCC, EIC, BMBF, Gründungsstipendium.NRW, secure4sme.eu, DIGITAL SME Alliance, EU Cybersecurity Skills Academy, World Bank, OECD.
+  Kaynaklar: <a href="https://www.foerderdatenbank.de/FDB/DE/Foerderprogramme/foerderprogramme.html" target="_blank" rel="noopener" style="color:var(--accent)">Förderdatenbank des Bundes (BMWK)</a>, EU Funding &amp; Tenders Portal, ECCC, EIC, BMBF, Gründungsstipendium.NRW, secure4sme.eu, DIGITAL SME Alliance, EU Cybersecurity Skills Academy, World Bank, OECD.
 </footer>
 
 <script>
@@ -206,25 +230,25 @@ const DATA = [
    cat:"Eğitim & araştırma", region:"Almanya", budget:"Proje fonu", deadline:"2026-11-30",
    elig:["Üniversite/Araştırma","Firma/KOBİ"], publicOnly:false,
    desc:"Kuantum iletişiminin transferi ve ağ entegrasyonu yönergesi. Proje taslağı son tarihi 30 Kasım 2026.",
-   url:"https://www.forschung-it-sicherheit-kommunikationssysteme.de/foerderung/bekanntmachungen"},
+   url:"https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"},
 
   {title:"BSI — 5G/6G Siber Güvenlik & Dijital Egemenlik (KoPa45)", org:"BSI (BMI adına)",
    cat:"Almanya & NRW desteği", region:"Almanya", budget:"AR-GE proje fonu", deadline:"rolling",
    elig:["Firma/KOBİ","Üniversite/Araştırma"], publicOnly:false,
    desc:"5G/6G iletişim teknolojilerinde dijital egemenlik ve siber güvenlik için araştırma & geliştirme projeleri.",
-   url:"https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/5-G/KoPa45/Cyber-Sicherheit-digitale-Souveraenitaet-5G-6G_node.html"},
+   url:"https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"},
 
   {title:"BMBF — IT-Sicherheit in der Wirtschaft", org:"BMBF / foerderinfo.bund.de",
    cat:"Almanya & NRW desteği", region:"Almanya", budget:"Forschungsrahmenprogramm (≥€350M'e kadar)", deadline:"rolling",
    elig:["Firma/KOBİ","Üniversite/Araştırma"], publicOnly:false,
    desc:"Cybersecurity-Transferstelle ve odak projeleri; KOBİ'ler için IT güvenliği transferi. Yeni taslak dönemleri periyodik açılıyor.",
-   url:"https://www.forschung-it-sicherheit-kommunikationssysteme.de/foerderung/bekanntmachungen"},
+   url:"https://www.foerderinfo.bund.de/foerderinfo/de/foerderung/bund/sicherheit/it-sicherheit/it-sicherheit_node.html"},
 
   {title:"Cyberagentur — Robust & Secure Machine Learning (RSML)", org:"Agentur für Innovation in der Cybersicherheit",
    cat:"Eğitim & araştırma", region:"Almanya", budget:"Faz 4 (devam eden)", deadline:"rolling",
    elig:["Üniversite/Araştırma","Firma/KOBİ"], publicOnly:false,
    desc:"AI sistemlerinin eğitim sürecini manipülasyona karşı güvenli kılan araştırma programı. Gelecek çağrılar için ajansı takip edin.",
-   url:"https://www.research-in-germany.org/idw-news/en_US/2026/1/2026-01-26_AI_training_under_fire___Cyberagentur_focuses_on_defence_strategy.html"},
+   url:"https://www.cyberagentur.de/programme/rsml/"},
 
   {title:"EDIH / DAISEC — AI & Siber Güvenlik Dijital İnovasyon Hub", org:"European Digital Innovation Hub",
    cat:"Eğitim & araştırma", region:"AB / Almanya", budget:"EDIH dönemi 2026–2028", deadline:"rolling",
@@ -278,7 +302,67 @@ const DATA = [
    cat:"AB fon çağrısı", region:"AB", budget:"Değişken", deadline:"rolling",
    elig:["Firma/KOBİ","Üniversite/Araştırma","Dernek/Vakıf","Birey (startup kurucu)"], publicOnly:false,
    desc:"Tüm AB fon çağrılarının merkezi portalı. 'cybersecurity', 'data protection', 'NIS2', 'AI' filtreleriyle yeni çağrıları düzenli tarayın. Başvuran tipini portalda filtreleyin.",
-   url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals"}
+   url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals"},
+
+  {title:"Förderdatenbank des Bundes (BMWK) — Resmi Fon Veritabanı", org:"Bundesministerium für Wirtschaft (BMWK)",
+   cat:"Almanya & NRW desteği", region:"Almanya", budget:"Tüm federal/eyalet/AB programları", deadline:"rolling",
+   elig:["Firma/KOBİ","Üniversite/Araştırma","Dernek/Vakıf","Birey (startup kurucu)"], publicOnly:false,
+   desc:"Almanya Ekonomi Bakanlığı'nın resmi fon veritabanı: federal, eyalet (NRW dahil) ve AB programlarının tamamı burada yayınlanır. 'Cybersicherheit', 'IT-Sicherheit', 'Digitalisierung' anahtar kelimeleriyle filtreleyin.",
+   url:"https://www.foerderdatenbank.de/FDB/DE/Foerderprogramme/foerderprogramme.html"},
+
+  {title:"Smart Cities Modellprojekte (BMWSB / KfW – 436)", org:"BMWSB & KfW Bankengruppe",
+   cat:"Kommunal / Belediye", region:"Almanya", budget:"%65 hibe (mali sıkıntıda %90); ≤€2,5M strateji + ≤€15M uygulama", deadline:"rolling",
+   elig:["Kommune (başvuran)","Firma (tedarikçi/ortak)"], publicOnly:false,
+   desc:"Belediyelerin akıllı şehir / dijitalleşme stratejileri (siber güvenlik dahil) için hibe. Başvuran belediyedir; yılda bir proje çağrısı (Projektaufruf) açılır. Şu an başvuru kapalı, yeni tur bekleniyor. Sen hizmet sağlayıcı/ortak olarak ihale yoluyla dahil olabilirsin.",
+   url:"https://www.foerderdatenbank.de/FDB/Content/DE/Foerderprogramm/Bund/KfW/smart-cities-entwicklung-digitalisierung.html"},
+
+  {title:"BSI – Allianz für Cybersicherheit & Kommunen Eğitimleri", org:"Bundesamt für Sicherheit in der Informationstechnik (BSI)",
+   cat:"Kommunal / Belediye", region:"Almanya", budget:"Ücretsiz eğitim/danışmanlık + uzman aracılığı (hibe değil)", deadline:"rolling",
+   elig:["Kommune","Firma (eğitim sağlayıcı)","Üniversite/Araştırma"], publicOnly:false,
+   desc:"BSI, belediye personeline yönelik IT-Grundschutz-Praktiker eğitimleri (eyalet İçişleri bakanlıklarıyla birlikte) sunar ve uzman aracılığı yapar. Eğitim sağlayıcılar BSI müfredatıyla bu eğitimleri verebilir — belediye personeli siber farkındalık projesi için doğal giriş noktası.",
+   url:"https://www.allianz-fuer-cybersicherheit.de/"},
+
+  {title:"Kamu İhaleleri – Belediye Eğitim/Hizmet Çağrıları (Vergabe)", org:"service.bund.de · Vergabe.NRW · TED (EU)",
+   cat:"Kommunal / Belediye", region:"Almanya / AB", budget:"İhale/sözleşme bedeli", deadline:"rolling",
+   elig:["Firma (tedarikçi)","Dernek/Vakıf"], publicOnly:false,
+   desc:"Belediyeler 'personel siber eğitimi' gibi hizmetleri İHALE ile satın alır. Tedarikçi olarak teklif vereceğin yerler: service.bund.de (federal), NRW için Vergabe.NRW / Vergabemarktplatz, AB eşik üstü için TED. 'IT-Sicherheit Schulung Kommune' araması yap.",
+   url:"https://www.service.bund.de/"},
+
+  {title:"MID-Digitale Sicherheit NRW", org:"NRW.BANK / Wirtschaftsministerium NRW",
+   cat:"Almanya & NRW desteği", region:"NRW", budget:"%50 eş finansman · €4.000–15.000", deadline:"rolling",
+   elig:["Firma/KOBİ","Birey (startup kurucu)"], publicOnly:false,
+   desc:"NRW'deki KOBİ'lerin KENDİ personeli için siber farkındalık eğitimi, pentest/IST-analizi ve temel güvenlik yazılım/donanımı masraflarına hibe. 2026'dan beri NRW.BANK yürütüyor; aylık kura (Losverfahren) ile dağıtılır. (Belediye için değil, kendi firman için.)",
+   url:"https://www.digital-sicher.nrw/infomaterial/foerdermoeglichkeiten/foerdergeld-fuer-ihre-digitale-sicherheit"},
+
+  {title:"KfW ERP-Gründerkredit – StartGeld (067)", org:"KfW Bankengruppe",
+   cat:"Kredi / Finansman", region:"Almanya", budget:"≤€200.000 (≤€80k işletme) · %100 finansman", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"Yeni kurulanlar (≤5 yıl) için uygun faizli kurucu kredisi. 10 yıla kadar vade, 2 yıla kadar GERİ ÖDEMESİZ (tilgungsfrei) başlangıç. Özsermaye şartı yok; banka %80 sorumluluktan muaf. Aralık 2025'ten beri limit €200k.",
+   url:"https://www.kfw.de/inlandsfoerderung/Unternehmen/Gr%C3%BCnden-Nachfolgen/F%C3%B6rderprodukte/ERP-Gr%C3%BCnderkredit-Startgeld-(067)/"},
+
+  {title:"KfW ERP-Kapital für Gründung (058)", org:"KfW Bankengruppe",
+   cat:"Kredi / Finansman", region:"Almanya", budget:"≤€500.000 · sermaye benzeri ikincil kredi (Nachrangdarlehen)", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"En cazip geri ödeme: 15 yıl vade, İLK 7 YIL GERİ ÖDEMESİZ. Piyasada <3 yıl olan kurucular. %10–15 öz katkı gerekir. Özsermaye gibi sayıldığından başka kredilere kaldıraç olur; banka %100 sorumluluktan muaf.",
+   url:"https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-(Inlandsf%C3%B6rderung)/PDF-Dokumente/6000000213_M_058_ERP_Kapital_Gruendung.pdf"},
+
+  {title:"NRW/EU.Mikrodarlehen", org:"NRW.BANK",
+   cat:"Kredi / Finansman", region:"NRW", budget:"≤€50.000 · faiz ~%4,59 · teminat/öz sermaye yok", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"NRW'de kuruluş/büyüme için mikro kredi. 10 yıl vade, 6 ay geri ödemesiz. Teminat ve öz sermaye gerekmez — sınırlı kaynağı olan kurucular için ideal. Faiz %4,59'a indirildi.",
+   url:"https://www.nrwbank.de/de/foerderung/foerderprodukte/15262/nrwmikrodarlehen.html"},
+
+  {title:"NRW.BANK.Gründung und Wachstum", org:"NRW.BANK",
+   cat:"Kredi / Finansman", region:"NRW", budget:"≤€10 milyon · uygun faiz + geri ödemesiz başlangıç", deadline:"rolling",
+   elig:["Birey (startup kurucu)","Firma/KOBİ"], publicOnly:false,
+   desc:"NRW'deki kurucular, serbest meslek ve KOBİ'ler için uygun faizli yatırım/işletme kredisi; geri ödemesiz (tilgungsfrei) başlangıç ay/yılları. İlk 5 yıl içindeki firmalar için elverişli.",
+   url:"https://www.nrwbank.de/de/foerderung/foerderprodukte/60100/nrwbank-gruendung-und-wachstum.html"},
+
+  {title:"KfW ERP-Förderkredit Digitalisierung (511/512)", org:"KfW Bankengruppe",
+   cat:"Kredi / Finansman", region:"Almanya", budget:"Uygun faizli kredi + ERP faiz indirimi/zuschuss", deadline:"rolling",
+   elig:["Firma/KOBİ","Birey (startup kurucu)"], publicOnly:false,
+   desc:"Dijitalleşme (yazılım/donanım, AI, siber güvenlik) yatırımları VE işletme masrafları için uygun faizli kredi. Proje ne kadar yenilikçi/büyükse faiz indirimi ve ERP zuschuss o kadar artar. Siber güvenlik startup'ı için birebir.",
+   url:"https://www.kfw.de/inlandsfoerderung/Unternehmen/Innovation-und-Digitalisierung/F%C3%B6rderprodukte/ERP-F%C3%B6rderkredit-Digitalisierung-(511-512)/"}
 ];
 
 DATA.forEach((d,i)=>d._i=i);
@@ -483,7 +567,107 @@ const SUM = {
  butce:"Programa göre değişken.",
  sartlar:["EU Login + PIC numarası","İlgili çağrı dokümanları (call document, work programme)","Başvuran uygunluğunu her çağrıda ayrı kontrol"],
  nasil:"ec.europa.eu Funding & Tenders Portal arama + filtre.",
- ipucu:"'cybersecurity', 'NIS2', 'AI', 'data protection' anahtar kelimeleriyle kayıtlı arama (saved search) kurup e-posta uyarısı açın."}
+ ipucu:"'cybersecurity', 'NIS2', 'AI', 'data protection' anahtar kelimeleriyle kayıtlı arama (saved search) kurup e-posta uyarısı açın."},
+
+"Förderdatenbank des Bundes (BMWK) — Resmi Fon Veritabanı":{
+ frist:"Sürekli güncellenir; her programın kendi son tarihi vardır.",
+ kimler:"Programa göre: firma/KOBİ, üniversite, dernek/vakıf, bireysel kurucular.",
+ butce:"Tüm Almanya (federal + eyalet) ve AB programları tek yerde.",
+ es_finansman:"Programa göre değişir; her programın detay sayfasında belirtilir.",
+ konsorsiyum:"Programa göre; çoğu ulusal destekte tekil başvuru mümkün.",
+ sartlar:["Almanya'da yerleşik olmak (çoğu program)","Programın konu/bölge filtresine uyma","İlgili Projektträger'e başvuru"],
+ belgeler:["Proje taslağı/İş planı","Finansman planı"],
+ nasil:"foerderdatenbank.de → 'Förderprogramme' → konu/bölge (NRW)/başvuran tipine göre filtrele.",
+ kaynaklar:"BMWK Förderberatung (ücretsiz danışma hattı), IHK/Handwerkskammer danışmanları.",
+ ipucu:"'Cybersicherheit', 'IT-Sicherheit', 'Digitalisierung' ve bölge olarak 'Nordrhein-Westfalen' filtreleyin; en kapsamlı resmi kaynak budur."},
+
+"Smart Cities Modellprojekte (BMWSB / KfW – 436)":{
+ frist:"Yılda bir 'Projektaufruf'; şu an başvuru kapalı, yeni tur duyurusu beklenmeli.",
+ kimler:"Başvuran: belediyeler (Kommune), belediye birlikleri, belediyelerarası işbirlikleri. Sen: hizmet sağlayıcı/alt-yüklenici olarak.",
+ butce:"%65 hibe (mali sıkıntıdaki belediyelerde %90). Faz A ≤€2,5M (strateji), Faz B ≤€15M (uygulama).",
+ es_finansman:"Belediye %35 (veya %10) öz katkı koyar.",
+ konsorsiyum:"Belediyelerarası işbirliği teşvik edilir; uygulamada özel sektör tedarikçi olarak yer alır.",
+ sartlar:["Smart City Charta ilkelerine uyum","Şehir/belediye meclisi kararı","2 faz: strateji (A) → uygulama (B)","Deneyim paylaşımına katılım"],
+ belgeler:["Smart City stratejisi/konsept","Meclis kararı","Bütçe planı"],
+ nasil:"KfW üzerinden online proje çağrısında başvuru (belediye yapar).",
+ kaynaklar:"KfW (436) danışma hattı, BBSR Smart Cities ekibi.",
+ ipucu:"Bir belediyeyle erken temasa geç; çağrı açıldığında sen onların 'siber eğitim/güvenlik' iş paketinin tedarikçisi olarak konumlanabilirsin."},
+
+"BSI – Allianz für Cybersicherheit & Kommunen Eğitimleri":{
+ frist:"Sürekli; eğitim tarihleri dönemsel ilan edilir.",
+ kimler:"Belediye personeli (katılımcı); eğitim sağlayıcılar (BSI müfredatıyla); BSI ortakları.",
+ butce:"Genelde ücretsiz/sübvansiyeli — doğrudan hibe değil, eğitim+danışmanlık+uzman aracılığı.",
+ sartlar:["BSI IT-Grundschutz müfredatına uyum","Allianz für Cybersicherheit üyeliği/ortaklığı (sağlayıcı için)","Kamu yönetimi hedef kitlesi"],
+ nasil:"allianz-fuer-cybersicherheit.de üzerinden ortak/multiplikator ol; eyalet İçişleri (IM NRW) ile irtibat.",
+ kaynaklar:"BSI, eyalet CISO/İçişleri bakanlıkları, NKCS (Nationale Koordinierungsstelle).",
+ ipucu:"BSI 'IT-Grundschutz-Praktiker' müfredatına göre eğitim verirsen belediyeler için güvenilir/akredite sağlayıcı olursun. Projen için en somut yol bu."},
+
+"Kamu İhaleleri – Belediye Eğitim/Hizmet Çağrıları (Vergabe)":{
+ frist:"Sürekli — ihaleler yıl boyu yayınlanır.",
+ kimler:"Firma/tedarikçi, dernek/vakıf (hizmet sunan herkes).",
+ butce:"Sözleşme bedeli; AB eşiği üstü ihaleler TED'de yayınlanır.",
+ sartlar:["İlgili hizmette referans/yeterlilik","eVergabe platformlarına kayıt","Teklif dosyası (teknik+mali)"],
+ nasil:"service.bund.de (federal), NRW için vergabe.nrw / Vergabemarktplatz NRW, AB için ted.europa.eu. 'IT-Sicherheit Schulung / Sensibilisierung Kommune' ara.",
+ kaynaklar:"Auftragsberatungsstellen (ABSt NRW), IHK ihale danışmanlığı.",
+ ipucu:"Bu, belediye personeli siber eğitimi projeni HEMEN gerçekleştirebileceğin en doğrudan yol: hibe beklemeden, belediyenin açtığı ihaleye teklif verirsin."},
+
+"MID-Digitale Sicherheit NRW":{
+ frist:"Sürekli; aylık kura (Losverfahren) ile dağıtılır.",
+ kimler:"NRW'de yerleşik KOBİ/Kleinst işletmeler ve uygun startup'lar (kendi firman).",
+ butce:"%50 eş finansman; €4.000–15.000 (net).",
+ es_finansman:"Masrafların %50'sini sen karşılarsın (önce öde, sonra geri al).",
+ sartlar:["Firma merkezi NRW'de","Önlemler NRW'de uygulanmalı","3 odak: IST-analizi (pentest), Faktör İnsan (eğitim), temel güvenlik yazılım/donanımı"],
+ nasil:"NRW.BANK kundenportal üzerinden kayıt → aylık kura.",
+ kaynaklar:"digital-sicher.nrw, NRW.BANK Förderberatung.",
+ ipucu:"Kendi şirketinin personelini eğitmek/pentest yaptırmak için; belediye projesi DEĞİL ama domeninle birebir örtüşüyor."},
+
+"KfW ERP-Gründerkredit – StartGeld (067)":{
+ frist:"Sürekli; her zaman başvurulabilir.",
+ kimler:"Bireysel kurucular, serbest meslek, kuruluştan sonra ilk 5 yıldaki KOBİ'ler.",
+ butce:"≤€200.000 (en fazla €80k işletme sermayesi). %100 finansman.",
+ es_finansman:"Öz sermaye şart değil (önemli avantaj).",
+ hazirlik:"Orta — banka/Sparkasse üzerinden başvuru; iş planı gerekir. Erken başla.",
+ sartlar:["Almanya'da kuruluş/faaliyet","İş planı + finansman planı","Hausbank (kendi bankan) üzerinden başvuru"],
+ nasil:"Kendi bankan/Sparkasse'ne git → onlar KfW'ye iletir (Hausbankprinzip). Başvuruyu yatırımdan ÖNCE yap.",
+ ipucu:"Banka %80 sorumluluktan muaf olduğu için onay şansı yüksek. Bankayla görüşmeden önce net bir iş planıyla git."},
+
+"KfW ERP-Kapital für Gründung (058)":{
+ frist:"Sürekli.",
+ kimler:"Piyasada <3 yıl olan kurucular/serbest meslek; KOBİ kriterleri.",
+ butce:"≤€500.000. 15 yıl vade, ilk 7 yıl tamamen geri ödemesiz; ilk 10 yıl sabit düşük faiz.",
+ es_finansman:"En az %10 (yeni eyaletler/Berlin) veya %15 (eski eyaletler) öz katkı.",
+ hazirlik:"Orta-ağır — sermaye benzeri kredi, iyi bir plan ister.",
+ sartlar:["<3 yıl faaliyet","Asıl meslek olarak yürütme","%10–15 öz katkı","Hausbank üzerinden"],
+ nasil:"Hausbank üzerinden KfW'ye. Nachrangdarlehen olduğu için teminat istenmez.",
+ ipucu:"Bu kredi öz sermaye gibi sayılır → üstüne başka kredi/StartGeld eklersen toplam finansman büyür. Geri ödemesiz 7 yıl nakit akışını çok rahatlatır."},
+
+"NRW/EU.Mikrodarlehen":{
+ frist:"Sürekli.",
+ kimler:"NRW'de kuruluş/küçük işletme; sınırlı sermayeli kurucular.",
+ butce:"≤€50.000. 10 yıl vade, 6 ay geri ödemesiz. Faiz ~%4,59.",
+ es_finansman:"Öz sermaye/teminat gerekmez.",
+ hazirlik:"Hafif — mikro kredi, başvuru görece basit.",
+ sartlar:["NRW'de yerleşik","Kuruluş veya büyüme amacı","Kısa iş planı"],
+ nasil:"NRW.BANK / aracı danışma merkezleri (STARTERCENTER, Mikrofinanzinstitut) üzerinden.",
+ ipucu:"Küçük başlangıç sermayesi için en hızlı ve teminatsız yol. Daha büyük ihtiyaç varsa StartGeld ile birleştir."},
+
+"NRW.BANK.Gründung und Wachstum":{
+ frist:"Sürekli.",
+ kimler:"NRW'deki kurucular, serbest meslek, KOBİ'ler.",
+ butce:"≤€10 milyon. Uygun faiz + geri ödemesiz başlangıç ay/yılları.",
+ hazirlik:"Orta — Hausbank üzerinden, yatırım planı gerekir.",
+ sartlar:["NRW'de faaliyet","Yatırım/işletme finansmanı amacı","Hausbank üzerinden"],
+ nasil:"Kendi bankan üzerinden NRW.BANK'a iletilir.",
+ ipucu:"Büyüme aşaması için; StartGeld limitini aşan yatırımlarda buna geç."},
+
+"KfW ERP-Förderkredit Digitalisierung (511/512)":{
+ frist:"Sürekli.",
+ kimler:"Serbest meslek, KOBİ ve ≤€500M ciro orta ölçekli firmalar.",
+ butce:"Uygun faizli kredi; karmaşıklığa göre artan ERP faiz indirimi + zuschuss.",
+ hazirlik:"Orta — dijitalleşme/inovasyon planı.",
+ sartlar:["Dijitalleşme/inovasyon yatırımı (siber güvenlik dahil)","Hausbank üzerinden","Yatırım ÖNCESİ başvuru"],
+ nasil:"Hausbank → KfW. Yatırıma başlamadan önce başvur.",
+ ipucu:"Siber güvenlik/AI ürünü geliştiriyorsan 'Innovation' seviyesinden gir — faiz avantajı en yüksek olur."}
 };
 
 function statusOf(d){
@@ -500,6 +684,40 @@ function fmtDate(d){
 }
 
 let activeCat='', activeStatus='', kpiMode='all', lastRows=[];
+
+// ---- Kişisel durum: favori / başvuru durumu / notlar (tarayıcıda saklanır) ----
+const LS_KEY='fonState_v1';
+function loadStore(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'{}'); }catch(e){ return {}; } }
+let store=loadStore(); store.fav=store.fav||{}; store.durum=store.durum||{}; store.notlar=store.notlar||{};
+function saveStore(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(store)); }catch(e){} }
+function toggleFav(i){ const t=DATA[i].title; if(store.fav[t]) delete store.fav[t]; else store.fav[t]=1; saveStore(); render(); }
+function setDurum(i,v){ const t=DATA[i].title; if(v) store.durum[t]=v; else delete store.durum[t]; saveStore(); render(); }
+function setNot(i,v){ const t=DATA[i].title; if(v.trim()) store.notlar[t]=v; else delete store.notlar[t]; saveStore(); }
+const DURUM_ETIKET={plan:'Planlıyorum',applied:'Başvurdum',won:'Kazandım'};
+const DURUM_CLS={plan:'b-plan',applied:'b-applied',won:'b-won'};
+
+// ---- Geri sayım ----
+function daysLeft(d){ if(d==='rolling') return null; return Math.ceil((new Date(d)-TODAY)/86400000); }
+function countdownText(d){ const n=daysLeft(d); if(n===null) return 'Sürekli'; if(n<0) return 'Kapandı'; if(n===0) return 'Bugün son!'; return n+' gün kaldı'; }
+
+// ---- Takvime ekle (.ics) ----
+function addToCalendar(i){
+  const d=DATA[i];
+  if(d.deadline==='rolling'){ alert('Bu fırsatın sabit bir son tarihi yok (sürekli/dönemsel).'); return; }
+  const dt=d.deadline.replace(/-/g,'');
+  const esc=s=>(s||'').replace(/[\\,;]/g,' ').replace(/\n/g,' ');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//SiberFon//TR//','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT','UID:fon-'+i+'-'+dt+'@siberfon','DTSTAMP:'+dt+'T090000Z',
+    'DTSTART;VALUE=DATE:'+dt,'DTEND;VALUE=DATE:'+dt,
+    'SUMMARY:Fon son tarihi: '+esc(d.title),
+    'DESCRIPTION:'+esc(d.desc)+' — '+d.url,
+    'BEGIN:VALARM','TRIGGER:-P7D','ACTION:DISPLAY','DESCRIPTION:Fon son tarihi 1 hafta sonra','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
+  a.download=('son-tarih-'+d.title).replace(/[^\w]+/g,'-').slice(0,40)+'.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+}
 
 // ---- Sesli okuma (Web Speech API; iOS Safari dahil çalışır) ----
 let ttsVoice=null, ttsWarned=false;
@@ -556,6 +774,15 @@ function setKpi(m){ kpiMode = (kpiMode===m && m!=='all') ? 'all' : m;
   render();
 }
 
+// "💶 Krediler" butonu: doğrudan bir kategoriye atla
+function filterCat(c){
+  activeCat = (activeCat===c) ? '' : c;   // tekrar basınca kapat
+  kpiMode='all'; activeStatus='';
+  [...catWrap.children].forEach(x=>x.classList.toggle('active', activeCat? x.textContent===c : x.textContent==='Tüm kategoriler'));
+  [...stWrap.children].forEach((x,i)=>x.classList.toggle('active',i===0));
+  render();
+}
+
 const cats=[...new Set(DATA.map(d=>d.cat))];
 const regions=[...new Set(DATA.map(d=>d.region))];
 
@@ -582,14 +809,17 @@ document.getElementById('search').oninput=render;
 document.getElementById('region').onchange=render;
 document.getElementById('sort').onchange=render;
 document.getElementById('hidePublic').onchange=()=>{if(kpiMode==='public')kpiMode='all';render()};
+document.getElementById('favOnly').onchange=render;
 
 function render(){
   const q=document.getElementById('search').value.toLowerCase();
   const reg=document.getElementById('region').value;
   const sort=document.getElementById('sort').value;
   const hidePub=document.getElementById('hidePublic').checked;
+  const favOnly=document.getElementById('favOnly').checked;
   let rows=DATA.filter(d=>{
     const st=statusOf(d.deadline).key;
+    if(favOnly && !store.fav[d.title]) return false;
     if(kpiMode==='public'){ if(!d.publicOnly) return false; }
     else { if(hidePub&&d.publicOnly) return false; }
     if(kpiMode==='active' && !['open','soon'].includes(st)) return false;
@@ -628,15 +858,22 @@ function render(){
     const st=statusOf(d.deadline);
     const near=st.key==='soon', past=st.key==='closed';
     const eligTags=(d.elig||[]).map(e=>`<span class="etag${d.publicOnly?' kamu':''}">${e}</span>`).join('');
+    const fav=store.fav[d.title], dr=store.durum[d.title];
+    const cdCls = (d.deadline!=='rolling' && daysLeft(d.deadline)!==null && daysLeft(d.deadline)>=0 && daysLeft(d.deadline)<=45)?'deadline-near':(past?'deadline-past':'');
+    const opt=(v,l)=>`<option value="${v}"${dr===v?' selected':''}>${l}</option>`;
     return `<div class="card${d.publicOnly?' pub':''}">
       <div class="card-top">
         <h3>${d.title}</h3>
-        <div class="badges"><span class="badge ${st.cls}">${st.label}</span></div>
+        <div class="badges">
+          <button class="fav ${fav?'on':''}" onclick="toggleFav(${d._i})" title="Favorilerime ekle/çıkar">${fav?'★':'☆'}</button>
+          <span class="badge ${st.cls}">${st.label}</span>
+        </div>
       </div>
       <div class="badges">
         <span class="badge b-cat">${d.cat}</span>
         <span class="badge b-reg">${d.region}</span>
         ${d.publicOnly?'<span class="badge b-pub">Kamu-only</span>':''}
+        ${dr?`<span class="badge ${DURUM_CLS[dr]}">${DURUM_ETIKET[dr]}</span>`:''}
       </div>
       <div class="desc">${d.desc}</div>
       <div>
@@ -646,11 +883,16 @@ function render(){
       <div class="meta">
         <span><b>Bütçe:</b> ${d.budget}</span>
         <span class="${near?'deadline-near':past?'deadline-past':''}"><b>Son tarih:</b> ${fmtDate(d.deadline)}</span>
+        <span class="${cdCls}"><b>Kalan:</b> ${countdownText(d.deadline)}</span>
       </div>
       <div><b style="font-size:12px;color:var(--muted)">${d.org}</b></div>
       <div class="card-actions">
         <button class="btn-sum" onclick="openSummary(${d._i})">📋 Proje Özeti</button>
         <button class="btn-sum" onclick="speakCard(${d._i})" title="Bu projeyi şartlarıyla sesli oku">🔊</button>
+        <button class="btn-sum" onclick="addToCalendar(${d._i})" title="Son tarihi takvime ekle (.ics)">📅</button>
+        <select class="btn-sum status-sel" onchange="setDurum(${d._i},this.value)" title="Başvuru durumun">
+          ${opt('','Durum…')}${opt('plan','Planlıyorum')}${opt('applied','Başvurdum')}${opt('won','Kazandım')}
+        </select>
         <a class="link" href="${d.url}" target="_blank" rel="noopener">Resmi sayfayı aç →</a>
       </div>
     </div>`;
@@ -663,12 +905,21 @@ function openSummary(i){
   const eligTags=(d.elig||[]).map(e=>`<span class="etag${d.publicOnly?' kamu':''}">${e}</span>`).join(' ');
   let rows='';
   const row=(lab,val)=>`<div class="srow"><div class="lab">${lab}</div><div class="val">${val}</div></div>`;
+  const lst=v=>'<ul>'+(Array.isArray(v)?v:[v]).map(x=>`<li>${x}</li>`).join('')+'</ul>';
   if(s){
     rows+=row('Son tarih (Frist)', s.frist);
+    rows+=row('Kalan süre', countdownText(d.deadline));
     rows+=row('Kim başvurabilir', s.kimler+'<br><div class="elig" style="margin-top:6px">'+eligTags+'</div>');
     rows+=row('Bütçe / Oran', s.butce);
-    rows+=row('Başvuru şartları', '<ul>'+s.sartlar.map(x=>`<li>${x}</li>`).join('')+'</ul>');
+    if(s.es_finansman) rows+=row('Eş finansman / öz kaynak', s.es_finansman);
+    if(s.basari_orani) rows+=row('Başarı oranı / rekabet', s.basari_orani);
+    if(s.konsorsiyum) rows+=row('Konsorsiyum şartı', s.konsorsiyum);
+    if(s.hazirlik) rows+=row('Hazırlık süresi & efor', s.hazirlik);
+    rows+=row('Başvuru şartları', lst(s.sartlar));
+    if(s.belgeler) rows+=row('Gerekli belgeler', lst(s.belgeler));
+    if(s.kriterler) rows+=row('Değerlendirme kriterleri', s.kriterler);
     rows+=row('Nasıl başvurulur', s.nasil);
+    if(s.kaynaklar) rows+=row('Yardım kaynakları', s.kaynaklar);
     rows+=row('İpucu', s.ipucu);
   } else {
     rows+=row('Son tarih (Frist)', fmtDate(d.deadline));
@@ -687,8 +938,21 @@ function openSummary(i){
       ${d.publicOnly?'<span class="badge b-pub">Kamu-only</span>':''}
     </div>
     ${rows}
-    <a class="m-cta" href="${d.url}" target="_blank" rel="noopener">Resmi sayfaya git →</a>
-    <button class="btn-sum" style="margin-top:18px;margin-left:8px" onclick="speakCard(${i})">🔊 Sesli Oku</button>
+    <div class="srow"><div class="lab">Başvuru durumun</div><div class="val">
+      <select class="btn-sum status-sel" onchange="setDurum(${i},this.value)">
+        <option value=""${!store.durum[d.title]?' selected':''}>Durum…</option>
+        <option value="plan"${store.durum[d.title]==='plan'?' selected':''}>Planlıyorum</option>
+        <option value="applied"${store.durum[d.title]==='applied'?' selected':''}>Başvurdum</option>
+        <option value="won"${store.durum[d.title]==='won'?' selected':''}>Kazandım</option>
+      </select></div></div>
+    <div class="srow"><div class="lab">Notların</div><div class="val">
+      <textarea class="m-notes" oninput="setNot(${i},this.value)" placeholder="Bu fona dair kişisel notların (tarayıcında saklanır)...">${(store.notlar[d.title]||'').replace(/</g,'&lt;')}</textarea></div></div>
+    <div class="m-tools">
+      <a class="m-cta" href="${d.url}" target="_blank" rel="noopener">Resmi sayfaya git →</a>
+      <button class="btn-sum" onclick="speakCard(${i})">🔊 Sesli Oku</button>
+      <button class="btn-sum" onclick="addToCalendar(${i})">📅 Takvime ekle</button>
+      <button class="btn-sum" onclick="window.print()">🖨️ PDF / Yazdır</button>
+    </div>
     <div class="m-note">Özet bilgilendirme amaçlıdır; bağlayıcı şartlar resmi çağrı dokümanındadır. Başvurmadan önce teyit edin.</div>`;
   document.getElementById('overlay').classList.add('show');
 }
